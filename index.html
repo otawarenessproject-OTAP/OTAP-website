@@ -3,28 +3,174 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>O.T Awareness Project</title>
+  <meta name="theme-color" content="#030806">
+  <meta name="description" content="O.T Awareness Project — explore occupational therapy, sensory experiences and different perspectives.">
+  <title>OTAP | One Bigger Picture</title>
   <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: #030806;
-      color: white;
-      font-family: Arial, sans-serif;
-      display: grid;
-      place-items: center;
-      text-align: center;
+    :root { --bg:#030806; --panel:#09130f; --green:#00f5a0; --text:#f1fff8; --muted:#a5c4b5; --line:#174a36; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:85px; }
+    body { margin:0; background:var(--bg); color:var(--text); font-family:Arial,sans-serif; line-height:1.6; }
+    a { color:inherit; text-decoration:none; }
+    button { font:inherit; cursor:pointer; }
+    .container { width:min(1100px,90%); margin:auto; }
+    header { position:sticky; top:0; z-index:10; background:rgba(3,8,6,.95); border-bottom:1px solid var(--line); backdrop-filter:blur(12px); }
+    .nav { min-height:76px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .brand { display:flex; align-items:center; gap:10px; font-size:13px; font-weight:800; letter-spacing:1px; }
+    .brand-mark { width:43px; height:43px; border:1px solid var(--green); border-radius:12px; display:grid; place-items:center; color:var(--green); font-size:12px; box-shadow:0 0 18px #00f5a020; }
+    .brand small { display:block; color:var(--muted); font-size:10px; letter-spacing:2px; }
+    .nav-actions { display:flex; gap:8px; align-items:center; }
+    .lang,.menu-btn { color:var(--green); background:transparent; border:1px solid var(--line); border-radius:9px; padding:9px 12px; }
+    .menu-btn { display:none; }
+    nav { display:flex; gap:20px; align-items:center; }
+    nav a { font-size:12px; color:var(--muted); }
+    nav a:hover { color:var(--green); }
+    .hero { min-height:610px; display:grid; align-items:center; padding:76px 0; position:relative; overflow:hidden; }
+    .hero::before { content:""; position:absolute; width:330px; height:330px; right:-100px; top:70px; border-radius:50%; background:#00f5a010; filter:blur(70px); pointer-events:none; }
+    .eyebrow { color:var(--green); letter-spacing:3px; font-size:11px; font-weight:bold; text-transform:uppercase; }
+    h1 { max-width:850px; font-size:clamp(38px,8vw,76px); line-height:1.05; letter-spacing:-2px; margin:20px 0; }
+    h1 span { color:var(--green); }
+    .hero p { max-width:570px; color:var(--muted); font-size:16px; }
+    .actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:28px; }
+    .btn { display:inline-flex; justify-content:center; align-items:center; padding:13px 18px; border-radius:9px; border:1px solid var(--green); font-size:13px; font-weight:bold; }
+    .btn-primary { background:var(--green); color:#03110b; }
+    .btn-secondary { color:var(--green); }
+    section { padding:68px 0; }
+    .section-top { margin-bottom:28px; }
+    .section-top h2 { font-size:clamp(26px,5vw,40px); line-height:1.2; margin:10px 0; }
+    .section-top p { color:var(--muted); max-width:620px; font-size:14px; }
+    .people { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:13px; }
+    .person { background:linear-gradient(160deg,#0c1b14,#050a07); border:1px solid var(--line); border-radius:14px; padding:18px 8px; text-align:center; min-width:0; transition:transform .2s,border-color .2s; }
+    .person:hover { border-color:var(--green); transform:translateY(-3px); }
+    .silhouette { height:95px; width:74px; margin:0 auto 12px; position:relative; overflow:hidden; }
+    .head { position:absolute; top:8px; left:26px; width:23px; height:29px; background:#61766a; border-radius:45% 45% 42% 42%; }
+    .body-shape { position:absolute; width:60px; height:59px; bottom:-7px; left:7px; background:#263b30; border-radius:45% 45% 8px 8px; }
+    .person:nth-child(3n) .head { width:27px; height:30px; left:24px; }
+    .person:nth-child(3n) .body-shape { width:66px; left:4px; border-radius:48% 48% 8px 8px; }
+    .person:nth-child(4n) .head::before { content:""; position:absolute; inset:-5px -5px -2px; border:5px solid #61766a; border-radius:50% 50% 35% 35%; }
+    .person strong { display:block; font-size:12px; color:var(--green); letter-spacing:1px; }
+    .person small { color:var(--muted); font-size:10px; }
+    .cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+    .card { padding:22px; background:var(--panel); border:1px solid var(--line); border-radius:13px; }
+    .card .number { color:var(--green); font-size:12px; letter-spacing:2px; }
+    .card h3 { margin:12px 0 8px; font-size:17px; }
+    .card p { color:var(--muted); font-size:13px; }
+    .card a { display:inline-block; margin-top:8px; color:var(--green); font-size:12px; }
+    .feature { background:linear-gradient(120deg,#0b2016,#07100b); border:1px solid var(--line); border-radius:18px; padding:clamp(22px,5vw,42px); }
+    .feature h2 { font-size:clamp(27px,5vw,42px); line-height:1.2; margin:12px 0; }
+    .feature p { color:var(--muted); max-width:650px; }
+    .notice { border-left:3px solid var(--green); padding:12px 15px; background:#00f5a00b; color:var(--muted); font-size:12px; margin-top:20px; }
+    footer { border-top:1px solid var(--line); padding:30px 0; color:var(--muted); font-size:12px; }
+    .footer-inner { display:flex; flex-wrap:wrap; justify-content:space-between; gap:18px; }
+    .footer-links { display:flex; flex-wrap:wrap; gap:16px; }
+    .footer-links a:hover { color:var(--green); }
+    @media (max-width:760px) {
+      .nav { min-height:68px; }
+      .menu-btn { display:inline-block; }
+      nav { display:none; position:absolute; top:68px; left:0; right:0; background:#050c08; border-bottom:1px solid var(--line); padding:18px 5%; flex-direction:column; align-items:stretch; gap:0; }
+      nav.open { display:flex; }
+      nav a { padding:12px 0; border-bottom:1px solid #153124; font-size:14px; }
+      .brand { font-size:11px; }
+      .brand-mark { width:38px; height:38px; }
+      .hero { min-height:auto; padding:90px 0 75px; }
+      h1 { letter-spacing:-1px; }
+      section { padding:52px 0; }
+      .people { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .person:last-child { grid-column:1 / -1; }
+      .cards { grid-template-columns:1fr; }
+      .card { padding:20px; }
     }
-    main { padding: 24px; }
-    h1 { color: #00f5a0; }
-    p { color: #b7d5c6; line-height: 1.7; }
+    @media (min-width:450px) and (max-width:760px) { .cards { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition:none!important; } }
   </style>
 </head>
 <body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="OTAP Home">
+        <span class="brand-mark">OT<span style="color:white">AP</span></span>
+        <span>O.T AWARENESS PROJECT<small>EXPLORE THE UNKNOWN</small></span>
+      </a>
+      <div class="nav-actions">
+        <button class="lang" id="languageButton" type="button" aria-label="Toggle language">BM / EN</button>
+        <button class="menu-btn" id="menuButton" type="button" aria-expanded="false" aria-controls="mainNav">☰</button>
+      </div>
+      <nav id="mainNav" aria-label="Main navigation">
+        <a href="#about" data-ms="Tentang OTAP" data-en="About OTAP">Tentang OTAP</a>
+        <a href="#missions" data-ms="Misi Sensori" data-en="Sensory Missions">Misi Sensori</a>
+        <a href="#profile" data-ms="Profil Sensori" data-en="Sensory Profile">Profil Sensori</a>
+        <a href="#podcast">Podcast</a>
+        <a href="#discovery" data-ms="Kenali OT" data-en="Discover OT">Kenali OT</a>
+      </nav>
+    </div>
+  </header>
   <main>
-    <h1>O.T Awareness Project</h1>
-    <p>Ten OTs. Many Perspectives.<br>One Bigger Picture.</p>
-    <p>Selamat datang ke dunia misteri OTAP.</p>
+    <section class="hero" id="home"><div class="container">
+      <div class="eyebrow">A journey into occupational therapy</div>
+      <h1>TEN OTs.<br>MANY PERSPECTIVES.<br><span>ONE BIGGER PICTURE.</span></h1>
+      <p data-ms="Sepuluh ahli terapi cara kerja. Pelbagai perspektif. Mari meneroka pengalaman sensori, aktiviti harian dan dunia OT dengan cara yang berbeza." data-en="Ten occupational therapists. Many perspectives. Explore sensory experiences, everyday occupations and the world of OT in a different way.">Sepuluh ahli terapi cara kerja. Pelbagai perspektif. Mari meneroka pengalaman sensori, aktiviti harian dan dunia OT dengan cara yang berbeza.</p>
+      <div class="actions"><a class="btn btn-primary" href="#people" data-ms="Temui 10 OT ↓" data-en="Meet the 10 OTs ↓">Temui 10 OT ↓</a><a class="btn btn-secondary" href="#missions" data-ms="Teroka misi sensori ↗" data-en="Explore sensory missions ↗">Teroka misi sensori ↗</a></div>
+    </div></section>
+    <section id="people"><div class="container">
+      <div class="section-top"><div class="eyebrow">THE PEOPLE BEHIND THE PERSPECTIVES</div><h2 data-ms="Sepuluh wajah. Siapakah mereka?" data-en="Ten silhouettes. Who are they?">Sepuluh wajah. Siapakah mereka?</h2><p data-ms="Setiap OT membawa pengalaman dan perspektif tersendiri. Identiti tidak didedahkan di sini — terokai projek ini dahulu." data-en="Every OT brings a different experience and perspective. Identities remain hidden here — explore the project first.">Setiap OT membawa pengalaman dan perspektif tersendiri. Identiti tidak didedahkan di sini — terokai projek ini dahulu.</p></div>
+      <div class="people" aria-label="Ten anonymous OT silhouettes">
+        <div class="person"><div class="silhouette"><div class="head"></div><div class="body-shape"></div></div><strong>OT 01</strong><small>Identity hidden</small></div>
+        <div class="person"><div class="silhouette"><div class="head"></div><div class="body-shape"></div></div><strong>OT 02</strong><small>Identity hidden</small></div>
+        <div class="person"><div class="silhouette"><div class="head"></div><div class="body-shape"></div></div><strong>OT 03</strong><small>Identity hidden</small></div>
+        <div class="person"><div class="silhouette"><div class="head"></div><div class="body-shape"></div></div><strong>OT 04</strong><small>Identity hidden</small></div>
+        <div class="person"><div class="silhouette"><div class="head"></div><div class="body-shape"></div></div><strong>OT 05</strong><small>Identity hidden</small></div>
+        <div class="person"><div class="silhouette"><div class="head"></div><div class="body-shape"></div></div><strong>OT 06</strong><small>Identity hidden</small></div>
+        <div class="person"><div class="silhouette"><div class="head"></div><div class="body-shape"></div></div><strong>OT 07</strong><small>Identity hidden</small></div>
+        <div class="person"><div class="silhouette"><div class="head"></div><div class="body-shape"></div></div><strong>OT 08</strong><small>Identity hidden</small></div>
+        <div class="person"><div class="silhouette"><div class="head"></div><div class="body-shape"></div></div><strong>OT 09</strong><small>Identity hidden</small></div>
+        <div class="person"><div class="silhouette"><div class="head"></div><div class="body-shape"></div></div><strong>OT 10</strong><small>Identity hidden</small></div>
+      </div>
+    </div></section>
+    <section id="about"><div class="container"><div class="feature"><div class="eyebrow">ABOUT OTAP · TENTANG OTAP</div><h2 data-ms="Melihat kehidupan dari perspektif yang lebih luas." data-en="See everyday life through a wider lens.">Melihat kehidupan dari perspektif yang lebih luas.</h2><p data-ms="OTAP ialah ruang penerokaan pendidikan tentang terapi cara kerja, pengalaman sensori dan bagaimana aktiviti harian membentuk penyertaan seseorang dalam kehidupan." data-en="OTAP is an educational space exploring occupational therapy, sensory experiences and how everyday activities shape participation in life.">OTAP ialah ruang penerokaan pendidikan tentang terapi cara kerja, pengalaman sensori dan bagaimana aktiviti harian membentuk penyertaan seseorang dalam kehidupan.</p></div></div></section>
+    <section id="missions"><div class="container">
+      <div class="section-top"><div class="eyebrow">EXPLORE · DISCOVER · REFLECT</div><h2 data-ms="8 Misi Sensori" data-en="8 Sensory Missions">8 Misi Sensori</h2><p data-ms="Kenali lapan sistem sensori melalui penerangan pendidikan dan aktiviti refleksi. Kandungan misi akan dibangunkan secara berperingkat." data-en="Explore eight sensory systems through educational explanations and reflection activities. Mission content will be developed in stages.">Kenali lapan sistem sensori melalui penerangan pendidikan dan aktiviti refleksi. Kandungan misi akan dibangunkan secara berperingkat.</p></div>
+      <div class="cards">
+        <article class="card"><div class="number">MISSION 01</div><h3>Visual</h3><p data-ms="Penglihatan dan maklumat yang diterima melalui mata." data-en="Vision and information received through the eyes.">Penglihatan dan maklumat yang diterima melalui mata.</p></article>
+        <article class="card"><div class="number">MISSION 02</div><h3>Auditory</h3><p data-ms="Bunyi, pendengaran dan respons terhadap persekitaran." data-en="Sound, hearing and responses to the environment.">Bunyi, pendengaran dan respons terhadap persekitaran.</p></article>
+        <article class="card"><div class="number">MISSION 03</div><h3>Tactile</h3><p data-ms="Sentuhan, tekstur dan maklumat daripada kulit." data-en="Touch, textures and information from the skin.">Sentuhan, tekstur dan maklumat daripada kulit.</p></article>
+        <article class="card"><div class="number">MISSION 04</div><h3>Olfactory</h3><p data-ms="Bau dan cara kita mengalami persekitaran." data-en="Smell and how we experience our surroundings.">Bau dan cara kita mengalami persekitaran.</p></article>
+        <article class="card"><div class="number">MISSION 05</div><h3>Gustatory</h3><p data-ms="Rasa dan pengalaman berkaitan makanan." data-en="Taste and experiences related to food.">Rasa dan pengalaman berkaitan makanan.</p></article>
+        <article class="card"><div class="number">MISSION 06</div><h3>Vestibular</h3><p data-ms="Pergerakan, keseimbangan dan orientasi kepala." data-en="Movement, balance and head orientation.">Pergerakan, keseimbangan dan orientasi kepala.</p></article>
+        <article class="card"><div class="number">MISSION 07</div><h3>Proprioception</h3><p data-ms="Kesedaran kedudukan badan dan pergerakan sendi." data-en="Awareness of body position and joint movement.">Kesedaran kedudukan badan dan pergerakan sendi.</p></article>
+        <article class="card"><div class="number">MISSION 08</div><h3>Interoception</h3><p data-ms="Kesedaran isyarat dalaman badan seperti lapar dan dahaga." data-en="Awareness of internal body signals such as hunger and thirst.">Kesedaran isyarat dalaman badan seperti lapar dan dahaga.</p></article>
+        <article class="card"><div class="number">YOUR JOURNEY</div><h3 data-ms="Sedia untuk meneroka?" data-en="Ready to explore?">Sedia untuk meneroka?</h3><p data-ms="Misi interaktif akan ditambah selepas kandungan dan pengalaman pengguna disemak." data-en="Interactive missions will be added after the content and user experience are reviewed.">Misi interaktif akan ditambah selepas kandungan dan pengalaman pengguna disemak.</p></article>
+      </div>
+    </div></section>
+    <section id="profile"><div class="container"><div class="feature"><div class="eyebrow">SELF-REFLECTION · REFLEKSI DIRI</div><h2>Your Sensory Profile</h2><p data-ms="Ruang refleksi pendidikan untuk meneroka pengalaman sensori diri. Ini bukan alat diagnosis atau pengganti penilaian profesional." data-en="An educational reflection space to explore your sensory experiences. This is not a diagnostic tool or a substitute for professional assessment.">Ruang refleksi pendidikan untuk meneroka pengalaman sensori diri. Ini bukan alat diagnosis atau pengganti penilaian profesional.</p><div class="notice" data-ms="Nota: Kandungan ini bukan Adult Sensory Profile rasmi. Item soal selidik berlesen dan pemarkahan piawai tidak akan diterbitkan tanpa kebenaran yang sesuai." data-en="Note: This is not the official Adult Sensory Profile. Licensed questionnaire items and standardized scoring will not be published without appropriate authorization.">Nota: Kandungan ini bukan Adult Sensory Profile rasmi. Item soal selidik berlesen dan pemarkahan piawai tidak akan diterbitkan tanpa kebenaran yang sesuai.</div></div></div></section>
+    <section id="podcast"><div class="container"><div class="section-top"><div class="eyebrow">LISTEN · REFLECT · CONNECT</div><h2>OTAP Podcast</h2><p data-ms="Cerita, perbualan dan perspektif tentang dunia terapi cara kerja. Episod audio akan ditambah di sini." data-en="Stories, conversations and perspectives from the world of occupational therapy. Audio episodes will be added here.">Cerita, perbualan dan perspektif tentang dunia terapi cara kerja. Episod audio akan ditambah di sini.</p></div></div></section>
+    <section id="discovery"><div class="container"><div class="feature"><div class="eyebrow">DISCOVER OCCUPATIONAL THERAPY</div><h2 data-ms="Kenali dunia OT" data-en="Discover Occupational Therapy">Kenali dunia OT</h2><p data-ms="Terokai bagaimana OT menyokong penyertaan dalam aktiviti harian, penjagaan diri, pembelajaran, pekerjaan, permainan dan kehidupan bermasyarakat." data-en="Explore how OT supports participation in daily activities, self-care, learning, work, play and community life.">Terokai bagaimana OT menyokong penyertaan dalam aktiviti harian, penjagaan diri, pembelajaran, pekerjaan, permainan dan kehidupan bermasyarakat.</p></div></div></section>
   </main>
+  <footer><div class="container footer-inner"><div><strong style="color:var(--green)">O.T AWARENESS PROJECT</strong><div>Ten OTs. Many Perspectives. One Bigger Picture.</div><div style="margin-top:8px">Educational project · BM / EN</div></div><div class="footer-links"><a href="#about">About</a><a href="#missions">Missions</a><a href="#profile">Sensory Profile</a><a href="#podcast">Podcast</a><a href="#home">Back to top ↑</a></div></div></footer>
+  <script>
+    const menuButton = document.getElementById("menuButton");
+    const mainNav = document.getElementById("mainNav");
+    menuButton.addEventListener("click", () => {
+      const isOpen = mainNav.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.textContent = isOpen ? "✕" : "☰";
+    });
+    mainNav.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        mainNav.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.textContent = "☰";
+      });
+    });
+    let currentLanguage = "ms";
+    const languageButton = document.getElementById("languageButton");
+    languageButton.addEventListener("click", () => {
+      currentLanguage = currentLanguage === "ms" ? "en" : "ms";
+      document.documentElement.lang = currentLanguage;
+      document.querySelectorAll("[data-ms][data-en]").forEach(element => {
+        element.textContent = element.dataset[currentLanguage];
+      });
+      languageButton.textContent = currentLanguage === "ms" ? "BM / EN" : "EN / BM";
+    });
+  </script>
 </body>
 </html>
