@@ -877,6 +877,112 @@
       .splash-water-impact,.water-beam,.water-core,.water-ring,.water-particles i { animation-duration:.01ms !important; }
     }
 
+  
+    /* Refine OTAP loading logo typography and staircase colours to match reference */
+    .splash-wordmark-title {
+      font-family: "Arial Narrow", "Roboto Condensed", "Liberation Sans Narrow", sans-serif !important;
+      font-stretch: condensed !important;
+      font-weight: 800 !important;
+      letter-spacing: -.045em !important;
+      line-height: .98 !important;
+      text-transform: uppercase !important;
+      color: #f5f5f2 !important;
+      text-shadow: 0 0 4px rgba(255,255,255,.18) !important;
+    }
+    .splash-staircase span {
+      background: linear-gradient(135deg, #00f5a0 0%, #00d98b 55%, #00a96b 100%) !important;
+      border: 1px solid rgba(0,255,166,.18) !important;
+      box-shadow: 0 0 8px rgba(0,255,166,.42), 0 0 20px rgba(0,255,166,.2) !important;
+    }
+    .splash-staircase span:nth-child(4n+1) { background:linear-gradient(135deg,#00e997,#00bf79) !important; }
+    .splash-staircase span:nth-child(4n+2) { background:linear-gradient(135deg,#00f5a0,#00d38a) !important; }
+    .splash-staircase span:nth-child(4n+3) { background:linear-gradient(135deg,#00d98b,#009b64) !important; }
+    .splash-staircase span:nth-child(4n) { background:linear-gradient(135deg,#00c982,#007e55) !important; }
+    .splash-wordmark-rule {
+      background:linear-gradient(90deg,#00e997,rgba(0,233,151,.15)) !important;
+    }
+
+  
+    /* Match the supplied OTAP loading-logo reference: exact 10-tile stair and condensed wordmark */
+    .splash-lockup {
+      display:flex !important;
+      align-items:center !important;
+      justify-content:center !important;
+      gap:clamp(10px,2.2vw,22px) !important;
+      width:min(90vw,690px) !important;
+      margin-inline:auto !important;
+    }
+    .splash-staircase {
+      flex:0 0 auto !important;
+      width:clamp(132px,36vw,220px) !important;
+      height:clamp(132px,36vw,220px) !important;
+      display:grid !important;
+      grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+      grid-template-rows:repeat(4,minmax(0,1fr)) !important;
+      gap:clamp(3px,.7vw,7px) !important;
+      align-items:stretch !important;
+      justify-items:stretch !important;
+    }
+    .splash-staircase span {
+      width:100% !important;
+      max-width:none !important;
+      aspect-ratio:1 !important;
+      border-radius:0 !important;
+      background:linear-gradient(135deg,#00ffad 0%,#00e99a 58%,#00b978 100%) !important;
+      box-shadow:0 0 9px rgba(0,255,166,.72),0 0 22px rgba(0,255,166,.38),inset 0 0 5px rgba(220,255,242,.12) !important;
+    }
+    .splash-staircase span:nth-child(4),
+    .splash-staircase span:nth-child(7),
+    .splash-staircase span:nth-child(9) {
+      background:linear-gradient(135deg,#00e99a,#00b978 75%,#008c60) !important;
+    }
+    .splash-staircase span:nth-child(10) {
+      background:linear-gradient(135deg,#00e99a 0%,#00c985 70%,#00885b 100%) !important;
+    }
+    .splash-wordmark {
+      flex:1 1 auto !important;
+      min-width:0 !important;
+      max-width:410px !important;
+      text-align:left !important;
+    }
+    .splash-wordmark-title {
+      color:#f7f7f7 !important;
+      font-family:"Roboto Condensed","Arial Narrow","Liberation Sans Narrow",Impact,sans-serif !important;
+      font-stretch:condensed !important;
+      font-size:clamp(30px,7.2vw,64px) !important;
+      font-weight:900 !important;
+      line-height:.91 !important;
+      letter-spacing:-.045em !important;
+      text-transform:uppercase !important;
+      text-shadow:0 0 5px rgba(255,255,255,.16) !important;
+    }
+    .splash-wordmark-rule {
+      width:100% !important;
+      height:2px !important;
+      margin:clamp(12px,2vw,20px) 0 0 !important;
+      background:linear-gradient(90deg,#00ffa6 0%,rgba(0,255,166,.5) 82%,transparent 100%) !important;
+    }
+    .splash-slogan-below {
+      width:min(76vw,530px) !important;
+      margin:clamp(18px,3vw,28px) auto 25px !important;
+      color:#b8d4c9 !important;
+      font-family:"Roboto Condensed","Arial Narrow","Liberation Sans Narrow",sans-serif !important;
+      font-size:clamp(15px,3.5vw,25px) !important;
+      font-weight:700 !important;
+      line-height:1.65 !important;
+      letter-spacing:clamp(1.8px,.5vw,4px) !important;
+      text-align:center !important;
+      text-transform:uppercase !important;
+      text-shadow:0 0 10px rgba(0,255,166,.18) !important;
+    }
+    @media(max-width:420px) {
+      .splash-lockup { width:92vw !important; gap:9px !important; }
+      .splash-staircase { width:clamp(116px,34vw,142px) !important; height:clamp(116px,34vw,142px) !important; gap:3px !important; }
+      .splash-wordmark-title { font-size:clamp(27px,7.3vw,32px) !important; letter-spacing:-.05em !important; }
+      .splash-wordmark-rule { margin-top:11px !important; }
+      .splash-slogan-below { width:82vw !important; font-size:14px !important; letter-spacing:1.7px !important; line-height:1.7 !important; }
+    }
+
   </style>
 </head>
 <body class="loading">
