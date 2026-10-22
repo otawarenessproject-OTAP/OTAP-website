@@ -716,6 +716,27 @@
       .splash-wordmark-tag { font-size:6.5px !important; letter-spacing:.5px !important; }
     }
 
+  
+    /* Correct hierarchy: logo staircase + wordmark first; slogan below the full logo lockup */
+    .splash-wordmark-tag { display:none !important; }
+    .splash-slogan-below {
+      display:block !important;
+      width:min(78vw,390px) !important;
+      margin:16px auto 24px !important;
+      text-align:center !important;
+      color:#c8ded5 !important;
+      font-size:clamp(8px,2vw,11px) !important;
+      line-height:1.8 !important;
+      letter-spacing:clamp(.8px,.3vw,1.8px) !important;
+      text-transform:uppercase !important;
+    }
+    .splash-lockup { margin-bottom:0 !important; }
+    .splash-wordmark-rule { display:none !important; }
+    .loading-track { margin-top:0 !important; }
+    @media (max-width:380px) {
+      .splash-slogan-below { width:82vw !important; margin:13px auto 20px !important; font-size:7px !important; }
+    }
+
   </style>
 </head>
 <body class="loading">
@@ -737,9 +758,10 @@
         <div class="splash-wordmark">
           <div class="splash-wordmark-title">O.T<br>AWARENESS<br>PROJECT</div>
           <div class="splash-wordmark-rule"></div>
-          <div class="splash-wordmark-tag">EIGHT SENSES.<br>TEN PERSPECTIVES.<br>ONE BIGGER PICTURE.</div>
+          
         </div>
       </div>
+      <div class="splash-slogan-below">EIGHT SENSES.<br>TEN PERSPECTIVES.<br>ONE BIGGER PICTURE.</div>
       <div class="loading-track"><div class="loading-bar"></div></div>
       <div class="splash-hint">A BIGGER PICTURE IS COMING…</div>
     </div>
