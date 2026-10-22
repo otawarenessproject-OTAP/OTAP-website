@@ -600,6 +600,82 @@
     }
     @media(prefers-reduced-motion:reduce) { .splash::before,.splash::after { animation:none!important; } }
 
+  
+    /* Targeted correction: preserve the approved silhouette artwork and stabilize splash layout */
+    .splash-inner {
+      display:block !important;
+      width:min(88vw,520px) !important;
+      text-align:center !important;
+      padding:0 !important;
+    }
+    .splash-lockup {
+      display:flex !important;
+      flex-direction:row !important;
+      align-items:center !important;
+      justify-content:center !important;
+      gap:clamp(12px,3.5vw,26px) !important;
+      width:100% !important;
+      margin:0 auto 30px !important;
+    }
+    .splash-staircase {
+      flex:0 0 auto !important;
+      width:clamp(112px,30vw,176px) !important;
+      height:clamp(104px,28vw,164px) !important;
+      margin:0 !important;
+    }
+    .splash-wordmark {
+      flex:0 1 58% !important;
+      min-width:0 !important;
+      text-align:left !important;
+    }
+    .splash-wordmark-title {
+      font-size:clamp(21px,5.8vw,36px) !important;
+      line-height:.98 !important;
+      letter-spacing:-.035em !important;
+    }
+    .splash-wordmark-rule { margin:12px 0 9px !important; }
+    .splash-wordmark-tag {
+      font-size:clamp(7px,1.8vw,10px) !important;
+      line-height:1.7 !important;
+      letter-spacing:clamp(.7px,.35vw,2px) !important;
+      white-space:normal !important;
+    }
+    .loading-track {
+      width:min(78vw,300px) !important;
+      height:5px !important;
+      margin:0 auto !important;
+    }
+    .loading-bar { animation:load-progress 3.8s linear forwards !important; }
+    .splash-hint {
+      margin-top:16px !important;
+      font-size:clamp(9px,2vw,12px) !important;
+      letter-spacing:clamp(1.5px,.4vw,3px) !important;
+    }
+    .splash::before, .splash::after {
+      pointer-events:none;
+      animation-fill-mode:both;
+    }
+    .hero-people {
+      display:block !important;
+      width:100% !important;
+      max-width:850px !important;
+      height:auto !important;
+      aspect-ratio:672 / 165 !important;
+      margin:8px auto 0 !important;
+      background-size:100% 100% !important;
+      background-repeat:no-repeat !important;
+      background-position:center !important;
+    }
+    .otap-silhouette-scene { display:none !important; }
+    @media (max-width:380px) {
+      .splash-inner { width:92vw !important; }
+      .splash-lockup { gap:9px !important; }
+      .splash-staircase { width:100px !important; height:96px !important; gap:3px !important; }
+      .splash-wordmark { flex-basis:60% !important; }
+      .splash-wordmark-title { font-size:20px !important; }
+      .splash-wordmark-tag { font-size:7px !important; letter-spacing:.5px !important; }
+    }
+
   </style>
 </head>
 <body class="loading">
@@ -679,21 +755,7 @@
     <div class="otap-sensory-icons" aria-hidden="true">
       <span>◉</span><span>♬</span><span>♧</span><span>♧</span><span>↗</span><span>♧</span><span>♥</span>
     </div>
-    <div class="otap-silhouette-scene" aria-label="Ten mysterious OT silhouettes">
-      <div class="otap-glow"></div>
-      <div class="otap-silhouettes">
-        <div class="otap-person woman-no-hijab p1"><i class="person-head"></i><i class="person-body"></i></div>
-        <div class="otap-person woman-hijab p2"><i class="person-head"></i><i class="person-body"></i><i class="hijab-shape"></i></div>
-        <div class="otap-person man p3"><i class="person-head"></i><i class="person-body"></i></div>
-        <div class="otap-person man p4"><i class="person-head"></i><i class="person-body"></i></div>
-        <div class="otap-person woman-hijab p5"><i class="person-head"></i><i class="person-body"></i></div>
-        <div class="otap-person man p6"><i class="person-head"></i><i class="person-body"></i></div>
-        <div class="otap-person woman-hijab p7"><i class="person-head"></i><i class="person-body"></i><i class="hijab-shape"></i></div>
-        <div class="otap-person man p8"><i class="person-head"></i><i class="person-body"></i></div>
-        <div class="otap-person woman-hijab p9"><i class="person-head"></i><i class="person-body"></i><i class="hijab-shape"></i></div>
-        <div class="otap-person man p10"><i class="person-head"></i><i class="person-body"></i></div>
-      </div>
-    </div>
+    <div class="hero-people" role="img" aria-label="The ten original OTAP mystery silhouettes"></div>
     <div class="otap-home-copy">
       <h1>TEN PEOPLE.<br>MANY PERSPECTIVES.<br><span>ONE BIGGER PICTURE.</span></h1>
       <p data-ms="Sepuluh individu. Pelbagai perspektif.<br>Satu gambaran yang lebih besar." data-en="Ten individuals. Many perspectives.<br>One bigger picture.">Sepuluh individu. Pelbagai perspektif.<br>Satu gambaran yang lebih besar.</p>
