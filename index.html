@@ -291,28 +291,49 @@
       .mockup-stage { max-width:1180px; }
     }
 
+
+    /* Splash: staircase mark beside OTAP wordmark, as in the approved concept */
+    .splash-inner { width:min(88vw,520px); text-align:center; }
+    .splash-stage,.splash-subtitle,.splash-logo-wrap,.splash-logo,.splash-tagline { display:none !important; }
+    .splash-lockup { display:flex; align-items:center; justify-content:center; gap:clamp(14px,4vw,28px); width:100%; margin:0 auto 30px; }
+    .splash-staircase { flex:0 0 auto; width:clamp(116px,31vw,176px); height:clamp(112px,29vw,166px); display:grid; grid-template-columns:repeat(5,1fr); grid-template-rows:repeat(4,1fr); gap:4px; align-items:center; justify-items:center; }
+    .splash-staircase span { grid-column:var(--x); grid-row:var(--y); width:100%; aspect-ratio:1; max-width:30px; background:var(--green); box-shadow:0 0 14px #00f5a044; opacity:0; transform:translateY(10px) scale(.7); animation:logo-piece-in .42s ease forwards; animation-delay:var(--d); }
+    .splash-wordmark { flex:0 1 auto; min-width:0; text-align:left; opacity:0; animation:wordmark-appear .8s ease 1.25s forwards; }
+    .splash-wordmark-title { color:#f2fff8; font-size:clamp(22px,6vw,36px); font-weight:900; line-height:.98; letter-spacing:.02em; }
+    .splash-wordmark-rule { height:1px; width:100%; background:linear-gradient(90deg,var(--green),#174a36); margin:12px 0 10px; }
+    .splash-wordmark-tag { color:#b9d8ca; font-size:clamp(7px,1.8vw,10px); line-height:1.7; letter-spacing:clamp(1px,.45vw,2.4px); white-space:nowrap; }
+    @keyframes wordmark-appear { to { opacity:1; transform:translateX(0); } from { opacity:0; transform:translateX(12px); } }
+    .loading-track { width:min(78vw,300px); height:5px; margin:0 auto; }
+    .loading-bar { animation-duration:3.8s; }
+    .splash-hint { margin-top:16px; color:var(--green); font-size:10px; letter-spacing:2.5px; }
+    @media (max-width:380px) {
+      .splash-inner { width:92vw; }
+      .splash-lockup { gap:10px; }
+      .splash-staircase { width:104px; height:100px; gap:3px; }
+      .splash-wordmark-title { font-size:21px; }
+      .splash-wordmark-tag { font-size:7px; letter-spacing:1px; }
+    }
+
   </style>
 </head>
 <body class="loading">
   <div class="splash" id="splash" aria-label="OTAP logo loading animation">
     <div class="splash-inner">
-      <div class="splash-stage" id="splashStage">01 · INITIAL LOADING</div>
-      <div class="splash-subtitle" id="splashSubtitle">Puzzle pieces appear one by one</div>
-      <div class="puzzle logo-puzzle" aria-hidden="true">
-        <span style="--c:1;--r:4;--delay:.15s"></span><span style="--c:2;--r:4;--delay:.25s"></span>
-        <span style="--c:3;--r:4;--delay:.35s"></span><span style="--c:4;--r:4;--delay:.45s"></span>
-        <span style="--c:5;--r:4;--delay:.55s"></span><span style="--c:2;--r:3;--delay:.65s"></span>
-        <span style="--c:3;--r:3;--delay:.75s"></span><span style="--c:4;--r:3;--delay:.85s"></span>
-        <span style="--c:5;--r:3;--delay:.95s"></span><span style="--c:3;--r:2;--delay:1.05s"></span>
-        <span style="--c:4;--r:2;--delay:1.15s"></span><span style="--c:5;--r:2;--delay:1.25s"></span>
-        <span style="--c:4;--r:1;--delay:1.35s"></span><span style="--c:5;--r:1;--delay:1.45s"></span>
+      <div class="splash-lockup">
+        <div class="splash-staircase" aria-hidden="true">
+          <span style="--x:1;--y:4;--d:.10s"></span><span style="--x:2;--y:4;--d:.18s"></span><span style="--x:3;--y:4;--d:.26s"></span><span style="--x:4;--y:4;--d:.34s"></span><span style="--x:5;--y:4;--d:.42s"></span>
+          <span style="--x:2;--y:3;--d:.50s"></span><span style="--x:3;--y:3;--d:.58s"></span><span style="--x:4;--y:3;--d:.66s"></span><span style="--x:5;--y:3;--d:.74s"></span>
+          <span style="--x:3;--y:2;--d:.82s"></span><span style="--x:4;--y:2;--d:.90s"></span><span style="--x:5;--y:2;--d:.98s"></span>
+          <span style="--x:4;--y:1;--d:1.06s"></span><span style="--x:5;--y:1;--d:1.14s"></span>
+        </div>
+        <div class="splash-wordmark">
+          <div class="splash-wordmark-title">O.T<br>AWARENESS<br>PROJECT</div>
+          <div class="splash-wordmark-rule"></div>
+          <div class="splash-wordmark-tag">EIGHT SENSES.<br>TEN PERSPECTIVES.<br>ONE BIGGER PICTURE.</div>
+        </div>
       </div>
-      <div class="splash-logo-wrap">
-        <img class="splash-logo" src="assets/images/logo-otap.jpg" alt="Logo rasmi O.T Awareness Project">
-      </div>
-      <div class="splash-tagline">EIGHT SENSES.<br>TEN PERSPECTIVES.<br>ONE BIGGER PICTURE.</div>
       <div class="loading-track"><div class="loading-bar"></div></div>
-      <div class="splash-hint">SOMETHING BIGGER IS COMING…</div>
+      <div class="splash-hint">A BIGGER PICTURE IS COMING…</div>
     </div>
   </div>
 
@@ -417,34 +438,10 @@
       otapLogo.insertAdjacentElement("afterend", fallback);
     }, { once: true });
 
-    const splashLogo = document.querySelector(".splash-logo");
-    const splashFallback = document.querySelector(".splash-fallback");
-    if (splashLogo.complete && splashLogo.naturalWidth > 0) splashFallback.style.display = "none";
-    splashLogo.addEventListener("load", () => { splashFallback.style.display = "none"; });
-    document.querySelectorAll(".splash-logo, header .brand-logo").forEach(img => {
-      img.addEventListener("error", () => {
-        img.style.display = "none";
-        const fallback = document.createElement("div");
-        fallback.textContent = "O.T AWARENESS PROJECT";
-        fallback.style.cssText = "color:var(--green);font-weight:800;letter-spacing:2px;text-align:center;margin:12px auto;font-size:14px";
-        img.insertAdjacentElement("afterend", fallback);
-      }, { once: true });
-    });
+    // Current splash screen uses a CSS-built staircase and wordmark.
+    // Do not reference the old image-based splash elements here.
 
-    const splashStages = [
-      ["01 · INITIAL LOADING", "Puzzle pieces appear one by one"],
-      ["02 · FORMING THE LOGO", "Pieces start to connect"],
-      ["03 · ALMOST THERE", "Final pieces lock in place"],
-      ["04 · LOGO REVEAL", "Official OTAP logo completed"],
-      ["05 · TRANSITION TO HOMEPAGE", "Logo dissolves into homepage"]
-    ];
-    splashStages.forEach((stage, index) => {
-      window.setTimeout(() => {
-        const title = document.getElementById("splashStage");
-        const subtitle = document.getElementById("splashSubtitle");
-        if (title && subtitle) { title.textContent = stage[0]; subtitle.textContent = stage[1]; }
-      }, index * 900);
-    });
+    // Allow the staircase pieces and wordmark to appear before revealing the homepage.
     window.setTimeout(() => {
       document.getElementById("splash").classList.add("done");
       document.body.classList.remove("loading");
