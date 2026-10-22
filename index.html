@@ -1070,7 +1070,7 @@
     .logo-tile {
       position:absolute !important; width:22.86% !important; height:22.86% !important;
       object-fit:cover !important; mix-blend-mode:screen !important;
-      opacity:0 !important; transform:translateY(12px) scale(.86) !important;
+      opacity:0; transform:translateY(12px) scale(.86) !important;
       filter:drop-shadow(0 0 6px rgba(0,255,166,.25)) !important;
       animation:original-tile-appear .38s cubic-bezier(.2,.8,.2,1) var(--tile-delay) forwards !important;
     }
@@ -1104,6 +1104,11 @@
       .animated-staircase {width:clamp(112px,34vw,138px) !important}
       .animated-wordmark {width:calc(100% - clamp(120px,36vw,150px)) !important}
     }
+
+  
+    /* Fix: opacity must be controlled by keyframes, not locked by !important. */
+    .splash-logo-animation .logo-tile { opacity:0; }
+    .splash-logo-animation .animated-wordmark { opacity:0; }
 
   </style>
 </head>
