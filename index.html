@@ -16,8 +16,8 @@
     .container { width:min(1100px,90%); margin:auto; }
     header { position:sticky; top:0; z-index:10; background:rgba(3,8,6,.95); border-bottom:1px solid var(--line); backdrop-filter:blur(12px); }
     .nav { min-height:76px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
-    .brand { display:flex; align-items:center; gap:10px; font-size:13px; font-weight:800; letter-spacing:1px; }
-    .brand-mark { width:43px; height:43px; border:1px solid var(--green); border-radius:12px; display:grid; place-items:center; color:var(--green); font-size:12px; box-shadow:0 0 18px #00f5a020; }
+    .brand { display:flex; align-items:center; gap:10px; font-size:13px; font-weight:800; letter-spacing:1px; min-width:0; }
+    .brand-logo { width:48px; height:48px; object-fit:contain; flex-shrink:0; display:block; }
     .brand small { display:block; color:var(--muted); font-size:10px; letter-spacing:2px; }
     .nav-actions { display:flex; gap:8px; align-items:center; }
     .lang,.menu-btn { color:var(--green); background:transparent; border:1px solid var(--line); border-radius:9px; padding:9px 12px; }
@@ -71,7 +71,7 @@
       nav.open { display:flex; }
       nav a { padding:12px 0; border-bottom:1px solid #153124; font-size:14px; }
       .brand { font-size:11px; }
-      .brand-mark { width:38px; height:38px; }
+      .brand-logo { width:40px; height:40px; }
       .hero { min-height:auto; padding:90px 0 75px; }
       h1 { letter-spacing:-1px; }
       section { padding:52px 0; }
@@ -88,7 +88,7 @@
   <header>
     <div class="container nav">
       <a class="brand" href="#home" aria-label="OTAP Home">
-        <span class="brand-mark">OT<span style="color:white">AP</span></span>
+        <img class="brand-logo" src="assets/images/logo-otap.jpg" alt="Logo rasmi O.T Awareness Project">
         <span>O.T AWARENESS PROJECT<small>EXPLORE THE UNKNOWN</small></span>
       </a>
       <div class="nav-actions">
@@ -147,6 +147,16 @@
   </main>
   <footer><div class="container footer-inner"><div><strong style="color:var(--green)">O.T AWARENESS PROJECT</strong><div>Ten OTs. Many Perspectives. One Bigger Picture.</div><div style="margin-top:8px">Educational project · BM / EN</div></div><div class="footer-links"><a href="#about">About</a><a href="#missions">Missions</a><a href="#profile">Sensory Profile</a><a href="#podcast">Podcast</a><a href="#home">Back to top ↑</a></div></div></footer>
   <script>
+    const otapLogo = document.querySelector(".brand-logo");
+    otapLogo.addEventListener("error", () => {
+      otapLogo.style.display = "none";
+      const fallback = document.createElement("span");
+      fallback.className = "brand-mark";
+      fallback.textContent = "OTAP";
+      fallback.style.cssText = "width:40px;height:40px;border:1px solid var(--green);border-radius:10px;display:grid;place-items:center;color:var(--green);font-size:11px;flex-shrink:0";
+      otapLogo.insertAdjacentElement("afterend", fallback);
+    }, { once: true });
+
     const menuButton = document.getElementById("menuButton");
     const mainNav = document.getElementById("mainNav");
     menuButton.addEventListener("click", () => {
