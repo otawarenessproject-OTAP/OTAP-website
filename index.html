@@ -1087,7 +1087,7 @@
     .animated-wordmark {
       display:block !important; width:calc(100% - clamp(135px,37vw,235px)) !important;
       max-width:430px !important; height:auto !important; object-fit:contain !important;
-      mix-blend-mode:screen !important; opacity:0 !important;
+      mix-blend-mode:screen !important; opacity:0;
       animation:original-wordmark-reveal .7s ease 1.45s forwards !important;
     }
     @keyframes original-tile-appear {
@@ -1109,6 +1109,19 @@
     /* Fix: opacity must be controlled by keyframes, not locked by !important. */
     .splash-logo-animation .logo-tile { opacity:0; }
     .splash-logo-animation .animated-wordmark { opacity:0; animation:original-wordmark-reveal .7s ease 1.45s forwards !important; }
+
+  
+    /* Definitive visibility fix: no !important opacity can override the reveal animation. */
+    .splash-logo-animation img.animated-wordmark {
+      display:block !important;
+      visibility:visible !important;
+      opacity:0;
+      animation:original-wordmark-reveal .7s ease 1.45s forwards !important;
+    }
+    @keyframes original-wordmark-reveal {
+      0% { opacity:0; transform:translateX(10px); filter:blur(3px); }
+      100% { opacity:1; transform:translateX(0); filter:blur(0); }
+    }
 
   </style>
 </head>
