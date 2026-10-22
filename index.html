@@ -813,10 +813,85 @@
       .splash-slogan-below { width:88vw !important; margin:16px auto 22px !important; font-size:11px !important; line-height:1.8 !important; letter-spacing:1.1px !important; }
     }
 
+  
+    /* Real, visible neon water splash: a vertical light column hitting a reflective pool */
+    .splash::before, .splash::after { display:none !important; }
+    .splash { isolation:isolate !important; }
+    .splash-water-impact {
+      position:absolute !important;
+      left:0 !important; right:0 !important; bottom:7.5% !important;
+      height:36% !important; z-index:0 !important;
+      overflow:visible !important; pointer-events:none !important;
+      opacity:0;
+      animation:water-scene-in 1.45s ease-out 3.25s both !important;
+    }
+    .splash-inner { position:relative !important; z-index:2 !important; }
+    .water-beam {
+      position:absolute; left:50%; top:0; height:80%; width:2px;
+      transform:translateX(-50%);
+      background:linear-gradient(to bottom,transparent,rgba(0,255,166,.18) 15%,rgba(0,255,166,.7) 65%,#eafff6 95%,transparent);
+      box-shadow:0 0 8px #00ffa6,0 0 22px #00ffa688,0 0 44px #00ffa633;
+      animation:water-beam-pulse 1.45s ease-out 3.25s both;
+    }
+    .water-core {
+      position:absolute; left:50%; top:78%; width:24px; height:9px;
+      transform:translate(-50%,-50%); border-radius:50%;
+      background:#eafff8; box-shadow:0 0 10px 5px #00ffa6,0 0 32px 13px #00ffa688,0 0 90px 26px #00ffa633;
+      animation:water-core-flash 1.45s ease-out 3.25s both;
+    }
+    .water-ring {
+      position:absolute; left:50%; top:78%; border-radius:50%;
+      transform:translate(-50%,-50%) scale(.45);
+      border:2px solid rgba(0,255,166,.82);
+      box-shadow:0 0 8px rgba(0,255,166,.6),inset 0 0 8px rgba(0,255,166,.18);
+      opacity:0;
+    }
+    .water-ring-1 { width:24%; height:15%; animation:water-ring-expand 1.35s ease-out 3.3s both; }
+    .water-ring-2 { width:43%; height:22%; border-width:1px; animation:water-ring-expand 1.35s ease-out 3.38s both; }
+    .water-ring-3 { width:68%; height:31%; border-width:2px; animation:water-ring-expand 1.35s ease-out 3.46s both; }
+    .water-ring-4 { width:96%; height:43%; border-width:1px; animation:water-ring-expand 1.35s ease-out 3.54s both; }
+    .water-particles { position:absolute; inset:0; }
+    .water-particles i {
+      position:absolute; left:50%; top:78%; width:3px; height:3px; border-radius:50%;
+      background:#caffef; box-shadow:0 0 8px 2px #00ffa6;
+      opacity:0; animation:water-droplet 1.05s ease-out 3.35s both;
+    }
+    .water-particles i:nth-child(1) { --dx:-30vw; --dy:-15vh; }
+    .water-particles i:nth-child(2) { --dx:27vw; --dy:-13vh; animation-delay:3.4s; }
+    .water-particles i:nth-child(3) { --dx:-21vw; --dy:-9vh; animation-delay:3.42s; }
+    .water-particles i:nth-child(4) { --dx:19vw; --dy:-19vh; animation-delay:3.44s; }
+    .water-particles i:nth-child(5) { --dx:-39vw; --dy:-4vh; animation-delay:3.46s; }
+    .water-particles i:nth-child(6) { --dx:36vw; --dy:-7vh; animation-delay:3.48s; }
+    .water-particles i:nth-child(7) { --dx:-13vw; --dy:-22vh; animation-delay:3.5s; }
+    .water-particles i:nth-child(8) { --dx:12vw; --dy:-24vh; animation-delay:3.52s; }
+    .water-particles i:nth-child(9) { --dx:-45vw; --dy:-12vh; animation-delay:3.54s; }
+    .water-particles i:nth-child(10) { --dx:43vw; --dy:-16vh; animation-delay:3.56s; }
+    .water-particles i:nth-child(11) { --dx:-7vw; --dy:-11vh; animation-delay:3.58s; }
+    .water-particles i:nth-child(12) { --dx:8vw; --dy:-6vh; animation-delay:3.6s; }
+    @keyframes water-scene-in { 0%{opacity:0} 18%{opacity:1} 72%{opacity:.95} 100%{opacity:0} }
+    @keyframes water-beam-pulse { 0%{opacity:0;transform:translateX(-50%) scaleY(.25)} 18%{opacity:1;transform:translateX(-50%) scaleY(1)} 65%{opacity:.75} 100%{opacity:0} }
+    @keyframes water-core-flash { 0%{opacity:0;scale:.4} 18%{opacity:1;scale:1.35} 45%{opacity:.85;scale:1} 100%{opacity:0;scale:.6} }
+    @keyframes water-ring-expand { 0%{opacity:0;transform:translate(-50%,-50%) scale(.45)} 18%{opacity:.95} 75%{opacity:.65} 100%{opacity:0;transform:translate(-50%,-50%) scale(1.04)} }
+    @keyframes water-droplet { 0%{opacity:0;transform:translate(0,0) scale(.5)} 20%{opacity:1} 100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.2)} }
+    @media (prefers-reduced-motion:reduce) {
+      .splash-water-impact,.water-beam,.water-core,.water-ring,.water-particles i { animation-duration:.01ms !important; }
+    }
+
   </style>
 </head>
 <body class="loading">
   <div class="splash" id="splash" aria-label="OTAP logo loading animation">
+    <div class="splash-water-impact" aria-hidden="true">
+      <div class="water-beam"></div>
+      <div class="water-core"></div>
+      <div class="water-ring water-ring-1"></div>
+      <div class="water-ring water-ring-2"></div>
+      <div class="water-ring water-ring-3"></div>
+      <div class="water-ring water-ring-4"></div>
+      <div class="water-particles">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+    </div>
     <div class="splash-inner">
       <div class="splash-lockup">
         <div class="splash-staircase" aria-hidden="true">
