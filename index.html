@@ -64,7 +64,42 @@
     .footer-inner { display:flex; flex-wrap:wrap; justify-content:space-between; gap:18px; }
     .footer-links { display:flex; flex-wrap:wrap; gap:16px; }
     .footer-links a:hover { color:var(--green); }
+
+    .splash { position:fixed; inset:0; z-index:1000; display:grid; place-items:center; background:radial-gradient(ellipse at center,#092016 0%,#030806 58%,#010302 100%); transition:opacity .9s ease,visibility .9s ease; }
+    .splash.done { opacity:0; visibility:hidden; pointer-events:none; }
+    .splash-inner { width:min(88vw,440px); text-align:center; }
+    .puzzle { width:180px; height:150px; margin:0 auto 25px; display:grid; grid-template-columns:repeat(5,1fr); grid-template-rows:repeat(4,1fr); gap:5px; align-items:center; justify-items:center; }
+    .piece { width:23px; height:23px; background:var(--green); box-shadow:0 0 16px #00f5a080; opacity:0; transform:translate(var(--x),var(--y)) scale(.3); animation:piece-in .65s cubic-bezier(.2,.8,.2,1) forwards; animation-delay:var(--delay); }
+    .piece:nth-child(3n) { background:#00b978; } .piece:nth-child(4n) { width:17px;height:17px; }
+    @keyframes piece-in { to { opacity:1;transform:translate(0,0) scale(1); } }
+    .splash-logo { width:min(76vw,310px);max-height:120px;object-fit:contain;opacity:0;animation:logo-show .8s ease 2.8s forwards; }
+    @keyframes logo-show { to { opacity:1; } }
+    .splash-caption { color:var(--green);font-size:11px;letter-spacing:3px;margin-top:20px; }
+    .loading-track { height:4px;width:180px;margin:16px auto 0;background:#173b2b;border-radius:9px;overflow:hidden; }
+    .loading-bar { height:100%;width:0;background:var(--green);box-shadow:0 0 12px var(--green);animation:load-progress 3.5s ease forwards; }
+    @keyframes load-progress { to { width:100%; } } body.loading { overflow:hidden; }
+    .hero { background:radial-gradient(ellipse at 50% 65%,#06351f 0%,#030806 65%); }
+    .hero-people { display:flex;align-items:flex-end;justify-content:center;gap:clamp(2px,1.3vw,13px);height:190px;margin:30px auto -3px;max-width:850px;position:relative; }
+    .hero-people::before { content:"";position:absolute;bottom:0;left:5%;right:5%;height:2px;background:linear-gradient(90deg,transparent,var(--green),transparent);box-shadow:0 0 22px #00f5a060; }
+    .mystery-person { position:relative;flex:1;max-width:76px;height:var(--height,150px);min-width:0; }
+    .mystery-person .sil-head { position:absolute;top:0;left:50%;transform:translateX(-50%);width:clamp(16px,3.2vw,29px);height:clamp(23px,4.4vw,37px);border-radius:48% 48% 43% 43%;background:#010403;box-shadow:0 0 9px #00f5a01c; }
+    .mystery-person .sil-body { position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:88%;height:72%;background:linear-gradient(90deg,#010302,#07130c,#010302);border-radius:48% 48% 0 0;clip-path:polygon(27% 0,73% 0,100% 100%,0 100%); }
+    .mystery-person.woman .sil-body { width:100%;clip-path:polygon(34% 0,66% 0,78% 30%,100% 100%,0 100%,22% 30%); }
+    .mystery-person.hijab .sil-head { width:clamp(24px,4.2vw,37px);height:clamp(30px,5vw,44px);border-radius:48% 48% 40% 40%;box-shadow:0 0 0 5px #010403,0 0 0 7px #0a2116; }
+    .mystery-person.hijab .sil-body { height:76%;width:100%;clip-path:polygon(26% 0,74% 0,100% 100%,0 100%); }
+    .hero-copy { text-align:center;position:relative;z-index:1; }
+    .hero-copy h1 { margin:0 auto 12px;font-size:clamp(30px,6vw,52px);letter-spacing:-1px; }
+    .hero-copy p { margin:0 auto; }
+    .sensory-strip { display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin:0 auto 22px;color:#a6f8d1; }
+    .sensory-dot { width:36px;height:36px;display:grid;place-items:center;border:1px solid #287a55;border-radius:50%;font-size:17px;background:#04140c; }
+
     @media (max-width:760px) {
+      .hero-people { height:145px;gap:2px;margin-top:35px; }
+      .mystery-person { height:var(--height-mobile,115px); }
+      .splash-logo { max-height:100px; }
+      .puzzle { width:150px;height:125px; }
+      .piece { width:19px;height:19px; }
+
       .nav { min-height:68px; }
       .menu-btn { display:inline-block; }
       nav { display:none; position:absolute; top:68px; left:0; right:0; background:#050c08; border-bottom:1px solid var(--line); padding:18px 5%; flex-direction:column; align-items:stretch; gap:0; }
@@ -84,7 +119,37 @@
     @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition:none!important; } }
   </style>
 </head>
-<body>
+<body class="loading">
+  <div class="splash" id="splash" aria-label="OTAP logo loading animation">
+    <div class="splash-inner">
+      <div class="puzzle" aria-hidden="true">
+<span class="piece" style="--x:-40px;--y:-35px;--delay:0.00s"></span>
+        <span class="piece" style="--x:20px;--y:-45px;--delay:0.11s"></span>
+        <span class="piece" style="--x:45px;--y:20px;--delay:0.22s"></span>
+        <span class="piece" style="--x:-35px;--y:35px;--delay:0.33s"></span>
+        <span class="piece" style="--x:30px;--y:40px;--delay:0.44s"></span>
+        <span class="piece" style="--x:-50px;--y:0px;--delay:0.55s"></span>
+        <span class="piece" style="--x:45px;--y:-25px;--delay:0.66s"></span>
+        <span class="piece" style="--x:0px;--y:45px;--delay:0.77s"></span>
+        <span class="piece" style="--x:-25px;--y:-45px;--delay:0.88s"></span>
+        <span class="piece" style="--x:50px;--y:35px;--delay:0.99s"></span>
+        <span class="piece" style="--x:-45px;--y:-15px;--delay:1.10s"></span>
+        <span class="piece" style="--x:20px;--y:35px;--delay:1.21s"></span>
+        <span class="piece" style="--x:40px;--y:0px;--delay:1.32s"></span>
+        <span class="piece" style="--x:-20px;--y:40px;--delay:1.43s"></span>
+        <span class="piece" style="--x:0px;--y:-40px;--delay:1.54s"></span>
+        <span class="piece" style="--x:35px;--y:-35px;--delay:1.65s"></span>
+        <span class="piece" style="--x:-40px;--y:25px;--delay:1.76s"></span>
+        <span class="piece" style="--x:25px;--y:25px;--delay:1.87s"></span>
+        <span class="piece" style="--x:-15px;--y:-30px;--delay:1.98s"></span>
+        <span class="piece" style="--x:45px;--y:10px;--delay:2.09s"></span>
+        </div>
+      <img class="splash-logo" src="assets/images/logo-otap.jpg" alt="O.T Awareness Project">
+      <div class="splash-caption">EIGHT SENSES. TEN PERSPECTIVES.</div>
+      <div class="loading-track"><div class="loading-bar"></div></div>
+      <div class="splash-caption">A BIGGER PICTURE IS COMING…</div>
+    </div>
+  </div>
   <header>
     <div class="container nav">
       <a class="brand" href="#home" aria-label="OTAP Home">
@@ -105,12 +170,31 @@
     </div>
   </header>
   <main>
-    <section class="hero" id="home"><div class="container">
-      <div class="eyebrow">A journey into occupational therapy</div>
-      <h1>TEN OTs.<br>MANY PERSPECTIVES.<br><span>ONE BIGGER PICTURE.</span></h1>
-      <p data-ms="Sepuluh ahli terapi cara kerja. Pelbagai perspektif. Mari meneroka pengalaman sensori, aktiviti harian dan dunia OT dengan cara yang berbeza." data-en="Ten occupational therapists. Many perspectives. Explore sensory experiences, everyday occupations and the world of OT in a different way.">Sepuluh ahli terapi cara kerja. Pelbagai perspektif. Mari meneroka pengalaman sensori, aktiviti harian dan dunia OT dengan cara yang berbeza.</p>
-      <div class="actions"><a class="btn btn-primary" href="#people" data-ms="Temui 10 OT ↓" data-en="Meet the 10 OTs ↓">Temui 10 OT ↓</a><a class="btn btn-secondary" href="#missions" data-ms="Teroka misi sensori ↗" data-en="Explore sensory missions ↗">Teroka misi sensori ↗</a></div>
-    </div></section>
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="sensory-strip" aria-hidden="true"><span class="sensory-dot">◉</span><span class="sensory-dot">♫</span><span class="sensory-dot">♧</span><span class="sensory-dot">◎</span><span class="sensory-dot">↗</span><span class="sensory-dot">♙</span><span class="sensory-dot">♥</span></div>
+        <div class="hero-people" aria-label="Ten anonymous OT silhouettes">
+          <div class="mystery-person man" style="--height:106px;--height-mobile:83px"><div class="sil-head"></div><div class="sil-body"></div></div>
+          <div class="mystery-person hijab woman" style="--height:125px;--height-mobile:95px"><div class="sil-head"></div><div class="sil-body"></div></div>
+          <div class="mystery-person man" style="--height:143px;--height-mobile:108px"><div class="sil-head"></div><div class="sil-body"></div></div>
+          <div class="mystery-person woman" style="--height:157px;--height-mobile:118px"><div class="sil-head"></div><div class="sil-body"></div></div>
+          <div class="mystery-person hijab woman" style="--height:178px;--height-mobile:132px"><div class="sil-head"></div><div class="sil-body"></div></div>
+          <div class="mystery-person man" style="--height:168px;--height-mobile:126px"><div class="sil-head"></div><div class="sil-body"></div></div>
+          <div class="mystery-person hijab woman" style="--height:151px;--height-mobile:114px"><div class="sil-head"></div><div class="sil-body"></div></div>
+          <div class="mystery-person man" style="--height:135px;--height-mobile:102px"><div class="sil-head"></div><div class="sil-body"></div></div>
+          <div class="mystery-person hijab woman" style="--height:119px;--height-mobile:91px"><div class="sil-head"></div><div class="sil-body"></div></div>
+          <div class="mystery-person man" style="--height:100px;--height-mobile:79px"><div class="sil-head"></div><div class="sil-body"></div></div>
+        </div>
+        <div class="hero-copy">
+          <h1>TEN PEOPLE.<br>MANY PERSPECTIVES.<br><span>ONE BIGGER PICTURE.</span></h1>
+          <p data-ms="Sepuluh individu. Pelbagai perspektif.<br>Satu gambaran yang lebih besar." data-en="Ten people. Many perspectives.<br>One bigger picture.">Sepuluh individu. Pelbagai perspektif.<br>Satu gambaran yang lebih besar.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#people" data-ms="Kenali 10 Ahli OT →" data-en="Meet the 10 OTs →">Kenali 10 Ahli OT →</a>
+            <a class="btn btn-secondary" href="#missions" data-ms="Mulakan Perjalanan →" data-en="Start Your Journey →">Mulakan Perjalanan →</a>
+          </div>
+        </div>
+      </div>
+    </section>
     <section id="people"><div class="container">
       <div class="section-top"><div class="eyebrow">THE PEOPLE BEHIND THE PERSPECTIVES</div><h2 data-ms="Sepuluh wajah. Siapakah mereka?" data-en="Ten silhouettes. Who are they?">Sepuluh wajah. Siapakah mereka?</h2><p data-ms="Setiap OT membawa pengalaman dan perspektif tersendiri. Identiti tidak didedahkan di sini — terokai projek ini dahulu." data-en="Every OT brings a different experience and perspective. Identities remain hidden here — explore the project first.">Setiap OT membawa pengalaman dan perspektif tersendiri. Identiti tidak didedahkan di sini — terokai projek ini dahulu.</p></div>
       <div class="people" aria-label="Ten anonymous OT silhouettes">
@@ -147,7 +231,7 @@
   </main>
   <footer><div class="container footer-inner"><div><strong style="color:var(--green)">O.T AWARENESS PROJECT</strong><div>Ten OTs. Many Perspectives. One Bigger Picture.</div><div style="margin-top:8px">Educational project · BM / EN</div></div><div class="footer-links"><a href="#about">About</a><a href="#missions">Missions</a><a href="#profile">Sensory Profile</a><a href="#podcast">Podcast</a><a href="#home">Back to top ↑</a></div></div></footer>
   <script>
-    const otapLogo = document.querySelector(".brand-logo");
+    const otapLogo = document.querySelector("header .brand-logo");
     otapLogo.addEventListener("error", () => {
       otapLogo.style.display = "none";
       const fallback = document.createElement("span");
@@ -157,6 +241,12 @@
       otapLogo.insertAdjacentElement("afterend", fallback);
     }, { once: true });
 
+    window.addEventListener("load", () => {
+      window.setTimeout(() => {
+        document.getElementById("splash").classList.add("done");
+        document.body.classList.remove("loading");
+      }, 3900);
+    });
     const menuButton = document.getElementById("menuButton");
     const mainNav = document.getElementById("mainNav");
     menuButton.addEventListener("click", () => {
