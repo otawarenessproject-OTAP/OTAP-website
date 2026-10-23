@@ -608,6 +608,14 @@
     .otap-mockup-home::before { display:none !important; }
     .otap-mockup-art { position:relative; width:100%; max-width:1536px; margin:0 auto; line-height:0; background:#020805; }
     .otap-mockup-art > img { display:block; width:100%; height:auto; }
+    /* Mobile first-screen fit: preserve artwork/menu, reduce its displayed height so About is reached sooner. */
+    @media (max-width:760px) {
+      .otap-mockup-art > img { width:100%; height:auto; max-height:58svh; object-fit:contain; object-position:top center; }
+      #about { padding-top:clamp(16px,3vh,26px); padding-bottom:clamp(20px,3vh,30px); }
+      #about .feature { padding-top:0; padding-bottom:0; }
+      #about .feature h2 { font-size:clamp(23px,6vw,30px); line-height:1.15; margin:10px 0; }
+      #about .feature p { font-size:13px; line-height:1.55; }
+    }
     .mock-hotspot { position:absolute; display:block; z-index:4; border:0; padding:0; margin:0; background:transparent; color:transparent; cursor:pointer; line-height:normal; border-radius:8px; }
     .mock-hotspot:focus-visible { outline:2px solid #00f5a0; outline-offset:2px; background:#00f5a015; }
     .mock-menu { left:91%; top:1.5%; width:6.5%; height:7%; }
@@ -1316,7 +1324,7 @@
       <a href="#people"><span class="mockup-nav-icon">♟</span><span class="mockup-nav-copy"><span>Meet the 10 OTs</span><small>Kenali 10 Ahli OTAP</small></span><span class="mockup-nav-arrow">›</span></a>
       <a href="#missions"><span class="mockup-nav-icon">◇</span><span class="mockup-nav-copy"><span data-ms="8 Misi Sensori" data-en="The 8 Sensory Missions">8 Misi Sensori</span><small data-ms="Lapan Misi Deria" data-en="Eight Sensory Missions">Lapan Misi Deria</small></span><span class="mockup-nav-arrow">›</span></a>
       <a href="#profile"><span class="mockup-nav-icon">▥</span><span class="mockup-nav-copy"><span data-ms="Profil Deria Anda" data-en="Your OT Profile">Profil Deria Anda</span><small data-ms="Refleksi sensori" data-en="Sensory reflection">Refleksi sensori</small></span><span class="mockup-nav-arrow">›</span></a>
-      <a href="#podcast"><span class="mockup-nav-icon">♩</span><span class="mockup-nav-copy"><span>Podcast</span><small>Podcast OTAP</small></span><span class="mockup-nav-arrow">›</span></a>
+      <a href="#podcast"><span class="mockup-nav-icon">♩</span><span class="mockup-nav-copy"><span>OTAPcast</span><small>Audio &amp; perbualan OTAP</small></span><span class="mockup-nav-arrow">›</span></a>
       <a href="#discovery"><span class="mockup-nav-icon">▤</span><span class="mockup-nav-copy"><span>OT Discovery Hub</span><small>Pusat Penerokaan OT</small></span><span class="mockup-nav-arrow">›</span></a>
       <a href="#about"><span class="mockup-nav-icon">ⓘ</span><span class="mockup-nav-copy"><span data-ms="Tentang Projek" data-en="About the Project">Tentang Projek</span></span><span class="mockup-nav-arrow">›</span></a>
       <a href="#accessibility"><span class="mockup-nav-icon">♿</span><span class="mockup-nav-copy"><span data-ms="Kebolehcapaian" data-en="Accessibility">Kebolehcapaian</span></span><span class="mockup-nav-arrow">›</span></a>
@@ -1338,7 +1346,7 @@
         <a href="#about" data-ms="Tentang OTAP" data-en="About OTAP">Tentang OTAP</a>
         <a href="#missions" data-ms="Misi Sensori" data-en="Sensory Missions">Misi Sensori</a>
         <a href="#profile" data-ms="Profil Sensori" data-en="Sensory Profile">Profil Sensori</a>
-        <a href="#podcast">Podcast</a>
+        <a href="#podcast">OTAPcast</a>
         <a href="#discovery" data-ms="Kenali OT" data-en="Discover OT">Kenali OT</a>
       </nav>
     </div>
@@ -1352,7 +1360,7 @@
     <a class="mock-hotspot mock-meet" href="#people" aria-label="Meet the 10 OTs"></a>
     <a class="mock-hotspot mock-journey" href="#missions" aria-label="Start your journey"></a>
     <a class="mock-hotspot mock-about" href="#about" aria-label="About"></a>
-    <a class="mock-hotspot mock-podcast" href="#podcast" aria-label="Podcast"></a>
+    <a class="mock-hotspot mock-podcast" href="#podcast" aria-label="OTAPcast"></a>
     <a class="mock-hotspot mock-discovery" href="#discovery" aria-label="OT Discovery Hub"></a>
     <a class="mock-hotspot mock-accessibility" href="#accessibility" aria-label="Accessibility"></a>
   </div>
@@ -1373,7 +1381,7 @@
       <div class="person mystery-man"><div class="silhouette"><i class="head"></i><i class="body-shape"></i></div><strong>OT 10</strong><small>Identity hidden</small></div>
     </div>
     </div></section>
-    <section id="about"><div class="container"><div class="feature"><div class="eyebrow">ABOUT OTAP · TENTANG OTAP</div><h2 data-ms="Melihat kehidupan dari perspektif yang lebih luas." data-en="See everyday life through a wider lens.">Melihat kehidupan dari perspektif yang lebih luas.</h2><p data-ms="OTAP ialah ruang penerokaan pendidikan tentang terapi cara kerja, pengalaman sensori dan bagaimana aktiviti harian membentuk penyertaan seseorang dalam kehidupan." data-en="OTAP is an educational space exploring occupational therapy, sensory experiences and how everyday activities shape participation in life.">OTAP ialah ruang penerokaan pendidikan tentang terapi cara kerja, pengalaman sensori dan bagaimana aktiviti harian membentuk penyertaan seseorang dalam kehidupan.</p></div></div></section>
+    <section id="about"><div class="container"><div class="feature"><div class="eyebrow">ABOUT OTAP · TENTANG OTAP</div><h2 data-ms="Berbeza latar belakang, berkongsi perspektif." data-en="Different backgrounds, shared perspectives.">Berbeza latar belakang, berkongsi perspektif.</h2><p data-ms="OT Awareness Project (OTAP) menghimpunkan ahli terapi cara kerja dari pelbagai lokasi di seluruh Malaysia, dengan latar belakang, kepakaran dan pengalaman berbeza dalam sektor kerajaan merentas kementerian serta sektor swasta. Melalui perbincangan dan perkongsian ilmu secara berterusan, kami bertukar pandangan tentang pelbagai perspektif dalam bidang Occupational Therapy, berkongsi perkembangan pengetahuan masing-masing dan mengikuti perkembangan amalan OT di peringkat antarabangsa. Kami percaya perkongsian perspektif dapat meluaskan pemahaman, memperkayakan pengetahuan dan meningkatkan kesedaran tentang peranan serta potensi Occupational Therapy." data-en="OT Awareness Project (OTAP) brings together occupational therapists from across Malaysia, with diverse backgrounds, expertise and experience in government sectors across different ministries and in private practice. Through ongoing discussions and knowledge sharing, we exchange perspectives on occupational therapy, share professional learning and follow developments in OT internationally. We believe that sharing perspectives broadens understanding, enriches knowledge and raises awareness of the role and potential of occupational therapy.">OT Awareness Project (OTAP) menghimpunkan ahli terapi cara kerja dari pelbagai lokasi di seluruh Malaysia, dengan latar belakang, kepakaran dan pengalaman berbeza dalam sektor kerajaan merentas kementerian serta sektor swasta. Melalui perbincangan dan perkongsian ilmu secara berterusan, kami bertukar pandangan tentang pelbagai perspektif dalam bidang Occupational Therapy, berkongsi perkembangan pengetahuan masing-masing dan mengikuti perkembangan amalan OT di peringkat antarabangsa. Kami percaya perkongsian perspektif dapat meluaskan pemahaman, memperkayakan pengetahuan dan meningkatkan kesedaran tentang peranan serta potensi Occupational Therapy.</p></div></div></section>
     <section id="missions"><div class="container">
       <div class="section-top"><div class="eyebrow">EXPLORE · DISCOVER · REFLECT</div><h2 data-ms="8 Misi Sensori" data-en="8 Sensory Missions">8 Misi Sensori</h2><p data-ms="Kenali lapan sistem sensori melalui penerangan pendidikan dan aktiviti refleksi. Kandungan misi akan dibangunkan secara berperingkat." data-en="Explore eight sensory systems through educational explanations and reflection activities. Mission content will be developed in stages.">Kenali lapan sistem sensori melalui penerangan pendidikan dan aktiviti refleksi. Kandungan misi akan dibangunkan secara berperingkat.</p></div>
       <div class="cards">
@@ -1389,10 +1397,10 @@
       </div>
     </div></section>
     <section id="profile"><div class="container"><div class="feature"><div class="eyebrow">SELF-REFLECTION · REFLEKSI DIRI</div><h2>Your Sensory Profile</h2><p data-ms="Ruang refleksi pendidikan untuk meneroka pengalaman sensori diri. Ini bukan alat diagnosis atau pengganti penilaian profesional." data-en="An educational reflection space to explore your sensory experiences. This is not a diagnostic tool or a substitute for professional assessment.">Ruang refleksi pendidikan untuk meneroka pengalaman sensori diri. Ini bukan alat diagnosis atau pengganti penilaian profesional.</p><div class="notice" data-ms="Nota: Kandungan ini bukan Adult Sensory Profile rasmi. Item soal selidik berlesen dan pemarkahan piawai tidak akan diterbitkan tanpa kebenaran yang sesuai." data-en="Note: This is not the official Adult Sensory Profile. Licensed questionnaire items and standardized scoring will not be published without appropriate authorization.">Nota: Kandungan ini bukan Adult Sensory Profile rasmi. Item soal selidik berlesen dan pemarkahan piawai tidak akan diterbitkan tanpa kebenaran yang sesuai.</div></div></div></section>
-    <section id="podcast"><div class="container"><div class="section-top"><div class="eyebrow">LISTEN · REFLECT · CONNECT</div><h2>OTAP Podcast</h2><p data-ms="Cerita, perbualan dan perspektif tentang dunia terapi cara kerja. Episod audio akan ditambah di sini." data-en="Stories, conversations and perspectives from the world of occupational therapy. Audio episodes will be added here.">Cerita, perbualan dan perspektif tentang dunia terapi cara kerja. Episod audio akan ditambah di sini.</p></div></div></section>
+    <section id="podcast"><div class="container"><div class="section-top"><div class="eyebrow">LISTEN · REFLECT · CONNECT</div><h2>OTAPcast</h2><p data-ms="Cerita, perbualan dan perspektif tentang dunia terapi cara kerja. Episod audio akan ditambah di sini." data-en="Stories, conversations and perspectives from the world of occupational therapy. Audio episodes will be added here.">Cerita, perbualan dan perspektif tentang dunia terapi cara kerja. Episod audio akan ditambah di sini.</p></div></div></section>
     <section id="discovery"><div class="container"><div class="feature"><div class="eyebrow">DISCOVER OCCUPATIONAL THERAPY</div><h2 data-ms="Kenali dunia OT" data-en="Discover Occupational Therapy">Kenali dunia OT</h2><p data-ms="Terokai bagaimana OT menyokong penyertaan dalam aktiviti harian, penjagaan diri, pembelajaran, pekerjaan, permainan dan kehidupan bermasyarakat." data-en="Explore how OT supports participation in daily activities, self-care, learning, work, play and community life.">Terokai bagaimana OT menyokong penyertaan dalam aktiviti harian, penjagaan diri, pembelajaran, pekerjaan, permainan dan kehidupan bermasyarakat.</p></div></div></section>
   </main>
-  <section id="accessibility" class="accessibility-section"><div class="container"><div class="feature"><div class="eyebrow">ACCESSIBILITY · KEBOLEHCAPAIAN</div><h2>Designed for more people</h2><p>OTAP aims to support clear navigation, readable text and reduced-motion preferences.</p></div></div></section><footer><div class="container footer-inner"><div><strong style="color:var(--green)">O.T AWARENESS PROJECT</strong><div>Ten OTs. Many Perspectives. One Bigger Picture.</div><div style="margin-top:8px">Educational project · BM / EN</div></div><div class="footer-links"><a href="#about">About</a><a href="#missions">Missions</a><a href="#profile">Sensory Profile</a><a href="#podcast">Podcast</a><a href="#home">Back to top ↑</a></div></div></footer>
+  <section id="accessibility" class="accessibility-section"><div class="container"><div class="feature"><div class="eyebrow">ACCESSIBILITY · KEBOLEHCAPAIAN</div><h2>Designed for more people</h2><p>OTAP aims to support clear navigation, readable text and reduced-motion preferences.</p></div></div></section><footer><div class="container footer-inner"><div><strong style="color:var(--green)">O.T AWARENESS PROJECT</strong><div>Ten OTs. Many Perspectives. One Bigger Picture.</div><div style="margin-top:8px">Educational project · BM / EN</div></div><div class="footer-links"><a href="#about">About</a><a href="#missions">Missions</a><a href="#profile">Sensory Profile</a><a href="#podcast">OTAPcast</a><a href="#home">Back to top ↑</a></div></div></footer>
   <script>
     const otapLogo = document.querySelector("header .brand-logo");
     otapLogo.addEventListener("error", () => {
