@@ -1213,6 +1213,36 @@
       .splash-logo-animation .animated-wordmark-text span { transform:scaleX(1.04); }
     }
 
+  
+    /* Final targeted adjustment: keep the wordmark left-aligned beside the stairs,
+       but stretch each line horizontally to match the staircase width. */
+    .splash-logo-animation .animated-wordmark-text {
+      text-align:left !important;
+      align-items:flex-start !important;
+      margin-left:0 !important;
+      transform:none !important;
+      width:clamp(205px,55vw,370px) !important;
+      flex:0 0 auto !important;
+    }
+    .splash-logo-animation .animated-wordmark-text span {
+      display:block !important;
+      width:max-content !important;
+      max-width:none !important;
+      white-space:nowrap !important;
+      text-align:left !important;
+      transform:scaleX(1.30) !important;
+      transform-origin:left center !important;
+    }
+    @media(max-width:420px) {
+      .splash-logo-animation .animated-wordmark-text {
+        width:clamp(155px,43vw,190px) !important;
+      }
+      .splash-logo-animation .animated-wordmark-text span {
+        transform:scaleX(1.24) !important;
+        transform-origin:left center !important;
+      }
+    }
+
   </style>
 </head>
 <body class="loading">
