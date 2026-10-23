@@ -1,0 +1,285 @@
+/* OTAP UI refinement — align controls with the approved mockup.
+   Add these classes to the matching elements in index.html.
+   Keep the existing hero image asset; do not replace the image. */
+
+:root {
+  --otap-bg: #020907;
+  --otap-panel: #04140f;
+  --otap-green: #00e9a0;
+  --otap-green-soft: #79f5cc;
+  --otap-line: rgba(0, 235, 160, .62);
+  --otap-text: #f4fff9;
+}
+
+.otap-language-toggle {
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid var(--otap-line);
+  border-radius: 999px;
+  background: rgba(0, 15, 10, .88);
+}
+
+.otap-language-toggle button {
+  min-width: 58px;
+  min-height: 42px;
+  border: 0;
+  padding: 8px 14px;
+  color: var(--otap-green-soft);
+  background: transparent;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.otap-language-toggle button[aria-pressed="true"] {
+  color: #00170e;
+  background: var(--otap-green);
+}
+
+.otap-menu-toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 12px;
+  color: var(--otap-green-soft);
+  background: transparent;
+  cursor: pointer;
+}
+
+.otap-menu-toggle:focus-visible,
+.otap-language-toggle button:focus-visible,
+.otap-cta:focus-visible,
+.otap-bottom-nav a:focus-visible,
+.otap-contact-button:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 4px;
+}
+
+.otap-menu-toggle svg {
+  width: 30px;
+  height: 30px;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  fill: none;
+  stroke-linecap: round;
+}
+
+.otap-cta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 78px;
+  width: 100%;
+  padding: 14px 22px;
+  border: 1px solid var(--otap-green);
+  border-radius: 999px;
+  color: var(--otap-text);
+  background: transparent;
+  text-decoration: none;
+  font-weight: 750;
+  box-sizing: border-box;
+}
+
+.otap-cta__icon {
+  display: inline-grid;
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border: 1px solid var(--otap-line);
+  border-radius: 50%;
+  color: var(--otap-green);
+  background: rgba(0, 20, 13, .8);
+}
+
+.otap-cta__icon svg {
+  width: 27px;
+  height: 27px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.otap-cta__label {
+  flex: 1;
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.otap-cta__label small {
+  display: block;
+  margin-top: 4px;
+  font-weight: 500;
+  opacity: .88;
+}
+
+.otap-cta__arrow {
+  flex: 0 0 auto;
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.otap-cta--primary {
+  color: #00170e;
+  background: var(--otap-green);
+}
+
+.otap-cta--primary .otap-cta__icon {
+  color: #00170e;
+  border-color: transparent;
+  background: transparent;
+}
+
+.otap-cta--primary .otap-cta__icon svg {
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+.otap-bottom-nav {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid rgba(0, 235, 160, .22);
+  background: rgba(0, 8, 5, .94);
+}
+
+.otap-bottom-nav a {
+  display: flex;
+  min-width: 0;
+  min-height: 88px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 5px;
+  color: var(--otap-green-soft);
+  text-align: center;
+  text-decoration: none;
+  font-size: clamp(.68rem, 2.5vw, .86rem);
+  line-height: 1.2;
+}
+
+.otap-bottom-nav a svg {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.otap-bottom-nav a[aria-current="location"],
+.otap-bottom-nav a:hover {
+  color: var(--otap-green);
+}
+
+.otap-contact-button {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border: 1px solid var(--otap-line);
+  border-radius: 50%;
+  color: var(--otap-green);
+  background: rgba(2, 18, 12, .96);
+  box-shadow: 0 0 18px rgba(0, 235, 160, .12);
+  cursor: pointer;
+}
+
+.otap-contact-button svg {
+  width: 25px;
+  height: 25px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Keep floating contact control clear of the bottom navigation and phone edge. */
+.otap-contact-float {
+  position: fixed;
+  z-index: 40;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: calc(100px + env(safe-area-inset-bottom));
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .2s ease, visibility .2s ease;
+}
+
+.otap-contact-float.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.otap-menu-panel[hidden] {
+  display: none !important;
+}
+
+.otap-menu-panel {
+  position: fixed;
+  z-index: 60;
+  inset: 8px;
+  overflow: auto;
+  padding: clamp(20px, 5vw, 36px);
+  border: 1px solid var(--otap-line);
+  border-radius: 26px;
+  color: var(--otap-text);
+  background: rgba(0, 5, 3, .98);
+  box-shadow: 0 0 32px rgba(0, 235, 160, .12);
+}
+
+.otap-menu-panel a {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 64px;
+  padding: 12px;
+  border-radius: 16px;
+  color: var(--otap-text);
+  text-decoration: none;
+}
+
+.otap-menu-panel a:hover,
+.otap-menu-panel a[aria-current="location"] {
+  background: rgba(0, 235, 160, .18);
+}
+
+.otap-menu-panel a .otap-menu-item-icon {
+  flex: 0 0 34px;
+  color: var(--otap-green-soft);
+}
+
+@media (max-width: 480px) {
+  .otap-cta {
+    gap: 10px;
+    min-height: 70px;
+    padding: 11px 14px;
+    border-radius: 28px;
+  }
+  .otap-cta__icon {
+    flex-basis: 42px;
+    width: 42px;
+    height: 42px;
+  }
+  .otap-bottom-nav a {
+    min-height: 80px;
+    gap: 6px;
+    padding-inline: 2px;
+  }
+  .otap-bottom-nav a svg {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .otap-contact-float { transition: none; }
+}
