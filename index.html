@@ -1,462 +1,1606 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ms">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#020907">
-<meta name="description" content="OTAP — O.T Awareness Project. Sepuluh individu, pelbagai perspektif, satu gambaran yang lebih besar.">
-<title>OTAP | One Bigger Picture</title>
-<style>
-:root{--bg:#020907;--panel:#04140f;--green:#00e9a0;--mint:#8af6d2;--text:#f4fff9;--muted:#b6d9cc;--line:rgba(0,235,160,.42);--shadow:0 0 28px rgba(0,235,160,.12)}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:82px}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}
-body.menu-open{overflow:hidden}
-button,a,input,textarea,select{font:inherit}
-a{color:inherit}
-button{cursor:pointer}
-:focus-visible{outline:3px solid #fff;outline-offset:4px}
-.skip-link{position:fixed;z-index:200;top:8px;left:8px;padding:10px 14px;background:var(--green);color:#00170e;border-radius:10px;transform:translateY(-150%)}
-.skip-link:focus{transform:translateY(0)}
-.loading{position:fixed;inset:0;z-index:150;background:#010604;display:grid;place-items:center;transition:opacity .45s ease,visibility .45s ease}
-.loading.is-done{opacity:0;visibility:hidden;pointer-events:none}
-.loading-inner{text-align:center;padding:24px}
-.loading-mark{width:66px;height:60px;margin:0 auto 22px;display:flex;align-items:end;justify-content:center;gap:4px}
-.loading-mark span{display:block;width:11px;background:var(--green);box-shadow:0 0 12px #00e9a077}
-.loading-mark span:nth-child(1){height:13px}.loading-mark span:nth-child(2){height:23px}.loading-mark span:nth-child(3){height:34px}.loading-mark span:nth-child(4){height:46px}.loading-mark span:nth-child(5){height:58px}
-.loading-title{letter-spacing:.14em;font-size:.82rem;color:var(--mint);font-weight:800}
-.loading-sub{color:var(--muted);font-size:.82rem;margin-top:6px}
-.loading-bar{height:2px;width:180px;background:#12382b;margin:20px auto 0;overflow:hidden}
-.loading-bar:after{content:"";display:block;width:45%;height:100%;background:var(--green);animation:load 1.2s ease-in-out infinite}
-@keyframes load{from{transform:translateX(-110%)}to{transform:translateX(250%)}}
-.site-header{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px clamp(16px,4vw,48px);background:rgba(1,9,6,.94);border-bottom:1px solid rgba(0,235,160,.15);backdrop-filter:blur(16px)}
-.brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;min-width:0}
-.brand-mark{display:grid;grid-template-columns:repeat(4,10px);grid-template-rows:repeat(4,10px);gap:3px;align-items:end;transform:skewY(-2deg)}
-.brand-mark i{display:block;background:var(--green);box-shadow:0 0 8px #00e9a033}
-.brand-mark i:nth-child(1){grid-column:1;grid-row:4}.brand-mark i:nth-child(2){grid-column:2;grid-row:3}.brand-mark i:nth-child(3){grid-column:2;grid-row:4}.brand-mark i:nth-child(4){grid-column:3;grid-row:2}.brand-mark i:nth-child(5){grid-column:3;grid-row:3}.brand-mark i:nth-child(6){grid-column:3;grid-row:4}.brand-mark i:nth-child(7){grid-column:4;grid-row:1}.brand-mark i:nth-child(8){grid-column:4;grid-row:2}.brand-mark i:nth-child(9){grid-column:4;grid-row:3}.brand-mark i:nth-child(10){grid-column:4;grid-row:4}
-.brand-name{font-size:clamp(.78rem,2.2vw,1rem);font-weight:950;letter-spacing:-.035em;line-height:.96;text-transform:uppercase}
-.header-actions{display:flex;align-items:center;gap:12px}
-.language-toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:#020b07}
-.language-toggle button{min-width:45px;padding:7px 12px;border:0;background:transparent;color:var(--mint);font-weight:800}
-.language-toggle button[aria-pressed=true]{background:var(--green);color:#00170e}
-.menu-toggle{width:42px;height:42px;border:0;background:transparent;color:var(--mint);display:grid;place-items:center;border-radius:12px}
-.menu-toggle svg{width:29px;height:29px;stroke:currentColor;fill:none;stroke-width:2.3;stroke-linecap:round}
-.hero{position:relative;isolation:isolate;overflow:hidden;min-height:calc(100svh - 66px);display:flex;flex-direction:column;justify-content:center;padding:24px clamp(16px,5vw,64px) 110px}
-.hero:before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(ellipse at 50% 35%,rgba(0,155,95,.18),transparent 56%),linear-gradient(180deg,#010604 0%,#03130c 52%,#010604 100%)}
-.hero-glow{position:absolute;z-index:-1;left:50%;top:4%;height:55%;width:1px;background:linear-gradient(transparent,var(--green),transparent);box-shadow:0 0 22px 3px #00e9a055;opacity:.8}
-.hero-inner{width:min(100%,1050px);margin:0 auto;text-align:center}
-.hero-image-wrap{width:100%;margin:0 auto 18px;position:relative}
-.hero-image{display:block;width:100%;max-height:min(42svh,440px);min-height:175px;object-fit:contain;object-position:center;filter:drop-shadow(0 0 22px rgba(0,235,160,.12))}
-.hero-image-fallback{display:none;color:var(--muted);font-size:.8rem}
-.hero h1{margin:10px auto 0;max-width:900px;font-size:clamp(1.8rem,5.2vw,3.8rem);line-height:1.05;letter-spacing:-.04em;font-weight:950;text-transform:uppercase}
-.hero h1 span{display:block}
-.hero h1 .accent{color:var(--green)}
-.hero-translation{max-width:720px;margin:18px auto 0;color:var(--muted);font-size:clamp(.9rem,2.4vw,1.15rem);line-height:1.45}
-.hero-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;max-width:900px;margin:28px auto 0}
-.cta{display:flex;align-items:center;gap:14px;min-height:76px;padding:12px 20px;border:1px solid var(--green);border-radius:999px;background:rgba(0,10,6,.75);color:var(--text);text-decoration:none;text-align:left;transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
-.cta:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-.cta.primary{background:var(--green);color:#00170e}
-.cta-icon{width:46px;height:46px;flex:0 0 46px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;color:var(--green)}
-.primary .cta-icon{border-color:transparent;color:#00170e}
-.cta-icon svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.primary .cta-icon svg{fill:currentColor}
-.cta-copy{flex:1;min-width:0;font-weight:850;line-height:1.25}
-.cta-copy small{display:block;margin-top:5px;font-weight:550;opacity:.88}
-.cta-arrow{font-size:1.65rem;line-height:1;flex:0 0 auto}
-.section{padding:76px clamp(18px,5vw,64px);scroll-margin-top:78px}
-.section-inner{width:min(100%,1040px);margin:0 auto}
-.eyebrow{color:var(--green);font-size:.75rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase}
-.section h2{font-size:clamp(1.7rem,4vw,2.7rem);line-height:1.1;letter-spacing:-.035em;margin:10px 0 18px}
-.section p{color:var(--muted);max-width:760px}
-.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
-.info-card{padding:clamp(20px,4vw,32px);border:1px solid var(--line);border-radius:24px;background:linear-gradient(145deg,rgba(0,235,160,.09),rgba(0,0,0,.2));box-shadow:var(--shadow)}
-.info-card p:last-child{margin-bottom:0}
-.feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:24px}
-.feature-card{padding:22px;border:1px solid rgba(0,235,160,.25);border-radius:20px;background:rgba(0,235,160,.035)}
-.feature-card svg{width:32px;height:32px;stroke:var(--mint);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.feature-card h3{margin:12px 0 6px;font-size:1.05rem}
-.feature-card p{font-size:.92rem;margin:0}
-.podcast-card{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-.round-icon{display:grid;place-items:center;width:64px;height:64px;flex:0 0 64px;border:1px solid var(--line);border-radius:50%;color:var(--green)}
-.round-icon svg{width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:1.8}
-.inline-link{display:inline-flex;align-items:center;gap:8px;color:var(--green);font-weight:800;text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:3px}
-.accessibility-note{font-size:.92rem}
-.site-footer{padding:32px 20px 110px;text-align:center;border-top:1px solid rgba(0,235,160,.18);color:var(--muted);font-size:.84rem}
-.bottom-nav{position:fixed;z-index:45;bottom:0;left:0;right:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:8px max(8px,env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom));border-top:1px solid rgba(0,235,160,.24);background:rgba(1,8,5,.96);backdrop-filter:blur(16px)}
-.bottom-nav a{display:flex;min-width:0;min-height:64px;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:5px 2px;text-align:center;text-decoration:none;color:var(--mint);font-size:clamp(.61rem,2.5vw,.78rem);line-height:1.15;border-radius:12px}
-.bottom-nav a:hover,.bottom-nav a[aria-current=location]{color:var(--green);background:rgba(0,235,160,.07)}
-.bottom-nav svg{width:25px;height:25px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.contact-float{position:fixed;z-index:70;right:max(16px,env(safe-area-inset-right));bottom:calc(94px + env(safe-area-inset-bottom));width:58px;height:58px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;color:var(--green);background:#03150e;box-shadow:var(--shadow);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s,visibility .25s}
-.contact-float.is-visible{opacity:1;visibility:visible;pointer-events:auto}
-.contact-float svg{width:25px;height:25px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.contact-panel{position:fixed;z-index:90;right:16px;bottom:calc(164px + env(safe-area-inset-bottom));width:min(360px,calc(100vw - 32px));padding:22px;border:1px solid var(--line);border-radius:22px;background:#03110b;box-shadow:0 20px 70px #000b}
-.contact-panel[hidden]{display:none}
-.contact-panel h2{font-size:1.25rem;margin:0 32px 8px 0}
-.contact-panel p{font-size:.9rem;color:var(--muted)}
-.contact-panel label{display:block;margin:12px 0 5px;font-size:.86rem;font-weight:750}
-.contact-panel select,.contact-panel textarea{width:100%;border:1px solid var(--line);border-radius:12px;background:#010805;color:var(--text);padding:11px}
-.contact-panel textarea{min-height:95px;resize:vertical}
-.contact-panel-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.small-button{border:1px solid var(--line);border-radius:999px;padding:10px 14px;background:transparent;color:var(--mint);font-weight:800}
-.small-button.primary{background:var(--green);color:#00170e;border-color:var(--green)}
-.panel-close{position:absolute;top:12px;right:12px;border:0;background:transparent;color:var(--mint);font-size:1.5rem;width:36px;height:36px}
-.menu-overlay{position:fixed;z-index:100;inset:8px;overflow:auto;padding:24px clamp(18px,5vw,36px);border:1px solid var(--line);border-radius:26px;background:rgba(0,5,3,.985);box-shadow:0 0 40px #00e9a022}
-.menu-overlay[hidden]{display:none}
-.menu-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}
-.menu-close{border:0;background:transparent;color:var(--mint);font-size:2rem;line-height:1;width:44px;height:44px}
-.menu-links{display:grid;gap:7px}
-.menu-links a{display:grid;grid-template-columns:46px minmax(0,1fr) 24px;gap:14px;align-items:center;padding:14px;border-radius:17px;text-decoration:none}
-.menu-links a:hover,.menu-links a[aria-current=location]{background:rgba(0,235,160,.16)}
-.menu-icon{color:var(--mint);display:grid;place-items:center}
-.menu-icon svg{width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.menu-label{font-weight:800;line-height:1.25}
-.menu-label small{display:block;margin-top:4px;color:var(--muted);font-weight:550}
-.menu-chevron{color:var(--mint);font-size:1.6rem}
-.menu-language{display:flex;justify-content:center;margin:26px 0 8px}
-@media(max-width:700px){
- .site-header{padding:11px 15px}
- .brand-mark{grid-template-columns:repeat(4,8px);grid-template-rows:repeat(4,8px);gap:2px}
- .hero{min-height:auto;padding:18px 15px 112px}
- .hero-image{max-height:30svh;min-height:150px}
- .hero-actions{grid-template-columns:1fr;gap:11px;margin-top:23px}
- .cta{min-height:70px;padding:11px 15px;border-radius:28px}
- .cta-icon{width:42px;height:42px;flex-basis:42px}
- .section{padding:58px 18px}
- .about-grid,.feature-grid{grid-template-columns:1fr}
- .bottom-nav a{min-height:59px}
- .bottom-nav svg{width:23px;height:23px}
- .contact-float{width:54px;height:54px;right:14px;bottom:calc(86px + env(safe-area-inset-bottom))}
-}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#030806">
+  <meta name="description" content="O.T Awareness Project — explore occupational therapy, sensory experiences and different perspectives.">
+  <title>OTAP | One Bigger Picture</title>
+  <style>
+    :root { --bg:#030806; --panel:#09130f; --green:#00f5a0; --text:#f1fff8; --muted:#a5c4b5; --line:#174a36; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:85px; }
+    body { margin:0; background:var(--bg); color:var(--text); font-family:Arial,sans-serif; line-height:1.6; }
+    a { color:inherit; text-decoration:none; }
+    button { font:inherit; cursor:pointer; }
+    .container { width:min(1100px,90%); margin:auto; }
+    header { position:sticky; top:0; z-index:10; background:rgba(3,8,6,.95); border-bottom:1px solid var(--line); backdrop-filter:blur(12px); }
+    .nav { min-height:76px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .brand { display:flex; align-items:center; gap:10px; font-size:13px; font-weight:800; letter-spacing:1px; min-width:0; }
+    .brand-logo { width:48px; height:48px; object-fit:contain; flex-shrink:0; display:block; }
+    .brand small { display:block; color:var(--muted); font-size:10px; letter-spacing:2px; }
+    .nav-actions { display:flex; gap:8px; align-items:center; }
+    .lang,.menu-btn { color:var(--green); background:transparent; border:1px solid var(--line); border-radius:9px; padding:9px 12px; }
+    .menu-btn { display:none; }
+    nav { display:flex; gap:20px; align-items:center; }
+    nav a { font-size:12px; color:var(--muted); }
+    nav a:hover { color:var(--green); }
+    .hero { min-height:610px; display:grid; align-items:center; padding:42px 0 58px; position:relative; overflow:hidden; }
+    .hero::before { content:""; position:absolute; width:330px; height:330px; right:-100px; top:70px; border-radius:50%; background:#00f5a010; filter:blur(70px); pointer-events:none; }
+    .eyebrow { color:var(--green); letter-spacing:3px; font-size:11px; font-weight:bold; text-transform:uppercase; }
+    h1 { max-width:850px; font-size:clamp(38px,8vw,76px); line-height:1.05; letter-spacing:-2px; margin:20px 0; }
+    h1 span { color:var(--green); }
+    .hero p { max-width:570px; color:var(--muted); font-size:16px; }
+    .actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:28px; }
+    .btn { display:inline-flex; justify-content:center; align-items:center; padding:13px 18px; border-radius:9px; border:1px solid var(--green); font-size:13px; font-weight:bold; }
+    .btn-primary { background:var(--green); color:#03110b; }
+    .btn-secondary { color:var(--green); }
+    section { padding:68px 0; }
+    .section-top { margin-bottom:28px; }
+    .section-top h2 { font-size:clamp(26px,5vw,40px); line-height:1.2; margin:10px 0; }
+    .section-top p { color:var(--muted); max-width:620px; font-size:14px; }
+    .people { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:13px; }
+    .person { background:linear-gradient(160deg,#0c1b14,#050a07); border:1px solid var(--line); border-radius:14px; padding:18px 8px; text-align:center; min-width:0; transition:transform .2s,border-color .2s; }
+    .person:hover { border-color:var(--green); transform:translateY(-3px); }
+    .silhouette { height:95px; width:74px; margin:0 auto 12px; position:relative; overflow:hidden; }
+    .head { position:absolute; top:8px; left:26px; width:23px; height:29px; background:#61766a; border-radius:45% 45% 42% 42%; }
+    .body-shape { position:absolute; width:60px; height:59px; bottom:-7px; left:7px; background:#263b30; border-radius:45% 45% 8px 8px; }
+    .person:nth-child(3n) .head { width:27px; height:30px; left:24px; }
+    .person:nth-child(3n) .body-shape { width:66px; left:4px; border-radius:48% 48% 8px 8px; }
+    .person:nth-child(4n) .head::before { content:""; position:absolute; inset:-5px -5px -2px; border:5px solid #61766a; border-radius:50% 50% 35% 35%; }
+    .person strong { display:block; font-size:12px; color:var(--green); letter-spacing:1px; }
+    .person small { color:var(--muted); font-size:10px; }
+    .cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+    .card { padding:22px; background:var(--panel); border:1px solid var(--line); border-radius:13px; }
+    .card .number { color:var(--green); font-size:12px; letter-spacing:2px; }
+    .card h3 { margin:12px 0 8px; font-size:17px; }
+    .card p { color:var(--muted); font-size:13px; }
+    .card a { display:inline-block; margin-top:8px; color:var(--green); font-size:12px; }
+    .feature { background:linear-gradient(120deg,#0b2016,#07100b); border:1px solid var(--line); border-radius:18px; padding:clamp(22px,5vw,42px); }
+    .feature h2 { font-size:clamp(27px,5vw,42px); line-height:1.2; margin:12px 0; }
+    .feature p { color:var(--muted); max-width:650px; }
+    .notice { border-left:3px solid var(--green); padding:12px 15px; background:#00f5a00b; color:var(--muted); font-size:12px; margin-top:20px; }
+    footer { border-top:1px solid var(--line); padding:30px 0; color:var(--muted); font-size:12px; }
+    .footer-inner { display:flex; flex-wrap:wrap; justify-content:space-between; gap:18px; }
+    .footer-links { display:flex; flex-wrap:wrap; gap:16px; }
+    .footer-links a:hover { color:var(--green); }
+
+    .splash { position:fixed; inset:0; z-index:1000; display:grid; place-items:center; background:radial-gradient(ellipse at center,#092016 0%,#030806 58%,#010302 100%); transition:opacity .85s ease,visibility .85s ease; }
+    .splash.done { opacity:0; visibility:hidden; pointer-events:none; }
+    .splash-inner { width:min(88vw,440px); text-align:center; }
+    .puzzle { width:180px; height:150px; margin:0 auto 8px; display:grid; grid-template-columns:repeat(5,1fr); grid-template-rows:repeat(4,1fr); gap:5px; align-items:center; justify-items:center; animation:puzzle-fade .8s ease 2.45s forwards; }
+    @keyframes puzzle-fade { to { opacity:.12; transform:scale(.88) translateY(-8px); } }
+    .logo-puzzle span { grid-column:var(--c); grid-row:var(--r); width:24px; height:24px; background:var(--green); box-shadow:0 0 18px #00f5a080; opacity:0; transform:translateY(18px) scale(.5); animation:logo-piece-in .55s cubic-bezier(.2,.8,.2,1) forwards; animation-delay:var(--delay); }
+    @keyframes logo-piece-in { to { opacity:1; transform:translateY(0) scale(1); } }
+    .piece { width:23px; height:23px; background:var(--green); box-shadow:0 0 16px #00f5a080; opacity:0; transform:translate(var(--x),var(--y)) scale(.3); animation:piece-in .65s cubic-bezier(.2,.8,.2,1) forwards; animation-delay:var(--delay); }
+    .piece:nth-child(3n) { background:#00b978; } .piece:nth-child(4n) { width:17px;height:17px; }
+    @keyframes piece-in { to { opacity:1;transform:translate(0,0) scale(1); } }
+    .splash-logo { display:block; width:min(82vw,340px); max-height:150px; object-fit:contain; margin:-72px auto 0; position:relative; z-index:2; opacity:0; transform:scale(.88); animation:logo-reveal .9s cubic-bezier(.2,.8,.2,1) 2.45s forwards; }
+    @keyframes logo-reveal { to { opacity:1; transform:scale(1); } }
+    .splash-fallback { color:var(--text); font-size:23px; font-weight:900; line-height:1.05; letter-spacing:2px; margin-top:-72px; position:relative; z-index:3; pointer-events:none; opacity:0; animation:logo-show .8s ease 2.45s forwards; }
+    @keyframes logo-show { to { opacity:1; } }
+    .splash-caption { color:var(--green);font-size:11px;letter-spacing:3px;margin-top:20px; }
+    .loading-track { height:4px;width:180px;margin:16px auto 0;background:#173b2b;border-radius:9px;overflow:hidden; }
+    .loading-bar { height:100%;width:0;background:var(--green);box-shadow:0 0 12px var(--green);animation:load-progress 3.5s ease forwards; }
+    @keyframes load-progress { to { width:100%; } } body.loading { overflow:hidden; }
+    .hero { background:radial-gradient(ellipse at 50% 65%,#06351f 0%,#030806 65%); }
+    .hero-people { display:block; width:100%; max-width:850px; height:auto; aspect-ratio:672 / 165; margin:8px auto 0; position:relative; background-image:url("assets/images/otap-hero-silhouette-10-ot.png"); background-size:100% 100%; background-repeat:no-repeat; }
+    .hero-people::before { content:"";position:absolute;bottom:0;left:5%;right:5%;height:2px;background:linear-gradient(90deg,transparent,var(--green),transparent);box-shadow:0 0 22px #00f5a060; }
+    .mystery-person { display:none; }
+    .mystery-person .sil-head { position:absolute;top:0;left:50%;transform:translateX(-50%);width:clamp(16px,3.2vw,29px);height:clamp(23px,4.4vw,37px);border-radius:48% 48% 43% 43%;background:#010403;box-shadow:0 0 9px #00f5a01c; }
+    .mystery-person .sil-body { position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:88%;height:72%;background:linear-gradient(90deg,#010302,#07130c,#010302);border-radius:48% 48% 0 0;clip-path:polygon(27% 0,73% 0,100% 100%,0 100%); }
+    .mystery-person.woman .sil-body { width:100%;clip-path:polygon(34% 0,66% 0,78% 30%,100% 100%,0 100%,22% 30%); }
+    .mystery-person.hijab .sil-head { width:clamp(24px,4.2vw,37px);height:clamp(30px,5vw,44px);border-radius:48% 48% 40% 40%;background:#020604;box-shadow:0 0 0 5px #020604,0 0 0 7px #132b1d,0 0 0 9px #020604; }
+    .mystery-person.hijab .sil-body { height:76%;width:100%;clip-path:polygon(26% 0,74% 0,100% 100%,0 100%); }
+    .hero-copy { text-align:center;position:relative;z-index:1; }
+    .hero-copy h1 { margin:0 auto 12px;font-size:clamp(30px,6vw,52px);letter-spacing:-1px; }
+    .hero-copy p { margin:0 auto; }
+    .sensory-strip { display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin:0 auto 22px;color:#a6f8d1; }
+    .sensory-dot { width:36px;height:36px;display:grid;place-items:center;border:1px solid #287a55;border-radius:50%;font-size:17px;background:#04140c; }
+
+    @media (max-width:760px) {
+      .container { width:min(100% - 32px, 560px); }
+      .nav { min-height:68px; gap:8px; }
+      .brand { font-size:10px; letter-spacing:.7px; gap:7px; }
+      .brand-logo { width:42px; height:42px; }
+      .brand small { font-size:8px; letter-spacing:1.2px; }
+      .nav-actions { margin-left:auto; }
+      .lang { padding:7px 9px; font-size:11px; }
+      .menu-btn { display:inline-block; padding:7px 10px; font-size:18px; line-height:1.2; }
+      nav { display:none; position:absolute; top:68px; left:0; right:0; background:rgba(3,8,6,.98); border-bottom:1px solid var(--line); padding:12px 20px 18px; flex-direction:column; align-items:stretch; gap:0; box-shadow:0 18px 30px #0009; }
+      nav.open { display:flex; }
+      nav a { padding:13px 4px; border-bottom:1px solid #153124; font-size:14px; }
+      .hero { min-height:auto; padding:35px 0 46px; }
+      .sensory-strip { gap:7px; margin-bottom:12px; }
+      .sensory-dot { width:29px; height:29px; font-size:14px; }
+      .hero-people { width:100%; aspect-ratio:672 / 165; height:auto; margin:12px auto 8px; }
+      .hero-copy h1 { font-size:clamp(27px,7.5vw,42px); line-height:1.06; letter-spacing:-.7px; margin-bottom:12px; }
+      .hero-copy p { font-size:13px; padding:0 8px; }
+      .hero .actions { gap:9px; margin-top:20px; }
+      .hero .actions .btn { min-width:0; flex:1 1 145px; padding:12px 10px; font-size:11px; }
+      section { padding:44px 0; }
+      .section-top h2, .feature h2 { font-size:clamp(25px,7vw,34px); }
+      .section-top p, .feature p { font-size:13px; }
+      .people { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+      .person { padding:16px 6px; }
+      .person:last-child { grid-column:auto; }
+      .cards { grid-template-columns:1fr; gap:10px; }
+      .card { padding:18px; }
+      .feature { border-radius:14px; padding:22px 18px; }
+      .footer-inner { flex-direction:column; }
+      .footer-links { gap:12px; }
+      .splash-inner { width:min(88vw,380px); }
+      .puzzle { width:150px; height:125px; }
+      .logo-puzzle span { width:19px; height:19px; }
+      .splash-logo { max-height:112px; }
+      .splash-fallback { font-size:19px; margin-top:-58px; }
+    }
+    @media (min-width:450px) and (max-width:760px) {
+      .cards { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    }
+    @media (max-width:380px) {
+      .brand small { display:none; }
+      .brand-logo { width:36px; height:36px; }
+      .sensory-dot { width:26px; height:26px; }
+      .hero .actions .btn { flex-basis:100%; }
+    }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition:none!important; } }
+  
+    /* Mockup alignment refinements */
+    .splash-inner { width:min(92vw,560px); text-align:center; padding:18px; }
+    .splash-stage { color:#f1fff8; font-size:clamp(13px,2.6vw,18px); font-weight:800; letter-spacing:.5px; }
+    .splash-subtitle { color:var(--green); font-size:clamp(11px,2vw,14px); margin:4px 0 20px; }
+    .puzzle { width:min(74vw,240px); height:150px; margin:0 auto 12px; }
+    .logo-puzzle span { width:clamp(17px,4vw,27px); height:clamp(17px,4vw,27px); }
+    .splash-logo-wrap { min-height:112px; display:flex; align-items:center; justify-content:center; margin:4px auto 8px; }
+    .splash-logo { width:min(72vw,300px); max-height:112px; object-fit:contain; margin:auto; }
+    .splash-tagline { color:#bce8d4; font-size:10px; letter-spacing:2.5px; line-height:1.8; margin-top:4px; }
+    .loading-track { width:min(64vw,220px); height:5px; margin:17px auto 0; }
+    .splash-hint { color:var(--green); font-size:9px; letter-spacing:2px; margin-top:10px; }
+    .loading-bar { animation:load-progress 4.7s linear forwards; }
+    .splash-logo { animation:logo-show .75s ease 1.65s forwards; }
+    .splash.done .splash-inner { transform:translateY(-12px) scale(1.02); transition:transform .7s ease; }
+    .nav { gap:16px; }
+    .brand-logo { width:58px; height:58px; }
+    .nav-actions { margin-left:auto; }
+    .lang { padding:8px 11px; font-size:12px; }
+    .menu-btn { display:none; min-width:42px; min-height:42px; font-size:23px; line-height:1; padding:7px 10px; }
+    nav { display:flex; gap:18px; }
+    nav a { white-space:nowrap; }
+    @media (max-width:1000px) {
+      .nav { min-height:68px; }
+      .menu-btn { display:inline-flex; align-items:center; justify-content:center; }
+      nav { display:none; position:absolute; top:68px; left:0; right:0; width:100%; background:rgba(3,8,6,.98); border-bottom:1px solid var(--line); padding:10px 5% 18px; flex-direction:column; align-items:stretch; gap:0; }
+      nav.open { display:flex; }
+      nav a { padding:13px 0; border-bottom:1px solid #153124; font-size:14px; white-space:normal; }
+      .brand { font-size:10px; letter-spacing:.6px; gap:7px; }
+      .brand-logo { width:44px; height:44px; }
+      .brand small { font-size:8px; letter-spacing:1.3px; }
+    }
+    @media (max-width:420px) {
+      .brand-logo { width:39px; height:39px; }
+      .brand { font-size:9px; }
+      .lang { padding:7px 8px; font-size:11px; }
+      .nav { gap:7px; }
+      .splash-tagline { font-size:9px; letter-spacing:1.8px; }
+    }
+
+
+    /* Final responsive pass based on the approved OTAP mockup */
+    html, body { width:100%; max-width:100%; overflow-x:clip; }
+    img { max-width:100%; }
+    .container { width:min(1100px, calc(100% - 40px)); }
+    .nav { width:100%; }
+    .hero-people { overflow:hidden; }
+    .hero-copy { width:100%; max-width:100%; }
+    .hero-copy h1 { max-width:100%; overflow-wrap:normal; word-break:normal; text-wrap:balance; }
+    .hero-copy p { max-width:100%; }
+    .hero .actions { width:100%; }
+    .hero .actions .btn { max-width:100%; white-space:normal; text-align:center; }
+    .splash-inner { display:flex; flex-direction:column; align-items:center; justify-content:center; }
+    .logo-puzzle { margin:0 auto 26px; }
+    .splash-logo { margin:0 auto; width:min(72vw,280px); max-height:130px; }
+    .splash-fallback { margin:10px auto 0; font-size:18px; }
+    .splash-caption { text-align:center; line-height:1.7; }
+    .loading-track { margin-top:18px; }
+    @media (max-width:760px) {
+      .container { width:calc(100% - 32px); }
+      .nav { min-height:68px; flex-wrap:nowrap; gap:8px; }
+      .brand { flex:1 1 auto; min-width:0; max-width:calc(100% - 118px); }
+      .brand-logo { width:38px; height:38px; }
+      .brand > span:last-child { min-width:0; line-height:1.25; }
+      .brand small { font-size:7px; letter-spacing:1px; line-height:1.3; }
+      .nav-actions { flex:0 0 auto; gap:6px; }
+      .lang { padding:7px 8px; font-size:10px; white-space:nowrap; }
+      .menu-btn { width:38px; height:38px; padding:0; display:grid; place-items:center; font-size:19px; }
+      nav { top:68px; left:0; right:0; width:100%; padding:10px 18px 16px; }
+      .hero { padding:30px 0 38px; min-height:0; }
+      .sensory-strip { justify-content:center; gap:7px; }
+      .sensory-dot { width:29px; height:29px; font-size:13px; }
+      .hero-people { width:100%; aspect-ratio:672 / 165; height:auto; margin:12px auto 12px; background-position:center; }
+      .hero-copy h1 { font-size:clamp(25px,7.2vw,38px); line-height:1.08; letter-spacing:-.8px; margin:0 auto 12px; }
+      .hero-copy p { font-size:13px; line-height:1.55; padding:0; }
+      .hero .actions { display:grid; grid-template-columns:1fr; gap:10px; margin-top:20px; }
+      .hero .actions .btn { width:100%; min-width:0; padding:12px 14px; font-size:12px; }
+      section { padding:42px 0; }
+      .section-top h2, .feature h2 { font-size:clamp(24px,6.7vw,32px); overflow-wrap:anywhere; }
+      .people { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .cards { grid-template-columns:1fr; }
+      .footer-inner { flex-direction:column; }
+      .footer-links { gap:12px; }
+      .splash-inner { width:calc(100% - 36px); }
+      .logo-puzzle { width:150px; height:125px; margin-bottom:20px; }
+      .logo-puzzle span { width:19px; height:19px; }
+      .splash-logo { width:min(70vw,240px); max-height:100px; }
+      .splash-fallback { font-size:16px; }
+      .splash-caption { font-size:9px; letter-spacing:2px; }
+    }
+    @media (min-width:761px) {
+      .hero-people { max-width:850px; }
+      .hero-copy h1 { font-size:clamp(38px,5vw,58px); }
+      .hero .actions { justify-content:center; }
+    }
+
+
+    /* Approved homepage mockup presentation */
+    body > header { display:none; }
+    .mockup-hero { min-height:0; display:block; padding:0; overflow:visible; background:#030806; }
+    .mockup-hero::before { display:none; }
+    .mockup-stage { width:100%; max-width:1180px; margin:0 auto; position:relative; }
+    .mockup-home-art { display:block; width:100%; height:auto; object-fit:contain; }
+    .mockup-hotspots { position:absolute; inset:0; pointer-events:none; }
+    .hotspot { position:absolute; display:block; padding:0; border:0; background:transparent; pointer-events:auto; cursor:pointer; border-radius:12px; }
+    .hotspot:focus-visible { outline:3px solid #00f5a0; outline-offset:2px; }
+    .hotspot.meet { left:10%; top:79%; width:39%; height:8%; }
+    .hotspot.journey { left:52%; top:79%; width:39%; height:8%; }
+    .hotspot.menu { left:91%; top:3%; width:6%; height:8%; }
+    .hotspot.about { left:3%; top:88%; width:20%; height:9%; }
+    .hotspot.podcast { left:25%; top:88%; width:20%; height:9%; }
+    .hotspot.discovery { left:48%; top:88%; width:24%; height:9%; }
+    .hotspot.accessibility { left:76%; top:88%; width:21%; height:9%; }
+    .hotspot.language { left:80%; top:3%; width:10%; height:7%; }
+    .mockup-nav-panel { position:fixed; z-index:1002; top:0; right:0; bottom:0; width:min(360px,88vw); background:#030806; border-left:1px solid #174a36; box-shadow:-25px 0 70px #000b; padding:24px 20px; transform:translateX(105%); transition:transform .3s ease; overflow-y:auto; }
+    .mockup-nav-panel.open { transform:translateX(0); }
+    .mockup-nav-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:24px; }
+    .mockup-nav-brand { display:flex; align-items:center; gap:10px; font-size:12px; font-weight:800; letter-spacing:1px; }
+    .mockup-nav-brand img { width:52px; height:52px; object-fit:contain; }
+    .mockup-nav-close { color:#a5c4b5; background:transparent; border:0; font-size:28px; padding:5px 10px; }
+    .mockup-nav-links { display:grid; gap:8px; }
+    .mockup-nav-links a { display:flex; align-items:center; gap:12px; padding:12px 10px; border-radius:10px; border:1px solid transparent; font-size:14px; }
+    .mockup-nav-links a:hover, .mockup-nav-links a:focus-visible { background:#09291b; border-color:#174a36; }
+    .mockup-nav-icon { width:30px; color:#8eeac0; font-size:21px; text-align:center; flex-shrink:0; }
+    .mockup-nav-links small { display:block; color:#a5c4b5; font-size:11px; line-height:1.4; }
+    .mockup-nav-language { margin:24px auto 0; display:flex; width:180px; border:1px solid #17623f; border-radius:999px; overflow:hidden; }
+    .mockup-nav-language button { width:50%; border:0; padding:10px; color:#a5c4b5; background:transparent; }
+    .mockup-nav-language button.active { color:#03110b; background:#00f5a0; }
+    .mockup-menu-backdrop { position:fixed; inset:0; z-index:1001; background:#0009; opacity:0; pointer-events:none; transition:opacity .3s ease; }
+    .mockup-menu-backdrop.open { opacity:1; pointer-events:auto; }
+    .accessibility-section { display:none; }
+    @media (max-width:760px) {
+      .mockup-stage { width:100%; }
+      .mockup-home-art { width:100%; }
+      .mockup-hero { padding:0; }
+      .hotspot.meet { left:8%; top:79%; width:41%; height:8%; }
+      .hotspot.journey { left:52%; top:79%; width:40%; height:8%; }
+      .hotspot.menu { left:91%; top:3%; width:7%; height:8%; }
+      .hotspot.about,.hotspot.podcast,.hotspot.discovery,.hotspot.accessibility { top:88%; height:9%; }
+      .hotspot.language { left:80%; top:3%; width:10%; height:7%; }
+      .mockup-nav-panel { padding:20px 16px; }
+    }
+    @media (min-width:761px) {
+      .mockup-stage { max-width:1180px; }
+    }
+
+
+    /* Splash: staircase mark beside OTAP wordmark, as in the approved concept */
+    .splash-inner { width:min(88vw,520px); text-align:center; }
+    .splash-stage,.splash-subtitle,.splash-logo-wrap,.splash-logo,.splash-tagline { display:none !important; }
+    .splash-lockup { display:flex; align-items:center; justify-content:center; gap:clamp(14px,4vw,28px); width:100%; margin:0 auto 30px; }
+    .splash-staircase { flex:0 0 auto; width:clamp(116px,31vw,176px); height:clamp(112px,29vw,166px); display:grid; grid-template-columns:repeat(5,1fr); grid-template-rows:repeat(4,1fr); gap:4px; align-items:center; justify-items:center; }
+    .splash-staircase span { grid-column:var(--x); grid-row:var(--y); width:100%; aspect-ratio:1; max-width:30px; background:var(--green); box-shadow:0 0 14px #00f5a044; opacity:0; transform:translateY(10px) scale(.7); animation:logo-piece-in .42s ease forwards; animation-delay:var(--d); }
+    .splash-wordmark { flex:0 1 auto; min-width:0; text-align:left; opacity:0; animation:wordmark-appear .8s cubic-bezier(.2,.8,.2,1) 1.3s forwards; }
+    .splash-wordmark-title { color:#f2fff8; font-size:clamp(22px,6vw,36px); font-weight:900; line-height:.98; letter-spacing:.02em; }
+    .splash-wordmark-rule { height:1px; width:100%; background:linear-gradient(90deg,var(--green),#174a36); margin:12px 0 10px; }
+    .splash-wordmark-tag { color:#b9d8ca; font-size:clamp(7px,1.8vw,10px); line-height:1.7; letter-spacing:clamp(1px,.45vw,2.4px); white-space:nowrap; }
+    @keyframes wordmark-appear { to { opacity:1; transform:translateX(0); } from { opacity:0; transform:translateX(12px); } }
+    .loading-track { width:min(78vw,300px); height:5px; margin:0 auto; }
+    .loading-bar { animation-duration:3.8s; }
+    .splash-hint { margin-top:16px; color:var(--green); font-size:10px; letter-spacing:2.5px; }
+    @media (max-width:380px) {
+      .splash-inner { width:92vw; }
+      .splash-lockup { gap:10px; }
+      .splash-staircase { width:104px; height:100px; gap:3px; }
+      .splash-wordmark-title { font-size:21px; }
+      .splash-wordmark-tag { font-size:7px; letter-spacing:1px; }
+    }
+
+
+    /* Final polish: menu hierarchy, typography and small-screen rhythm */
+    .mockup-nav-panel { width:min(340px,86vw); padding:20px 16px 18px; }
+    .mockup-nav-head { align-items:center; gap:8px; margin-bottom:18px; padding-bottom:16px; border-bottom:1px solid #153d2b; }
+    .mockup-nav-brand { flex:1 1 auto; min-width:0; display:flex; align-items:center; gap:9px; }
+    .mockup-nav-brand img { width:48px; height:48px; flex:0 0 48px; border-radius:4px; }
+    .mockup-brand-copy { display:block; min-width:0; line-height:1.25; overflow-wrap:normal; }
+    .mockup-brand-copy strong { display:block; font-size:11px; line-height:1.25; letter-spacing:.7px; white-space:normal; }
+    .mockup-brand-copy small { display:block; margin-top:4px; color:#a5c4b5; font-size:8px; line-height:1.3; letter-spacing:1.4px; white-space:normal; }
+    .mockup-nav-close { flex:0 0 auto; font-size:27px; line-height:1; padding:6px; }
+    nav.mockup-nav-links { display:flex !important; flex-direction:column; align-items:stretch; gap:4px; width:100%; }
+    nav.mockup-nav-links a { display:flex; align-items:center; gap:10px; width:100%; min-height:48px; padding:9px 8px; border-radius:9px; line-height:1.25; font-size:13px; }
+    .mockup-nav-icon { width:27px; flex:0 0 27px; font-size:19px; }
+    .mockup-nav-copy { display:block; min-width:0; flex:1 1 auto; color:#effff7; overflow-wrap:anywhere; }
+    .mockup-nav-copy > span { display:block; font-size:13px; line-height:1.3; }
+    .mockup-nav-copy small { display:block; margin-top:2px; color:#a5c4b5; font-size:10px; line-height:1.35; }
+    .mockup-nav-arrow { color:#8eeac0; font-size:22px; line-height:1; flex:0 0 auto; }
+    .mockup-nav-language { margin:16px auto 0; width:160px; }
+    .mockup-nav-language button { padding:8px; font-size:12px; }
+    .mockup-nav-panel .mockup-nav-links a:hover { color:#fff; }
+    .mockup-hero + #people { padding-top:44px; }
+    #people .section-top { margin-bottom:22px; }
+    #people .eyebrow { font-size:10px; letter-spacing:2.5px; line-height:1.5; }
+    #people .section-top h2 { font-size:clamp(25px,4vw,36px); letter-spacing:-.8px; line-height:1.15; margin:12px 0; }
+    #people .section-top p { font-size:14px; line-height:1.7; max-width:650px; }
+    #people .person { padding:17px 8px 16px; }
+    #people .silhouette { height:85px; transform:scale(.9); transform-origin:bottom center; margin-bottom:8px; }
+    #people .person strong { font-size:11px; }
+    #people .person small { font-size:9px; }
+    #missions .section-top h2, #profile .feature h2, #about .feature h2, #discovery .feature h2 { letter-spacing:-.7px; }
+    footer { padding:24px 0; }
+    @media (max-width:760px) {
+      .mockup-nav-panel { width:min(340px,88vw); padding:16px 13px 14px; }
+      .mockup-nav-head { margin-bottom:12px; padding-bottom:12px; }
+      .mockup-nav-brand img { width:43px; height:43px; flex-basis:43px; }
+      .mockup-brand-copy strong { font-size:10px; }
+      .mockup-brand-copy small { font-size:7px; letter-spacing:1.1px; }
+      nav.mockup-nav-links { gap:3px; }
+      nav.mockup-nav-links a { min-height:44px; padding:8px 6px; gap:8px; }
+      .mockup-nav-copy > span { font-size:12px; }
+      .mockup-nav-copy small { font-size:9px; }
+      .mockup-nav-language { margin-top:12px; }
+      .mockup-hero + #people { padding-top:34px; }
+      #people .section-top h2 { font-size:clamp(25px,7vw,32px); }
+      #people .section-top p { font-size:13px; }
+      #people .people { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+      #people .person { border-radius:12px; padding:14px 6px; }
+      #people .silhouette { transform:scale(.82); margin-bottom:4px; }
+    }
+
+
+    /* Loading-screen typography and final neon reveal */
+    .splash { isolation:isolate; overflow:hidden; }
+    .splash-inner { position:relative; z-index:2; }
+    .splash-lockup {
+      align-items:center;
+      justify-content:center;
+      gap:clamp(12px,3.5vw,24px);
+      width:min(90vw,500px);
+      margin:0 auto 28px;
+    }
+    .splash-staircase {
+      width:clamp(112px,29vw,166px);
+      height:clamp(108px,28vw,156px);
+      gap:3px;
+      filter:drop-shadow(0 0 7px #00f5a055);
+    }
+    .splash-staircase span {
+      max-width:29px;
+      background:linear-gradient(145deg,#14ffb0 0%,#00d98b 72%,#00a968 100%);
+      box-shadow:0 0 5px #00f5a0a0, 0 0 15px #00f5a055;
+    }
+    .splash-wordmark {
+      text-align:left;
+      transform:translateX(12px);
+      max-width:calc(100% - 120px);
+    }
+    .splash-wordmark-title {
+      font-family:"Arial Narrow", "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
+      font-stretch:condensed;
+      font-size:clamp(23px,5.7vw,37px);
+      font-weight:900;
+      line-height:.94;
+      letter-spacing:-.045em;
+      text-transform:uppercase;
+      text-shadow:0 0 16px #eafff41a;
+    }
+    .splash-wordmark-rule {
+      width:100%;
+      height:2px;
+      margin:13px 0 9px;
+      background:linear-gradient(90deg,#00f5a0 0%,#00f5a0 55%,#174a36 100%);
+      box-shadow:0 0 8px #00f5a044;
+    }
+    .splash-wordmark-tag {
+      font-family:"Arial", sans-serif;
+      font-size:clamp(7px,1.65vw,9px);
+      font-weight:500;
+      line-height:1.75;
+      letter-spacing:clamp(1px,.35vw,1.8px);
+      white-space:nowrap;
+      color:#c2dfd1;
+    }
+    .splash-hint {
+      font-family:"Arial", sans-serif;
+      font-size:clamp(9px,2vw,11px);
+      font-weight:600;
+      letter-spacing:clamp(1.5px,.45vw,2.8px);
+      margin-top:17px;
+      text-shadow:0 0 12px #00f5a055;
+    }
+     .splash::after {
+      content:"" !important;
+      position:absolute !important;
+      inset:0 !important;
+      pointer-events:none !important;
+      background:
+        linear-gradient(180deg, transparent 0%, transparent 54%, rgba(0,255,166,.035) 63%, rgba(0,255,166,.08) 73%, transparent 84%),
+        linear-gradient(180deg, transparent 48%, rgba(0,255,166,.06) 65%, rgba(230,255,248,.92) 75.7%, rgba(0,255,166,.25) 76.4%, transparent 81%),
+        radial-gradient(ellipse at 50% 76%, rgba(235,255,249,.95) 0%, rgba(0,255,166,.55) 2%, rgba(0,255,166,.22) 7%, transparent 24%) !important;
+      mix-blend-mode:screen !important;
+      opacity:0 !important;
+      animation:otap-water-flash 1.15s ease-out 3.5s both !important;
+    }
+     .splash::before {
+      content:"" !important;
+      position:absolute !important;
+      left:50% !important;
+      top:76% !important;
+      width:min(112vw,900px) !important;
+      height:min(34vw,260px) !important;
+      border:1px solid rgba(0,255,166,.82) !important;
+      border-radius:50% !important;
+      background:
+        radial-gradient(ellipse at 50% 50%, rgba(228,255,246,.98) 0%, rgba(0,255,166,.75) 2%, rgba(0,255,166,.25) 8%, transparent 22%),
+        radial-gradient(ellipse at 50% 50%, transparent 0 20%, rgba(0,255,166,.7) 20.5% 21%, transparent 21.5% 35%, rgba(0,255,166,.5) 35.5% 36%, transparent 36.5% 51%, rgba(0,255,166,.7) 51.5% 52%, transparent 52.5% 69%, rgba(0,255,166,.35) 69.5% 70%, transparent 70.5%) !important;
+      box-shadow:0 0 18px rgba(0,255,166,.22), inset 0 0 28px rgba(0,255,166,.15) !important;
+      transform:translate(-50%,-50%) scale(.72) !important;
+      opacity:0 !important;
+      pointer-events:none !important;
+      animation:otap-water-ripple 1.2s ease-out 3.55s both !important;
+    }
+    @keyframes otap-neon-burst {
+      0% { opacity:0; transform:scale(.78); filter:blur(8px) brightness(1); }
+      18% { opacity:1; transform:scale(1); filter:blur(0) brightness(1.5); }
+      48% { opacity:.72; transform:scale(1.05); filter:blur(2px) brightness(1.2); }
+      100% { opacity:0; transform:scale(1.16); filter:blur(8px) brightness(1); }
+    }
+    @keyframes otap-neon-ring {
+      0% { opacity:0; transform:translate(-50%,-50%) scale(.35); }
+      25% { opacity:.9; }
+      100% { opacity:0; transform:translate(-50%,-50%) scale(1.4); }
+    }
+    .splash.done::after, .splash.done::before { animation:none; opacity:0; }
+    @media (max-width:380px) {
+      .splash-lockup { gap:9px; width:94vw; }
+      .splash-staircase { width:100px; height:96px; gap:2px; }
+      .splash-wordmark { max-width:calc(100% - 108px); }
+      .splash-wordmark-title { font-size:20px; letter-spacing:-.04em; }
+      .splash-wordmark-tag { font-size:6.5px; letter-spacing:.7px; }
+      .splash-wordmark-rule { margin:9px 0 7px; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      .splash::before, .splash::after { animation:none !important; }
+    }
+
+  
+    /* Complete mockup-aligned layout: responsive home, menu, silhouettes and loading reveal */
+    body > header { display:none !important; }
+    .accessibility-section { display:block !important; }
+    body.loading { overflow:hidden; }
+    .otap-home { display:block !important; padding:0 !important; min-height:0 !important; background:#030806 !important; overflow:hidden; }
+    .otap-home::before { display:none !important; }
+    .otap-home-inner { max-width:1180px; margin:0 auto; position:relative; padding:0 clamp(18px,4vw,46px) 20px; background:radial-gradient(ellipse at 50% 28%,#06351f 0%,#030806 64%); }
+    .otap-homebar { display:flex; align-items:center; justify-content:space-between; min-height:78px; gap:14px; border-bottom:1px solid #174a36; }
+    .otap-home-logo { display:inline-flex; align-items:center; flex:0 0 auto; }
+    .otap-home-logo img { width:clamp(82px,12vw,120px); height:54px; object-fit:contain; }
+    .otap-home-controls { display:flex; align-items:center; gap:12px; }
+    .otap-language { display:flex; gap:0; border:1px solid #17623f; border-radius:7px; overflow:hidden; background:#03100a; color:#00f5a0; padding:0; font-size:12px; }
+    .otap-language { padding:7px 10px; }
+    .otap-language span { padding-left:8px; margin-left:8px; border-left:1px solid #17623f; color:#b5d9c8; }
+    .otap-menu-trigger { width:40px; height:40px; display:grid; place-items:center; border:1px solid #174a36; border-radius:7px; background:transparent; color:#00f5a0; font-size:22px; }
+    .otap-sensory-icons { display:flex; justify-content:center; gap:clamp(9px,2vw,22px); padding:28px 0 10px; }
+    .otap-sensory-icons span { width:clamp(34px,5vw,48px); aspect-ratio:1; border:1px solid #39775a; border-radius:50%; display:grid; place-items:center; color:#b4f7d7; font-size:clamp(15px,2.4vw,22px); box-shadow:0 0 14px #00f5a010; }
+    .otap-silhouette-scene { height:clamp(175px,29vw,300px); max-width:1000px; margin:0 auto; position:relative; overflow:hidden; }
+    .otap-glow { position:absolute; inset:0; background:radial-gradient(ellipse at 50% 72%,#00f5a052 0%,#00f5a01a 25%,transparent 63%),linear-gradient(90deg,transparent 47%,#00f5a01c 49%,#e2fff4 50%,#00f5a03b 51%,transparent 54%); filter:blur(2px); }
+    .otap-glow::after { content:""; position:absolute; left:50%; top:0; height:100%; width:2px; background:#a5ffda; box-shadow:0 0 18px 6px #00f5a0,0 0 60px 18px #00f5a077; }
+    .otap-silhouettes { position:absolute; inset:8% 0 0; display:flex; justify-content:space-around; align-items:flex-end; gap:0; }
+    .otap-person { position:relative; flex:1 1 10%; height:var(--h,76%); max-width:110px; min-width:0; }
+    .otap-person .person-head { position:absolute; z-index:2; top:0; left:50%; transform:translateX(-50%); width:clamp(20px,4.3vw,44px); height:clamp(29px,5.8vw,60px); border-radius:48% 48% 43% 43%; background:#010302; box-shadow:0 0 12px #00f5a01a; }
+    .otap-person .person-body { position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:88%; height:76%; background:linear-gradient(90deg,#010302,#020604 55%,#010302); border-radius:42% 42% 0 0; clip-path:polygon(32% 0,68% 0,82% 18%,100% 100%,0 100%,18% 18%); }
+    .otap-person.man .person-head { border-radius:48% 48% 40% 40%; }
+    .otap-person.man .person-body { width:78%; clip-path:polygon(28% 0,72% 0,85% 20%,100% 100%,0 100%,15% 20%); }
+    .otap-person.woman-no-hijab .person-head { width:clamp(24px,4.8vw,49px); border-radius:48% 48% 44% 44%; }
+    .otap-person.woman-no-hijab .person-body { width:96%; clip-path:polygon(35% 0,65% 0,80% 20%,100% 100%,0 100%,20% 20%); }
+    .otap-person.woman-no-hijab .person-head::before { content:""; position:absolute; top:-3px; left:-6px; right:-6px; height:70%; border-radius:55% 55% 25% 25%; background:#010302; z-index:-1; }
+    .otap-person.woman-hijab .person-head { top:4%; width:clamp(22px,4.3vw,43px); height:clamp(28px,5.4vw,56px); }
+    .otap-person .hijab-shape { position:absolute; z-index:3; left:50%; top:-2%; transform:translateX(-50%); width:clamp(34px,6vw,60px); height:clamp(55px,9vw,94px); background:#010302; clip-path:polygon(23% 0,77% 0,100% 28%,82% 100%,18% 100%,0 28%); border-radius:42% 42% 8% 8%; }
+    .otap-person .hijab-shape::after { content:""; position:absolute; left:50%; bottom:0; height:80%; width:1px; background:#0b2418; }
+    .otap-person.p1 { --h:50%; }
+    .otap-person.p2 { --h:64%; }
+    .otap-person.p3 { --h:67%; }
+    .otap-person.p4 { --h:78%; }
+    .otap-person.p5 { --h:95%; }
+    .otap-person.p6 { --h:100%; }
+    .otap-person.p7 { --h:83%; }
+    .otap-person.p8 { --h:70%; }
+    .otap-person.p9 { --h:75%; }
+    .otap-person.p10 { --h:55%; }
+    .otap-home-copy { text-align:center; position:relative; z-index:1; padding:0 0 26px; }
+    .otap-home-copy h1 { margin:0 auto 12px; max-width:800px; font-family:Arial,sans-serif; font-size:clamp(29px,5.4vw,54px); line-height:1.03; letter-spacing:-1.2px; font-weight:900; }
+    .otap-home-copy h1 span { color:#00f5a0; }
+    .otap-home-copy p { margin:0 auto; color:#d2e9dd; max-width:540px; font-size:clamp(12px,1.5vw,15px); line-height:1.55; }
+    .otap-home-actions { display:flex; justify-content:center; gap:14px; margin:22px auto 26px; max-width:620px; }
+    .otap-cta { display:flex; align-items:center; gap:10px; min-width:0; flex:1 1 0; padding:12px 16px; border-radius:999px; font-size:12px; line-height:1.3; }
+    .otap-cta.primary { background:#00f5a0; color:#03110b; box-shadow:0 0 22px #00f5a022; }
+    .otap-cta.secondary { border:1px solid #00f5a0; color:#eafff4; }
+    .otap-cta strong,.otap-cta small { display:block; text-align:left; }
+    .otap-cta strong { font-size:12px; }
+    .otap-cta small { font-size:10px; opacity:.85; margin-top:2px; }
+    .otap-cta b { margin-left:auto; font-size:21px; font-weight:400; }
+    .cta-icon { font-size:24px; }
+    .cta-play { display:grid; place-items:center; width:30px; height:30px; border:1px solid currentColor; border-radius:50%; font-size:12px; flex:0 0 auto; }
+    .otap-home-footer { border-top:1px solid #174a36; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); padding-top:15px; gap:0; }
+    .otap-home-footer a { display:flex; flex-direction:column; align-items:center; text-align:center; padding:0 8px; border-right:1px solid #123222; font-size:11px; }
+    .otap-home-footer a:last-child { border-right:0; }
+    .otap-home-footer span { font-size:23px; color:#a5f4d0; line-height:1.2; margin-bottom:5px; }
+    .otap-home-footer strong { font-size:11px; color:#f1fff8; }
+    .otap-home-footer small { font-size:10px; color:#a5c4b5; }
+    .otap-scroll-hint { display:none; }
+    .mockup-nav-panel { width:min(360px,88vw); }
+    .mockup-nav-panel .mockup-nav-brand img { flex:0 0 auto; }
+    #people .people { grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; }
+    #people .person { padding:17px 8px 15px; min-width:0; }
+    #people .silhouette { width:90px; max-width:100%; height:108px; margin:0 auto 12px; overflow:hidden; position:relative; }
+    #people .silhouette .head { top:5px; left:50%; transform:translateX(-50%); width:27px; height:34px; border-radius:48% 48% 43% 43%; background:#010302; }
+    #people .silhouette .body-shape { left:50%; transform:translateX(-50%); bottom:-2px; width:74px; height:72px; border-radius:45% 45% 0 0; background:#010302; clip-path:polygon(30% 0,70% 0,85% 18%,100% 100%,0 100%,15% 18%); }
+    #people .mystery-man .head { width:28px; height:35px; border-radius:46% 46% 38% 38%; }
+    #people .mystery-man .body-shape { width:70px; clip-path:polygon(27% 0,73% 0,85% 18%,100% 100%,0 100%,15% 18%); }
+    #people .mystery-woman .head { width:31px; height:35px; }
+    #people .mystery-woman .hair { position:absolute; z-index:2; left:50%; transform:translateX(-50%); top:0; width:40px; height:48px; border-radius:50% 50% 30% 30%; background:#010302; }
+    #people .mystery-hijab .head { top:8px; }
+    #people .mystery-hijab .hijab { position:absolute; z-index:3; left:50%; transform:translateX(-50%); top:0; width:43px; height:64px; background:#010302; clip-path:polygon(24% 0,76% 0,100% 27%,82% 100%,18% 100%,0 27%); border-radius:45% 45% 8% 8%; }
+    #people .mystery-hijab .body-shape { width:76px; clip-path:polygon(30% 0,70% 0,86% 22%,100% 100%,0 100%,14% 22%); }
+    .splash { isolation:isolate; }
+    .splash::after { content:""; position:absolute; inset:-20%; z-index:1; pointer-events:none; opacity:0; background:radial-gradient(ellipse at 50% 48%,rgba(232,255,246,.98) 0%,rgba(0,255,166,.8) 2%,rgba(0,245,160,.25) 11%,rgba(0,245,160,.08) 25%,transparent 45%),linear-gradient(90deg,transparent 30%,rgba(0,255,166,.1) 46%,rgba(232,255,246,.78) 50%,rgba(0,255,166,.12) 54%,transparent 70%); mix-blend-mode:screen; animation:otap-neon-burst .95s ease-out 3.65s both; }
+    .splash::before { content:""; position:absolute; z-index:1; left:50%; top:50%; width:min(80vw,560px); aspect-ratio:1; border-radius:50%; transform:translate(-50%,-50%) scale(.35); opacity:0; pointer-events:none; border:1px solid rgba(0,255,166,.8); box-shadow:0 0 24px #00f5a066,inset 0 0 24px #00f5a044; animation:otap-neon-ring .9s ease-out 3.72s both; }
+    @keyframes otap-neon-burst { 0%{opacity:0;transform:scale(.78);filter:blur(8px) brightness(1)} 18%{opacity:1;transform:scale(1);filter:blur(0) brightness(1.5)} 48%{opacity:.72;transform:scale(1.05);filter:blur(2px) brightness(1.2)} 100%{opacity:0;transform:scale(1.16);filter:blur(8px) brightness(1)} }
+    @keyframes otap-neon-ring { 0%{opacity:0;transform:translate(-50%,-50%) scale(.35)} 25%{opacity:.9} 100%{opacity:0;transform:translate(-50%,-50%) scale(1.4)} }
+    .splash-lockup { position:relative; z-index:2; }
+    .splash-wordmark { text-align:left !important; }
+    .splash-wordmark-title { font-family:"Arial Narrow","Roboto Condensed","Helvetica Neue",Arial,sans-serif; font-stretch:condensed; font-weight:900; letter-spacing:-.04em !important; line-height:.94 !important; }
+    .splash.done::before,.splash.done::after { animation:none; opacity:0; }
+    @media(max-width:760px) {
+      .otap-home-inner { padding:0 18px 17px; }
+      .otap-homebar { min-height:64px; }
+      .otap-home-logo img { width:88px; height:44px; }
+      .otap-sensory-icons { padding:20px 0 5px; gap:8px; }
+      .otap-sensory-icons span { width:34px; font-size:15px; }
+      .otap-silhouette-scene { height:clamp(150px,37vw,230px); }
+      .otap-home-copy h1 { font-size:clamp(27px,6.8vw,42px); letter-spacing:-.8px; }
+      .otap-home-actions { gap:9px; margin:18px auto 22px; }
+      .otap-cta { padding:10px 11px; gap:7px; }
+      .otap-cta strong { font-size:11px; }
+      .otap-cta small { font-size:9px; }
+      .otap-cta b { font-size:18px; }
+      .otap-home-footer a { padding:0 3px; }
+      .otap-home-footer strong { font-size:9px; }
+      .otap-home-footer small { font-size:8px; }
+      #people .people { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      #people .person:last-child { grid-column:auto; }
+    }
+    @media(max-width:420px) {
+      .otap-home-inner { padding-left:12px; padding-right:12px; }
+      .otap-home-logo img { width:78px; }
+      .otap-language { padding:6px 8px; }
+      .otap-home-actions { display:grid; grid-template-columns:1fr; max-width:310px; }
+      .otap-cta { min-height:52px; padding:10px 15px; }
+      .otap-home-footer { grid-template-columns:repeat(2,minmax(0,1fr)); row-gap:14px; }
+      .otap-home-footer a:nth-child(2) { border-right:0; }
+      .otap-home-footer a:nth-child(3) { border-right:1px solid #123222; }
+      .otap-sensory-icons { gap:6px; }
+      .otap-sensory-icons span { width:30px; }
+      .otap-person .person-head { width:20px; height:30px; }
+      .otap-person .hijab-shape { width:31px; height:54px; }
+    }
+    @media(prefers-reduced-motion:reduce) { .splash::before,.splash::after { animation:none!important; } }
+
+  
+    /* Homepage visual follows the approved mockup; transparent hotspots preserve working navigation. */
+    .otap-mockup-home { display:block !important; padding:0 !important; margin:0 !important; min-height:0 !important; background:#020805 !important; overflow:hidden; }
+    .otap-mockup-home::before { display:none !important; }
+    .otap-mockup-art { position:relative; width:100%; max-width:1536px; margin:0 auto; line-height:0; background:#020805; }
+    .otap-mockup-art > img { display:block; width:100%; height:auto; }
+    .mock-hotspot { position:absolute; display:block; z-index:4; border:0; padding:0; margin:0; background:transparent; color:transparent; cursor:pointer; line-height:normal; border-radius:8px; }
+    .mock-hotspot:focus-visible { outline:2px solid #00f5a0; outline-offset:2px; background:#00f5a015; }
+    .mock-menu { left:91%; top:1.5%; width:6.5%; height:7%; }
+    .mock-language { left:79%; top:1.5%; width:10%; height:6%; }
+    .mock-meet { left:9%; top:55%; width:41%; height:12%; border-radius:999px; }
+    .mock-journey { left:52%; top:55%; width:39%; height:12%; border-radius:999px; }
+    .mock-about { left:4%; top:72%; width:19%; height:12%; }
+    .mock-podcast { left:25%; top:72%; width:20%; height:12%; }
+    .mock-discovery { left:46%; top:72%; width:26%; height:12%; }
+    .mock-accessibility { left:75%; top:72%; width:21%; height:12%; }
+    @media (max-width:760px) {
+      .otap-mockup-art { width:100%; }
+      .mock-menu { left:91%; top:1.5%; width:6.5%; height:7%; }
+      .mock-language { left:79%; top:1.5%; width:10%; height:6%; }
+    }
+
+  
+    /* Loading screen corrections based strictly on the approved mockup */
+    .splash-staircase {
+      display:grid !important;
+      grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+      grid-template-rows:repeat(4,minmax(0,1fr)) !important;
+      width:clamp(112px,28vw,174px) !important;
+      height:clamp(112px,28vw,174px) !important;
+      gap:4px !important;
+      align-items:center !important;
+      justify-items:center !important;
+      flex:0 0 auto !important;
+    }
+    .splash-staircase span {
+      grid-column:var(--x) !important;
+      grid-row:var(--y) !important;
+      width:100% !important;
+      max-width:36px !important;
+      aspect-ratio:1 / 1 !important;
+      height:auto !important;
+      opacity:0;
+      animation:logo-piece-in .42s ease forwards !important;
+      animation-delay:var(--d) !important;
+    }
+    .splash-lockup {
+      display:flex !important;
+      flex-direction:row !important;
+      align-items:center !important;
+      justify-content:center !important;
+      gap:clamp(12px,3.5vw,26px) !important;
+      width:min(90vw,500px) !important;
+      margin:0 auto 28px !important;
+    }
+    .splash-wordmark {
+      text-align:left !important;
+      transform:none !important;
+      flex:0 1 58% !important;
+      max-width:calc(100% - 124px) !important;
+    }
+    .splash-wordmark-title {
+      color:#f2fff8 !important;
+      font-size:clamp(22px,5.8vw,36px) !important;
+      line-height:.98 !important;
+      letter-spacing:-.035em !important;
+    }
+    .splash-wordmark-rule { height:1px !important; margin:12px 0 9px !important; }
+    .splash-wordmark-tag {
+      font-size:clamp(7px,1.8vw,10px) !important;
+      line-height:1.7 !important;
+      letter-spacing:clamp(.7px,.35vw,2px) !important;
+      white-space:normal !important;
+    }
+    .splash::before {
+      content:"" !important;
+      left:50% !important;
+      top:68% !important;
+      width:min(72vw,420px) !important;
+      height:auto !important;
+      aspect-ratio:3.4 / 1 !important;
+      border-radius:50% !important;
+      border:1px solid rgba(0,255,166,.75) !important;
+      box-shadow:0 0 18px #00f5a055,inset 0 0 18px #00f5a033 !important;
+      background:transparent !important;
+      transform:translate(-50%,-50%) scale(.55) !important;
+      animation:otap-water-ripple .9s ease-out 3.65s both !important;
+    }
+    .splash::after {
+      content:"" !important;
+      inset:0 !important;
+      background:radial-gradient(ellipse at 50% 68%,rgba(240,255,248,.95) 0%,rgba(0,255,166,.55) 2%,rgba(0,245,160,.16) 9%,transparent 27%) !important;
+      mix-blend-mode:screen !important;
+      animation:otap-water-flash .85s ease-out 3.62s both !important;
+    }
+    @keyframes otap-water-ripple {
+      0% { opacity:0; transform:translate(-50%,-50%) scale(.62); }
+      18% { opacity:.95; }
+      62% { opacity:.68; }
+      100% { opacity:0; transform:translate(-50%,-50%) scale(1.06); }
+    }
+      20% { opacity:.9; }
+      100% { opacity:0; transform:translate(-50%,-50%) scale(1.3) !important; }
+    }
+    @keyframes otap-water-flash {
+      0% { opacity:0; filter:blur(7px) brightness(1); }
+      18% { opacity:1; filter:blur(0) brightness(1.45); }
+      42% { opacity:.78; filter:blur(1px) brightness(1.2); }
+      100% { opacity:0; filter:blur(5px) brightness(1); }
+    }
+      18% { opacity:1; filter:blur(0) brightness(1.35); }
+      55% { opacity:.5; filter:blur(2px) brightness(1.1); }
+      100% { opacity:0; filter:blur(6px) brightness(1); }
+    }
+    .splash.done::before,.splash.done::after { animation:none !important; opacity:0 !important; }
+    @media (max-width:380px) {
+      .splash-inner { width:92vw !important; padding:0 !important; }
+      .splash-lockup { gap:9px !important; width:92vw !important; }
+      .splash-staircase { width:100px !important; height:100px !important; gap:3px !important; }
+      .splash-wordmark { max-width:calc(100% - 108px) !important; }
+      .splash-wordmark-title { font-size:20px !important; }
+      .splash-wordmark-tag { font-size:6.5px !important; letter-spacing:.5px !important; }
+    }
+
+  
+    /* Correct hierarchy: logo staircase + wordmark first; slogan below the full logo lockup */
+    .splash-wordmark-tag { display:none !important; }
+    .splash-slogan-below {
+      display:block !important;
+      width:min(88vw,520px) !important;
+      margin:20px auto 25px !important;
+      text-align:center !important;
+      color:#c9ded6 !important;
+      font-family: "Arial Narrow", "Roboto Condensed", Arial, sans-serif !important;
+      font-size:clamp(12px,3.1vw,17px) !important;
+      font-weight:600 !important;
+      line-height:1.85 !important;
+      letter-spacing:clamp(1.3px,.38vw,2.6px) !important;
+      text-transform:uppercase !important;
+      text-shadow:0 0 9px rgba(0,255,166,.24) !important;
+    }
+    .splash-lockup { margin-bottom:0 !important; }
+    .splash-wordmark-rule { display:none !important; }
+    .loading-track { margin-top:0 !important; }
+    @media (max-width:380px) {
+      .splash-slogan-below {
+        width:88vw !important;
+        margin:16px auto 22px !important;
+        font-size:11px !important;
+        line-height:1.8 !important;
+        letter-spacing:1.1px !important;
+      }
+    }
+
+  
+    /* Final loading-screen polish matched to the supplied neon water-impact reference */
+    .splash-slogan-below {
+      display:block !important;
+      width:min(88vw,520px) !important;
+      margin:20px auto 25px !important;
+      text-align:center !important;
+      color:#c9ded6 !important;
+      font-family:"Arial Narrow","Roboto Condensed",Arial,sans-serif !important;
+      font-size:clamp(12px,3.1vw,17px) !important;
+      font-weight:600 !important;
+      line-height:1.85 !important;
+      letter-spacing:clamp(1.3px,.38vw,2.6px) !important;
+      text-transform:uppercase !important;
+      text-shadow:0 0 9px rgba(0,255,166,.24) !important;
+    }
+    .splash-wordmark-tag { display:none !important; }
+    .splash::before {
+      content:"" !important;
+      position:absolute !important;
+      left:50% !important; top:76% !important;
+      width:min(112vw,900px) !important; height:min(34vw,260px) !important;
+      border:1px solid rgba(0,255,166,.82) !important; border-radius:50% !important;
+      background:
+        radial-gradient(ellipse at 50% 50%,rgba(228,255,246,.98) 0%,rgba(0,255,166,.75) 2%,rgba(0,255,166,.25) 8%,transparent 22%),
+        radial-gradient(ellipse at 50% 50%,transparent 0 20%,rgba(0,255,166,.7) 20.5% 21%,transparent 21.5% 35%,rgba(0,255,166,.5) 35.5% 36%,transparent 36.5% 51%,rgba(0,255,166,.7) 51.5% 52%,transparent 52.5% 69%,rgba(0,255,166,.35) 69.5% 70%,transparent 70.5%) !important;
+      box-shadow:0 0 18px rgba(0,255,166,.22),inset 0 0 28px rgba(0,255,166,.15) !important;
+      transform:translate(-50%,-50%) scale(.72);
+      opacity:0 !important; pointer-events:none !important;
+      animation:otap-water-ripple 1.2s ease-out 3.55s both !important;
+    }
+    .splash::after {
+      content:"" !important; position:absolute !important; inset:0 !important;
+      pointer-events:none !important;
+      background:
+        linear-gradient(180deg,transparent 0%,transparent 54%,rgba(0,255,166,.035) 63%,rgba(0,255,166,.08) 73%,transparent 84%),
+        linear-gradient(180deg,transparent 48%,rgba(0,255,166,.06) 65%,rgba(230,255,248,.92) 75.7%,rgba(0,255,166,.25) 76.4%,transparent 81%),
+        radial-gradient(ellipse at 50% 76%,rgba(235,255,249,.95) 0%,rgba(0,255,166,.55) 2%,rgba(0,255,166,.22) 7%,transparent 24%) !important;
+      mix-blend-mode:screen !important; opacity:0 !important;
+      animation:otap-water-flash 1.15s ease-out 3.5s both !important;
+    }
+    @keyframes otap-water-ripple {
+      0% { opacity:0; transform:translate(-50%,-50%) scale(.62); }
+      18% { opacity:.95; }
+      62% { opacity:.68; }
+      100% { opacity:0; transform:translate(-50%,-50%) scale(1.06); }
+    }
+    @keyframes otap-water-flash {
+      0% { opacity:0; filter:blur(7px) brightness(1); }
+      18% { opacity:1; filter:blur(0) brightness(1.45); }
+      42% { opacity:.78; filter:blur(1px) brightness(1.2); }
+      100% { opacity:0; filter:blur(5px) brightness(1); }
+    }
+    @media (max-width:380px) {
+      .splash-slogan-below { width:88vw !important; margin:16px auto 22px !important; font-size:11px !important; line-height:1.8 !important; letter-spacing:1.1px !important; }
+    }
+
+  
+    /* Real, visible neon water splash: a vertical light column hitting a reflective pool */
+    .splash::before, .splash::after { display:none !important; }
+    .splash { isolation:isolate !important; }
+    .splash-water-impact {
+      position:absolute !important;
+      left:0 !important; right:0 !important; bottom:7.5% !important;
+      height:36% !important; z-index:0 !important;
+      overflow:visible !important; pointer-events:none !important;
+      opacity:0;
+      animation:water-scene-in 1.45s ease-out 3.25s both !important;
+    }
+    .splash-inner { position:relative !important; z-index:2 !important; }
+    .water-beam {
+      position:absolute; left:50%; top:0; height:80%; width:2px;
+      transform:translateX(-50%);
+      background:linear-gradient(to bottom,transparent,rgba(0,255,166,.18) 15%,rgba(0,255,166,.7) 65%,#eafff6 95%,transparent);
+      box-shadow:0 0 8px #00ffa6,0 0 22px #00ffa688,0 0 44px #00ffa633;
+      animation:water-beam-pulse 1.45s ease-out 3.25s both;
+    }
+    .water-core {
+      position:absolute; left:50%; top:78%; width:24px; height:9px;
+      transform:translate(-50%,-50%); border-radius:50%;
+      background:#eafff8; box-shadow:0 0 10px 5px #00ffa6,0 0 32px 13px #00ffa688,0 0 90px 26px #00ffa633;
+      animation:water-core-flash 1.45s ease-out 3.25s both;
+    }
+    .water-ring {
+      position:absolute; left:50%; top:78%; border-radius:50%;
+      transform:translate(-50%,-50%) scale(.45);
+      border:2px solid rgba(0,255,166,.82);
+      box-shadow:0 0 8px rgba(0,255,166,.6),inset 0 0 8px rgba(0,255,166,.18);
+      opacity:0;
+    }
+    .water-ring-1 { width:24%; height:15%; animation:water-ring-expand 1.35s ease-out 3.3s both; }
+    .water-ring-2 { width:43%; height:22%; border-width:1px; animation:water-ring-expand 1.35s ease-out 3.38s both; }
+    .water-ring-3 { width:68%; height:31%; border-width:2px; animation:water-ring-expand 1.35s ease-out 3.46s both; }
+    .water-ring-4 { width:96%; height:43%; border-width:1px; animation:water-ring-expand 1.35s ease-out 3.54s both; }
+    .water-particles { position:absolute; inset:0; }
+    .water-particles i {
+      position:absolute; left:50%; top:78%; width:3px; height:3px; border-radius:50%;
+      background:#caffef; box-shadow:0 0 8px 2px #00ffa6;
+      opacity:0; animation:water-droplet 1.05s ease-out 3.35s both;
+    }
+    .water-particles i:nth-child(1) { --dx:-30vw; --dy:-15vh; }
+    .water-particles i:nth-child(2) { --dx:27vw; --dy:-13vh; animation-delay:3.4s; }
+    .water-particles i:nth-child(3) { --dx:-21vw; --dy:-9vh; animation-delay:3.42s; }
+    .water-particles i:nth-child(4) { --dx:19vw; --dy:-19vh; animation-delay:3.44s; }
+    .water-particles i:nth-child(5) { --dx:-39vw; --dy:-4vh; animation-delay:3.46s; }
+    .water-particles i:nth-child(6) { --dx:36vw; --dy:-7vh; animation-delay:3.48s; }
+    .water-particles i:nth-child(7) { --dx:-13vw; --dy:-22vh; animation-delay:3.5s; }
+    .water-particles i:nth-child(8) { --dx:12vw; --dy:-24vh; animation-delay:3.52s; }
+    .water-particles i:nth-child(9) { --dx:-45vw; --dy:-12vh; animation-delay:3.54s; }
+    .water-particles i:nth-child(10) { --dx:43vw; --dy:-16vh; animation-delay:3.56s; }
+    .water-particles i:nth-child(11) { --dx:-7vw; --dy:-11vh; animation-delay:3.58s; }
+    .water-particles i:nth-child(12) { --dx:8vw; --dy:-6vh; animation-delay:3.6s; }
+    @keyframes water-scene-in { 0%{opacity:0} 18%{opacity:1} 72%{opacity:.95} 100%{opacity:0} }
+    @keyframes water-beam-pulse { 0%{opacity:0;transform:translateX(-50%) scaleY(.25)} 18%{opacity:1;transform:translateX(-50%) scaleY(1)} 65%{opacity:.75} 100%{opacity:0} }
+    @keyframes water-core-flash { 0%{opacity:0;scale:.4} 18%{opacity:1;scale:1.35} 45%{opacity:.85;scale:1} 100%{opacity:0;scale:.6} }
+    @keyframes water-ring-expand { 0%{opacity:0;transform:translate(-50%,-50%) scale(.45)} 18%{opacity:.95} 75%{opacity:.65} 100%{opacity:0;transform:translate(-50%,-50%) scale(1.04)} }
+    @keyframes water-droplet { 0%{opacity:0;transform:translate(0,0) scale(.5)} 20%{opacity:1} 100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.2)} }
+    @media (prefers-reduced-motion:reduce) {
+      .splash-water-impact,.water-beam,.water-core,.water-ring,.water-particles i { animation-duration:.01ms !important; }
+    }
+
+  
+    /* Refine OTAP loading logo typography and staircase colours to match reference */
+    .splash-wordmark-title {
+      font-family: "Arial Narrow", "Roboto Condensed", "Liberation Sans Narrow", sans-serif !important;
+      font-stretch: condensed !important;
+      font-weight: 800 !important;
+      letter-spacing: -.045em !important;
+      line-height: .98 !important;
+      text-transform: uppercase !important;
+      color: #f5f5f2 !important;
+      text-shadow: 0 0 4px rgba(255,255,255,.18) !important;
+    }
+    .splash-staircase span {
+      background: linear-gradient(135deg, #00f5a0 0%, #00d98b 55%, #00a96b 100%) !important;
+      border: 1px solid rgba(0,255,166,.18) !important;
+      box-shadow: 0 0 8px rgba(0,255,166,.42), 0 0 20px rgba(0,255,166,.2) !important;
+    }
+    .splash-staircase span:nth-child(4n+1) { background:linear-gradient(135deg,#00e997,#00bf79) !important; }
+    .splash-staircase span:nth-child(4n+2) { background:linear-gradient(135deg,#00f5a0,#00d38a) !important; }
+    .splash-staircase span:nth-child(4n+3) { background:linear-gradient(135deg,#00d98b,#009b64) !important; }
+    .splash-staircase span:nth-child(4n) { background:linear-gradient(135deg,#00c982,#007e55) !important; }
+    .splash-wordmark-rule {
+      background:linear-gradient(90deg,#00e997,rgba(0,233,151,.15)) !important;
+    }
+
+  
+    /* Match the supplied OTAP loading-logo reference: exact 10-tile stair and condensed wordmark */
+    .splash-lockup {
+      display:flex !important;
+      align-items:center !important;
+      justify-content:center !important;
+      gap:clamp(10px,2.2vw,22px) !important;
+      width:min(90vw,690px) !important;
+      margin-inline:auto !important;
+    }
+    .splash-staircase {
+      flex:0 0 auto !important;
+      width:clamp(132px,36vw,220px) !important;
+      height:clamp(132px,36vw,220px) !important;
+      display:grid !important;
+      grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+      grid-template-rows:repeat(4,minmax(0,1fr)) !important;
+      gap:clamp(3px,.7vw,7px) !important;
+      align-items:stretch !important;
+      justify-items:stretch !important;
+    }
+    .splash-staircase span {
+      width:100% !important;
+      max-width:none !important;
+      aspect-ratio:1 !important;
+      border-radius:0 !important;
+      background:linear-gradient(135deg,#00ffad 0%,#00e99a 58%,#00b978 100%) !important;
+      box-shadow:0 0 9px rgba(0,255,166,.72),0 0 22px rgba(0,255,166,.38),inset 0 0 5px rgba(220,255,242,.12) !important;
+    }
+    .splash-staircase span:nth-child(4),
+    .splash-staircase span:nth-child(7),
+    .splash-staircase span:nth-child(9) {
+      background:linear-gradient(135deg,#00e99a,#00b978 75%,#008c60) !important;
+    }
+    .splash-staircase span:nth-child(10) {
+      background:linear-gradient(135deg,#00e99a 0%,#00c985 70%,#00885b 100%) !important;
+    }
+    .splash-wordmark {
+      flex:1 1 auto !important;
+      min-width:0 !important;
+      max-width:410px !important;
+      text-align:left !important;
+    }
+    .splash-wordmark-title {
+      color:#f7f7f7 !important;
+      font-family:"Roboto Condensed","Arial Narrow","Liberation Sans Narrow",Impact,sans-serif !important;
+      font-stretch:condensed !important;
+      font-size:clamp(30px,7.2vw,64px) !important;
+      font-weight:900 !important;
+      line-height:.91 !important;
+      letter-spacing:-.045em !important;
+      text-transform:uppercase !important;
+      text-shadow:0 0 5px rgba(255,255,255,.16) !important;
+    }
+    .splash-wordmark-rule {
+      width:100% !important;
+      height:2px !important;
+      margin:clamp(12px,2vw,20px) 0 0 !important;
+      background:linear-gradient(90deg,#00ffa6 0%,rgba(0,255,166,.5) 82%,transparent 100%) !important;
+    }
+    .splash-slogan-below {
+      width:min(76vw,530px) !important;
+      margin:clamp(18px,3vw,28px) auto 25px !important;
+      color:#b8d4c9 !important;
+      font-family:"Roboto Condensed","Arial Narrow","Liberation Sans Narrow",sans-serif !important;
+      font-size:clamp(15px,3.5vw,25px) !important;
+      font-weight:700 !important;
+      line-height:1.65 !important;
+      letter-spacing:clamp(1.8px,.5vw,4px) !important;
+      text-align:center !important;
+      text-transform:uppercase !important;
+      text-shadow:0 0 10px rgba(0,255,166,.18) !important;
+    }
+    @media(max-width:420px) {
+      .splash-lockup { width:92vw !important; gap:9px !important; }
+      .splash-staircase { width:clamp(116px,34vw,142px) !important; height:clamp(116px,34vw,142px) !important; gap:3px !important; }
+      .splash-wordmark-title { font-size:clamp(27px,7.3vw,32px) !important; letter-spacing:-.05em !important; }
+      .splash-wordmark-rule { margin-top:11px !important; }
+      .splash-slogan-below { width:82vw !important; font-size:14px !important; letter-spacing:1.7px !important; line-height:1.7 !important; }
+    }
+
+  
+    /* Use the actual approved mockup artwork for the loading lockup: exact font, tiles and slogan. */
+    .splash-reference-lockup {
+      position:relative !important;
+      z-index:2 !important;
+      width:min(92vw,650px) !important;
+      margin:0 auto 22px !important;
+      line-height:0 !important;
+      isolation:isolate !important;
+    }
+    .splash-reference-lockup img {
+      display:block !important;
+      width:100% !important;
+      height:auto !important;
+      object-fit:contain !important;
+      mix-blend-mode:screen !important;
+      filter:drop-shadow(0 0 8px rgba(0,255,166,.12)) !important;
+    }
+    .splash-lockup, .splash-slogan-below { display:none !important; }
+    @media(max-width:420px) {
+      .splash-reference-lockup { width:min(94vw,590px) !important; margin-bottom:16px !important; }
+    }
+
+  
+    /* Animated stair tiles retained; only the live wordmark typography is adjusted to the mockup. */
+    .splash-reference-lockup { display:none !important; }
+    .splash-lockup {
+      display:flex !important; flex-direction:row !important; align-items:center !important;
+      justify-content:center !important; gap:clamp(10px,2.2vw,22px) !important;
+      width:min(90vw,690px) !important; margin:0 auto !important; position:relative !important; z-index:2 !important;
+    }
+    .splash-staircase {
+      display:grid !important; grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+      grid-template-rows:repeat(4,minmax(0,1fr)) !important;
+      width:clamp(124px,34vw,215px) !important; height:clamp(124px,34vw,215px) !important;
+      gap:clamp(3px,.65vw,6px) !important; flex:0 0 auto !important;
+    }
+    .splash-staircase span {
+      grid-column:var(--x) !important; grid-row:var(--y) !important;
+      width:100% !important; max-width:none !important; aspect-ratio:1 !important;
+      border-radius:0 !important;
+      background:linear-gradient(135deg,#00f7a5 0%,#00df91 58%,#00a96f 100%) !important;
+      box-shadow:0 0 8px rgba(0,255,166,.66),0 0 19px rgba(0,255,166,.32) !important;
+      opacity:0; animation:logo-piece-in .42s ease forwards !important; animation-delay:var(--d) !important;
+    }
+    .splash-wordmark { display:block !important; flex:1 1 auto !important; min-width:0 !important; max-width:410px !important; text-align:left !important; }
+    .splash-wordmark-title {
+      color:#f4f4f4 !important;
+      font-family:"Roboto Condensed","Arial Narrow","Liberation Sans Narrow",Impact,sans-serif !important;
+      font-stretch:condensed !important; font-size:clamp(29px,7.1vw,62px) !important;
+      font-weight:900 !important; line-height:.91 !important; letter-spacing:-.045em !important;
+      text-transform:uppercase !important; text-shadow:0 0 4px rgba(255,255,255,.12) !important;
+    }
+    .splash-wordmark-rule { display:block !important; width:100% !important; height:2px !important; margin:clamp(11px,2vw,19px) 0 0 !important; background:linear-gradient(90deg,#00ffa6,rgba(0,255,166,.45),transparent) !important; }
+    .splash-slogan-below {
+      display:block !important; position:relative !important; z-index:2 !important;
+      width:min(76vw,530px) !important; margin:clamp(18px,3vw,28px) auto 25px !important;
+      color:#b8d4c9 !important; font-family:"Roboto Condensed","Arial Narrow","Liberation Sans Narrow",sans-serif !important;
+      font-size:clamp(14px,3.3vw,23px) !important; font-weight:700 !important;
+      line-height:1.65 !important; letter-spacing:clamp(1.6px,.45vw,3.6px) !important;
+      text-align:center !important; text-transform:uppercase !important;
+      text-shadow:0 0 9px rgba(0,255,166,.16) !important;
+    }
+    @media(max-width:420px) {
+      .splash-lockup { width:92vw !important; gap:8px !important; }
+      .splash-staircase { width:clamp(112px,33vw,140px) !important; height:clamp(112px,33vw,140px) !important; gap:3px !important; }
+      .splash-wordmark-title { font-size:clamp(26px,7.15vw,32px) !important; letter-spacing:-.05em !important; }
+      .splash-wordmark-rule { margin-top:10px !important; }
+      .splash-slogan-below { width:84vw !important; font-size:13px !important; letter-spacing:1.5px !important; line-height:1.7 !important; }
+    }
+
+  
+    /* Animate the exact supplied logo artwork: original tiles appear one by one, then original wordmark. */
+    .splash-reference-lockup,.splash-lockup { display:none !important; }
+    .splash-logo-animation {
+      display:flex !important; flex-direction:row !important; align-items:center !important;
+      justify-content:center !important; gap:clamp(9px,2vw,18px) !important;
+      width:min(92vw,650px) !important; margin:0 auto !important;
+      position:relative !important; z-index:2 !important;
+    }
+    .animated-staircase {
+      position:relative !important; flex:0 0 auto !important;
+      width:clamp(126px,35vw,215px) !important; aspect-ratio:420 / 420 !important;
+    }
+    .logo-tile {
+      position:absolute !important; width:22.86% !important; height:22.86% !important;
+      object-fit:cover !important; mix-blend-mode:screen !important;
+      opacity:0; transform:translateY(12px) scale(.86) !important;
+      filter:drop-shadow(0 0 6px rgba(0,255,166,.25)) !important;
+      animation:original-tile-appear .38s cubic-bezier(.2,.8,.2,1) var(--tile-delay) forwards !important;
+    }
+    .tile-1 {left:0;bottom:0}
+    .tile-2 {left:25.71%;bottom:0}
+    .tile-3 {left:51.43%;bottom:0}
+    .tile-4 {left:77.14%;bottom:0}
+    .tile-5 {left:25.71%;bottom:25.71%}
+    .tile-6 {left:51.43%;bottom:25.71%}
+    .tile-7 {left:77.14%;bottom:25.71%}
+    .tile-8 {left:51.43%;bottom:51.43%}
+    .tile-9 {left:77.14%;bottom:51.43%}
+    .tile-10 {left:77.14%;bottom:77.14%}
+    .animated-wordmark {
+      display:block !important;
+      flex:0 0 auto !important;
+      width:clamp(165px,42vw,300px) !important;
+      max-width:none !important;
+      height:auto !important;
+      object-fit:contain !important;
+      mix-blend-mode:screen !important;
+      opacity:0;
+      animation:original-wordmark-reveal .7s ease 1.45s forwards !important;
+    }
+    @keyframes original-tile-appear {
+      0% {opacity:0;transform:translateY(12px) scale(.86);filter:brightness(.65) drop-shadow(0 0 0 rgba(0,255,166,0))}
+      65% {opacity:1;transform:translateY(-2px) scale(1.03);filter:brightness(1.35) drop-shadow(0 0 11px rgba(0,255,166,.75))}
+      100% {opacity:1;transform:translateY(0) scale(1);filter:brightness(1) drop-shadow(0 0 6px rgba(0,255,166,.25))}
+    }
+    @keyframes original-wordmark-reveal {
+      0% {opacity:0;transform:translateX(10px);filter:blur(3px)}
+      100% {opacity:1;transform:translateX(0);filter:blur(0)}
+    }
+    @media(max-width:420px) {
+      .splash-logo-animation {width:94vw !important;gap:7px !important}
+      .animated-staircase {width:clamp(112px,34vw,138px) !important}
+      .animated-wordmark {width:clamp(165px,42vw,300px) !important}
+    }
+
+  
+    /* Fix: opacity must be controlled by keyframes, not locked by !important. */
+    .splash-logo-animation .logo-tile { opacity:0; }
+    .splash-logo-animation .animated-wordmark { opacity:0; animation:original-wordmark-reveal .7s ease 1.45s forwards !important; }
+
+  
+    /* Definitive visibility fix: no !important opacity can override the reveal animation. */
+    .splash-logo-animation img.animated-wordmark {
+      display:block !important;
+      visibility:visible !important;
+      opacity:0;
+      animation:original-wordmark-reveal .7s ease 1.45s forwards !important;
+    }
+    @keyframes original-wordmark-reveal {
+      0% { opacity:0; transform:translateX(10px); filter:blur(3px); }
+      100% { opacity:1; transform:translateX(0); filter:blur(0); }
+    }
+
+  
+    /* Final wordmark proportions: source artwork is text only, sized to match the staircase. */
+    .splash-logo-animation { width:min(92vw,650px) !important; gap:clamp(8px,1.5vw,16px) !important; }
+    .splash-logo-animation img.animated-wordmark {
+      width:clamp(165px,42vw,300px) !important;
+      max-width:none !important;
+      height:auto !important;
+      flex:0 0 auto !important;
+      opacity:0;
+      animation:original-wordmark-reveal .7s ease 1.45s forwards !important;
+    }
+    @media(max-width:420px) {
+      .splash-logo-animation { width:94vw !important; gap:7px !important; }
+      .splash-logo-animation .animated-staircase { width:clamp(112px,34vw,138px) !important; }
+      .splash-logo-animation img.animated-wordmark { width:clamp(155px,43vw,190px) !important; }
+    }
+
+  
+    /* Live text wordmark: no pasted image; condensed bold typography to match the original mark. */
+    .splash-logo-animation .animated-wordmark-text {
+      display:flex !important;
+      flex-direction:column !important;
+      align-items:flex-start !important;
+      justify-content:center !important;
+      flex:0 0 auto !important;
+      width:clamp(165px,42vw,300px) !important;
+      max-width:none !important;
+      color:#f7f7f7 !important;
+      font-family:"Roboto Condensed","Arial Narrow","Liberation Sans Narrow",Impact,sans-serif !important;
+      font-stretch:condensed !important;
+      font-weight:900 !important;
+      font-size:clamp(30px,7.1vw,59px) !important;
+      line-height:.91 !important;
+      letter-spacing:-.045em !important;
+      text-transform:uppercase !important;
+      white-space:nowrap !important;
+      text-shadow:0 0 4px rgba(255,255,255,.12) !important;
+      opacity:0;
+      animation:original-wordmark-reveal .7s ease 1.45s forwards !important;
+    }
+    .splash-logo-animation .animated-wordmark-text span { display:block !important; }
+    @media(max-width:420px) {
+      .splash-logo-animation .animated-wordmark-text {
+        width:clamp(155px,43vw,190px) !important;
+        font-size:clamp(27px,7.15vw,32px) !important;
+        letter-spacing:-.05em !important;
+      }
+    }
+
+  
+    .otap-hero-logo{display:block;width:clamp(44px,5vw,58px);height:clamp(44px,5vw,58px);object-fit:contain;flex:0 0 auto;border-radius:6px}
+    .otap-hero-brand{align-items:center}
+    .otap-hero-logo[hidden]{display:none}
+
 </style>
+
+  <style id="otap-contact-and-nav-polish">
+    /* Contact control is a small icon, and stays hidden until the loading screen has finished. */
+    .otap-contact-launcher{position:fixed;right:18px;bottom:20px;z-index:90;width:54px;height:54px;border-radius:50%;border:1px solid rgba(0,245,160,.7);background:linear-gradient(145deg,#103c2a,#06130d);color:#00f5a0;box-shadow:0 8px 26px #0008,0 0 18px #00f5a022;display:grid;place-items:center;font-size:24px;opacity:0;visibility:hidden;transform:translateY(8px) scale(.9);transition:opacity .25s,transform .25s,visibility .25s;cursor:pointer}
+    .otap-contact-launcher i{position:absolute;right:-2px;bottom:-1px;background:#00f5a0;color:#03110b;border:2px solid #030806;border-radius:9px;padding:1px 4px;font-size:8px;font-style:normal;font-weight:900;letter-spacing:.4px}
+    body.otap-ready .otap-contact-launcher{opacity:1;visibility:visible;transform:none}
+    .otap-contact-launcher:hover{box-shadow:0 0 0 5px #00f5a01c,0 8px 26px #0008}
+    .otap-contact-launcher:focus-visible,.otap-contact-dialog button:focus-visible,.otap-contact-dialog select:focus-visible,.otap-contact-dialog textarea:focus-visible{outline:2px solid #00f5a0;outline-offset:3px}
+    .otap-contact-dialog{position:fixed;z-index:95;right:18px;bottom:86px;width:min(360px,calc(100vw - 28px));max-height:min(76vh,620px);overflow:auto;background:#07130d;border:1px solid #176b48;border-radius:20px;padding:18px;color:#f1fff8;box-shadow:0 18px 60px #000b}
+    .otap-contact-dialog[hidden]{display:none}
+    .otap-contact-head{display:flex;align-items:center;gap:11px;margin-bottom:18px}.otap-contact-symbol{width:42px;height:42px;flex:0 0 42px;border-radius:14px;display:grid;place-items:center;background:#00f5a018;color:#00f5a0;font-size:22px}.otap-contact-head h2{font-size:17px;margin:0;color:#f1fff8}.otap-contact-head p{font-size:11px;color:#a5c4b5;margin:3px 0 0}.otap-contact-head>button{margin-left:auto;align-self:flex-start;border:0;background:transparent;color:#a5c4b5;font-size:25px;line-height:1}
+    .otap-contact-dialog form{display:grid;gap:8px}.otap-contact-dialog label{font-size:12px;color:#d5e9df;font-weight:700;margin-top:3px}.otap-contact-dialog select,.otap-contact-dialog textarea{width:100%;border:1px solid #24583f;background:#030b07;color:#f1fff8;border-radius:10px;padding:11px;font:inherit;font-size:13px}.otap-contact-dialog textarea{resize:vertical;min-height:90px}.otap-contact-dialog select option{background:#07130d}.otap-contact-privacy{margin:2px 0 4px;color:#b8d4c9;font-size:11px;line-height:1.5}.otap-contact-send{display:flex;justify-content:center;align-items:center;gap:8px;background:#00f5a0;color:#03110b;border:0;border-radius:11px;padding:12px;font-weight:800;font-size:13px}.otap-contact-note{margin:0;color:#8fb5a4;font-size:10px;line-height:1.5;text-align:center}
+    @media(max-width:420px){.otap-contact-launcher{right:14px;bottom:14px;width:49px;height:49px}.otap-contact-dialog{right:12px;bottom:72px;width:calc(100vw - 24px);padding:15px;border-radius:17px}}
+    @media(prefers-reduced-motion:reduce){.otap-contact-launcher{transition:none}}
+
+    /* Rebuilt responsive hero: the silhouette is an independent asset; all copy and controls are real HTML. */
+    body > header{display:none !important}
+    .otap-hero-rebuilt{position:relative;isolation:isolate;overflow:hidden;padding:0 0 18px;background:radial-gradient(ellipse at 50% 38%,#063a25 0%,#020805 64%);border-bottom:1px solid #123b2b}
+    .otap-hero-rebuilt:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 35%,#00f5a018,transparent 54%)}
+    .otap-hero-top{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-top:18px;position:relative;z-index:5}
+    .otap-hero-brand{display:flex;align-items:center;gap:10px;min-width:0;color:#fff}
+    .otap-brand-staircase{width:58px;height:58px;flex:0 0 auto;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);gap:3px;align-items:end}.otap-brand-staircase i{display:block;background:#00f5a0;box-shadow:0 0 8px #00f5a055}.otap-brand-staircase i:nth-child(1){grid-column:1;grid-row:4}.otap-brand-staircase i:nth-child(2){grid-column:2;grid-row:3}.otap-brand-staircase i:nth-child(3){grid-column:2;grid-row:4}.otap-brand-staircase i:nth-child(4){grid-column:3;grid-row:2}.otap-brand-staircase i:nth-child(5){grid-column:3;grid-row:3}.otap-brand-staircase i:nth-child(6){grid-column:3;grid-row:4}.otap-brand-staircase i:nth-child(7){grid-column:4;grid-row:1}.otap-brand-staircase i:nth-child(8){grid-column:4;grid-row:2}.otap-brand-staircase i:nth-child(9){grid-column:4;grid-row:3}.otap-brand-staircase i:nth-child(10){grid-column:4;grid-row:4}
+    .otap-brand-wordmark{display:flex;flex-direction:column;font-family:'Arial Narrow','Roboto Condensed',Arial,sans-serif;font-weight:900;line-height:.9;letter-spacing:-.04em;font-size:clamp(13px,2vw,21px)}
+    .otap-hero-tools{display:flex;align-items:center;gap:12px}
+    .otap-hero-language{display:flex;border:1px solid #12623f;border-radius:12px;overflow:hidden;background:#020805b8}
+    .otap-hero-language button{border:0;background:transparent;color:#8fb5a4;padding:9px 14px;font-weight:800;min-width:48px}
+    .otap-hero-language button.active{background:#00d98b;color:#03110b;box-shadow:0 0 15px #00f5a055}
+    .otap-hero-menu-button{border:0;background:transparent;color:#8cfbd0;font-size:30px;line-height:1;padding:5px 0 5px 8px;min-width:40px}
+    .otap-hero-image-wrap{width:100%;max-width:1450px;margin:0 auto;position:relative;z-index:0;line-height:0}
+    .otap-hero-silhouette{display:block;width:100%;height:auto;object-fit:contain;max-height:clamp(210px,45vw,570px);object-position:center;filter:drop-shadow(0 0 18px #00f5a014)}
+    .otap-hero-content{position:relative;z-index:2;margin-top:clamp(-94px,-7vw,-28px);text-align:center}
+    .otap-hero-project-name{margin:0 0 9px;color:#00f5a0;font-size:clamp(10px,1.3vw,14px);font-weight:900;letter-spacing:.22em}
+    .otap-hero-content h1{display:flex;flex-direction:column;gap:2px;max-width:950px;margin:0 auto;color:#f6fff9;font-size:clamp(24px,4.4vw,56px);font-weight:900;line-height:1.04;letter-spacing:-.025em;text-shadow:0 2px 16px #000,0 0 14px #00f5a02a}
+    .otap-hero-content h1 .otap-green{color:#00f5a0}
+    .otap-hero-slogan{max-width:720px;margin:16px auto 0;color:#c5ded3;font-size:clamp(12px,1.7vw,19px);line-height:1.55}
+    .otap-hero-actions{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin:25px auto 30px;max-width:1000px}
+    .otap-hero-cta{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:66px;padding:13px 22px;border-radius:999px;border:1px solid #00f5a0;width:min(420px,calc(50% - 8px));font-weight:800;font-size:clamp(12px,1.5vw,17px);transition:transform .2s,box-shadow .2s}
+    .otap-hero-cta:hover{transform:translateY(-2px);box-shadow:0 0 22px #00f5a033}
+    .otap-hero-cta-primary{background:#00f5a0;color:#03110b;box-shadow:0 0 26px #00f5a022}
+    .otap-hero-cta-secondary{background:#020805d9;color:#eafff6}
+    .otap-cta-icon{font-size:24px}.otap-cta-play{display:grid;place-items:center;width:34px;height:34px;border:1px solid #00f5a0;border-radius:50%;color:#00f5a0;font-size:13px;flex:0 0 auto}
+    .otap-hero-bottom-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid #12402d;padding-top:17px;gap:0}
+    .otap-hero-bottom-nav a{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:7px;min-height:82px;padding:8px 10px;color:#d7eee4;font-size:clamp(11px,1.25vw,14px);font-weight:700;border-right:1px solid #103323}
+    .otap-hero-bottom-nav a:last-child{border-right:0}.otap-bottom-icon{font-size:26px;color:#8cfbd0;line-height:1}
+    .otap-hero-mobile-menu{position:absolute;top:78px;right:5%;z-index:20;width:min(300px,90vw);padding:10px;border:1px solid #176b48;border-radius:16px;background:#041009f5;box-shadow:0 15px 45px #000b}
+    .otap-hero-mobile-menu[hidden]{display:none}.otap-hero-mobile-menu a{display:block;padding:12px;border-radius:9px;color:#eafff6;font-size:14px}.otap-hero-mobile-menu a:hover{background:#00f5a018;color:#00f5a0}
+    @media(min-width:761px){.otap-hero-image-wrap{margin-top:-3px}.otap-hero-silhouette{max-height:clamp(310px,39vw,530px)}.otap-hero-content{margin-top:-80px}}
+    @media(max-width:760px){.otap-hero-top{padding-top:12px}.otap-brand-staircase{width:43px;height:43px;gap:2px}.otap-hero-brand{gap:7px}.otap-brand-wordmark{font-size:13px}.otap-hero-tools{gap:7px}.otap-hero-language button{padding:8px 10px;min-width:40px}.otap-hero-image-wrap{margin-top:4px}.otap-hero-silhouette{max-height:none;width:100%}.otap-hero-content{margin-top:-5vw}.otap-hero-project-name{letter-spacing:.13em}.otap-hero-content h1{font-size:clamp(22px,5.6vw,38px)}.otap-hero-slogan{margin-top:10px}.otap-hero-actions{gap:9px;margin:19px auto 22px}.otap-hero-cta{width:calc(50% - 5px);min-height:55px;padding:10px 12px;gap:7px;font-size:clamp(10px,2.5vw,14px)}.otap-cta-icon{font-size:19px}.otap-cta-play{width:28px;height:28px}.otap-hero-bottom-nav a{padding:7px 4px;min-height:74px;font-size:10px}.otap-bottom-icon{font-size:22px}}
+    @media(max-width:420px){.otap-hero-content{margin-top:-2px}.otap-hero-content h1{font-size:clamp(21px,6.2vw,28px);letter-spacing:-.035em}.otap-hero-project-name{font-size:9px;letter-spacing:.1em}.otap-hero-cta{width:100%;max-width:330px;min-height:52px}.otap-hero-actions{flex-direction:column;align-items:center}.otap-hero-bottom-nav{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:7px}.otap-hero-bottom-nav a:nth-child(2){border-right:0}.otap-hero-bottom-nav a:nth-child(-n+2){border-bottom:1px solid #103323}.otap-hero-mobile-menu{top:67px}.otap-brand-staircase{width:37px;height:37px;gap:2px}.otap-brand-wordmark{font-size:11px}}
+    @media(prefers-reduced-motion:reduce){.otap-hero-cta{transition:none}}
+
+
+    .otap-hero-live-copy{position:absolute;inset:0;z-index:3;pointer-events:none;color:#f1fff8;text-align:center}
+    .otap-hero-live-title{position:absolute;left:8%;right:8%;top:35%;margin:0;font-size:clamp(18px,4.2vw,54px);font-weight:900;letter-spacing:.045em;line-height:1.08;text-shadow:0 2px 18px #000,0 0 12px #00f5a044}
+    .otap-hero-live-slogan{position:absolute;left:8%;right:8%;top:47%;margin:0;font-size:clamp(10px,1.7vw,20px);line-height:1.5;color:#d7eee4;text-shadow:0 2px 12px #000}
+    .otap-hero-live-cta{pointer-events:auto;position:absolute;top:55%;display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:8px 18px;border-radius:999px;border:1px solid #00f5a0;background:#062116;color:#eafff6;font-size:clamp(9px,1.25vw,14px);font-weight:800;box-shadow:0 3px 16px #0008}
+    .otap-hero-live-cta1{left:9%;width:41%}.otap-hero-live-cta2{left:52%;width:39%;background:#00f5a0;color:#03110b}
+    @media(max-width:600px){.otap-hero-live-title{top:35%;font-size:clamp(16px,4.6vw,27px)}.otap-hero-live-slogan{top:46%;font-size:clamp(9px,2.2vw,13px);left:5%;right:5%}.otap-hero-live-cta{top:55%;min-height:30px;padding:5px 6px;font-size:clamp(8px,2vw,11px)}}
+  </style>
+
+
+  <style id="otap-hero-mobile-layout-fix">
+    .otap-hero-content h1 span{color:#f6fff9 !important;display:block;}
+    .otap-hero-content h1 span.otap-green{color:#00f5a0 !important;}
+    .otap-hero-project-name{position:relative;z-index:3;}
+    .otap-hero-image-wrap{overflow:visible;}
+    .otap-hero-silhouette{object-fit:contain;}
+    .otap-hero-bottom-nav{position:relative;z-index:2;margin-top:4px;}
+    .accessibility-section{margin-top:0;}
+    @media(max-width:760px){
+      .otap-hero-top{padding-left:5%;padding-right:5%;}
+      .otap-hero-image-wrap{margin-top:2px;}
+      .otap-hero-silhouette{width:100%;height:auto;max-height:none;}
+      .otap-hero-content{margin-top:-4vw;padding-left:5%;padding-right:5%;}
+      .otap-hero-project-name{margin-bottom:8px;font-size:clamp(9px,2.6vw,12px);}
+      .otap-hero-content h1{font-size:clamp(22px,6vw,32px);line-height:1.08;gap:3px;}
+      .otap-hero-slogan{font-size:clamp(12px,3.5vw,15px);line-height:1.45;margin-top:12px;}
+      .otap-hero-actions{margin:20px auto 24px;}
+      .otap-hero-cta{width:100%;max-width:360px;min-height:58px;font-size:14px;padding:12px 18px;}
+      .otap-hero-bottom-nav{margin-top:4px;padding-top:12px;}
+      .otap-hero-bottom-nav a{font-size:11px;min-height:72px;}
+    }
+    @media(max-width:420px){
+      .otap-hero-content{margin-top:-2px;}
+      .otap-hero-content h1{font-size:clamp(21px,6vw,26px);line-height:1.1;}
+      .otap-hero-slogan{max-width:340px;}
+      .otap-hero-bottom-nav{grid-template-columns:repeat(2,minmax(0,1fr));}
+      .otap-hero-bottom-nav a{padding:8px 5px;}
+    }
+  
+    /* OTAP final hero refinements: logo, uppercase headline and mockup-style menu icons */
+    .otap-brand-staircase{display:grid!important;visibility:visible!important;opacity:1!important;width:58px!important;height:58px!important;min-width:58px;flex-shrink:0;}
+    .otap-brand-staircase i{min-width:0;min-height:0;background:#00f5a0!important;opacity:1!important;border-radius:1px;box-shadow:0 0 8px #00f5a055!important;}
+    .otap-hero-content h1{text-transform:uppercase;overflow-wrap:normal;}
+    .otap-hero-content h1 span{display:block;}
+    .otap-hero-project-name,.otap-hero-slogan{display:none!important;}
+    .otap-bottom-icon{display:flex;align-items:center;justify-content:center;width:36px;height:36px;}
+    .otap-bottom-icon svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;}
+    .otap-hero-language button{cursor:pointer;min-width:48px;}
+    .otap-hero-language button.active{background:#00d98b!important;color:#03110b!important;box-shadow:0 0 15px #00f5a055;}
+    @media(max-width:760px){.otap-brand-staircase{width:43px!important;height:43px!important;min-width:43px;}.otap-hero-content{margin-top:clamp(-18px,-2vw,-6px)!important;padding-inline:14px;}.otap-hero-content h1{font-size:clamp(19px,5.2vw,31px)!important;line-height:1.12!important;letter-spacing:-.035em!important;gap:5px!important;}.otap-hero-image-wrap{margin-top:6px!important;}.otap-hero-actions{margin:22px auto 26px!important;}.otap-hero-bottom-nav{margin-top:8px;}.otap-hero-bottom-nav a{font-size:clamp(10px,2.8vw,13px);}}
+    @media(max-width:420px){.otap-hero-top{gap:8px!important;padding-inline:16px!important;}.otap-brand-wordmark{font-size:clamp(10px,3vw,13px)!important;}.otap-hero-language button{min-width:42px;padding:8px 9px!important;}.otap-hero-menu-button{min-width:34px!important;font-size:27px!important;}.otap-hero-content h1{font-size:clamp(18px,5.1vw,24px)!important;}.otap-hero-cta{max-width:100%!important;min-height:58px!important;font-size:13px!important;}.otap-hero-bottom-nav{grid-template-columns:repeat(4,minmax(0,1fr))!important;}.otap-hero-bottom-nav a{padding:8px 2px!important;font-size:10px!important;min-height:78px!important;}.otap-bottom-icon{width:30px;height:30px;}.otap-bottom-icon svg{width:28px;height:28px;}}
+
+</style>
+
 </head>
-<body>
-<a class="skip-link" href="#main" data-i18n="skip">Langkau ke kandungan utama</a>
-
-<div class="loading" id="loadingScreen" aria-label="OTAP sedang dimuatkan" role="status">
-  <div class="loading-inner">
-    <div class="loading-mark" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
-    <div class="loading-title">O.T AWARENESS PROJECT</div>
-    <div class="loading-sub" data-i18n="loading">Membuka ruang penerokaan OT…</div>
-    <div class="loading-bar" aria-hidden="true"></div>
-  </div>
-</div>
-
-<header class="site-header">
-  <a class="brand" href="#home" aria-label="OTAP — Laman utama">
-    <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
-    <span class="brand-name">O.T<br>Awareness<br>Project</span>
-  </a>
-  <div class="header-actions">
-    <div class="language-toggle" role="group" aria-label="Pilih bahasa">
-      <button type="button" data-language="ms" aria-pressed="true">BM</button>
-      <button type="button" data-language="en" aria-pressed="false">EN</button>
+<body class="loading">
+  <div class="splash" id="splash" aria-label="OTAP logo loading animation">
+    <div class="splash-water-impact" aria-hidden="true">
+      <div class="water-beam"></div>
+      <div class="water-core"></div>
+      <div class="water-ring water-ring-1"></div>
+      <div class="water-ring water-ring-2"></div>
+      <div class="water-ring water-ring-3"></div>
+      <div class="water-ring water-ring-4"></div>
+      <div class="water-particles">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
     </div>
-    <button class="menu-toggle" type="button" id="menuOpen" aria-label="Buka menu" aria-expanded="false" aria-controls="menuOverlay">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-    </button>
-  </div>
-</header>
-
-<main id="main">
-<section class="hero" id="home" aria-labelledby="heroTitle">
-  <div class="hero-glow" aria-hidden="true"></div>
-  <div class="hero-inner">
-    <div class="hero-image-wrap">
-      <img class="hero-image" id="heroImage" src="assets/image/otap-hero-silhouette-10-ot.png" alt="Sepuluh figura ahli terapi cara kerja bersama ikon deria" fetchpriority="high">
-      <p class="hero-image-fallback" id="heroImageFallback" data-i18n="imageFallback">Imej hero tidak dapat dimuatkan. Sila semak laluan fail imej.</p>
+    <div class="splash-inner">
+      <div class="splash-logo-animation" aria-label="O.T Awareness Project logo animation">
+      <div class="animated-staircase" aria-hidden="true"><img class="logo-tile tile-1" style="--tile-delay:0.12s" src="data:image/jpeg;base64,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" alt="" aria-hidden="true">
+<img class="logo-tile tile-2" style="--tile-delay:0.24s" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAMEBgUGBgYFBgYGBwkIBgcJBwYGCAsICQoKCgoKBggLDAsKDAkKCgr/2wBDAQICAgICAgUDAwUKBwYHCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgr/wAARCABgAGADASIAAhEBAxEB/8QAHAAAAgMBAQEBAAAAAAAAAAAAAAgCAwcBBgQJ/8QARxAAAQIDAwUJCgwHAAAAAAAAAQACAwQRBQYHCAkSITEUFzI3UVJ0kZITGSIjQVRWcZTRFRYkMzRCRFVhYnLhQ1OBgoSh8P/EABwBAAICAwEBAAAAAAAAAAAAAAAEAQYCAwcFCP/EADIRAAEDAgQDBQYHAAAAAAAAAAEAAgMRIQQFBgcSEzEXIjJRYRQ2QVNxchYjJjNCUqH/2gAMAwEAAhEDEQA/AF0zX+F917xYLS1oWpZEvEeI1PGQwapr4WDuHMMVNzrOJ6I1LxmrIjIeA8uG0+kJrNJ3KvBMgc26+DNztY5jludSxxPIuvPHCTDzyXPs72RqhEwew4c6pubZx/xGr0gc7yldq7lCUe4C64uzcHUAxNRKf9XmhhLh2xuiy6FnCmz5I1G9Nh96JWd7IF6OlF2h5CkjiqGi3HcLNSaukNfqvN702H3olZ3sgRvTYfeiVneyBekoeQooeQoGLose0HM/mFeb3psPvRKzvZAjemw+9ErO9kC9JQ8hRQ8hR7USVPaDmXzCvNRsIsOocPu4udZznHVXcjVmmWVhPcmVwPteelLtSMKI2TqCyWAotzmYZEg0/mWZ5ahDMArad5NxJuCXifVXPQeuM4zLPYo3yEioWIZqp8R2BMvU/aKpu2QCWV11Sk5qWjMCZc0r4+ibmHM+CPBW11mpLeeVzNTzU81Hczv+KNz/AInqVm6G8xc3dT+H/tJuK4q3ESFyoAMM0OtS0xyFRee6GpNFxAZERVBZU1KnpjkKNMchUEI4IB1WPLCnpjkKC9tdVVBCgshIspEQJRPR9CVayv11meWm7Syf7a1/Y1olotPcW+F9ZZ3llwmnJ/tkE/Yllhh+bQLqm2kmFhzuGvWoWMZqjiHlukptYXASlZqjiHlukptYXATjvAvU3rH6lmPqpEEGhUHbT61Y/hFVu2n1pB4quJwir1xCELV6Jlx7yEIQpWKEIQoogdVRaPzA/Us8yzOIC2egrQ7Q1wBTnLPMsziAtnoKcwdpFeNvL6ig+4LFs1RxDy3SU2sLgJSs1RxDy3SU2sLgJh3gVu3r95Jvqpv4RVbtp9asfwiq3bT60g5cTg8a4hCFq+K3u8RQhCFKhCEIQgdVVOsJgA/mWd5ZoIwBtkHzFaPOfRR+tZxlocQdsdATeCvKrvt37xwfcFiuanNcCJYDziqbWGKN1pUM1DJGPghLSzYmvuybc2dGl21iEn+i3OcOBWzeyRv4mlA81U4E+ENirdtK68vDtAAq+BZ0WYbUVr6kg54quLfsniK+YkA0KFOLBfCeWlhJG3Uo6D+aepYAgprgc/vN6LiF3QfzT1I0H809SlRy3hcQu6D+aepGg/mnqQbIDHC6hOD5KD+ZZxloEbwdsfhI0Wmuk3TUIMZEAo7WCVnGWhKPGT5bb9MeKkuXamME8Ca6vG3Mbn6jgoOjgsPzS8SZj4PyxkBpkxa0JTfx7Ut9tYRs5ppt1FfkbkU5weBk/XRg2AbEjRCx1ascmGfnfrEMMR3XVignhDST8sYZZfS+4m1mNzrPHTMZYlPI6ft2ul8HN7Ktl7at2E2nwc3slILNZ5K78N2h8VYtf1Ig54y78fULrRR/d+6QfD8aKqY7ZDGzYMNay6foz9oPeXPlRr26lzdk3Wm5h2Uhwzv122sq+7rgfxcPejvwF2NKvxed2h71m2G1aKq9iGpWWayyfLdk35s3qRuyb82b1JDO+/3X+4H9oe9HfgLr/cD+0Pep5PoUdiWqP6J892TfmzepBnJwbZYdlIZ34C6/o+/tD3o77/djYbvv7X7o5I8kDZHU5/gnnJbMT9IsXQPNaVluW3Py8ngJbkFsdx05PYSlwlc8fdCVdovuPMRT/MEQ+9ZzlIZ0a7eJ9yJ2wZa6kWCZiFonSepiw/E+wXTNB7SY7J8eyWZt6hf/2Q==" alt="" aria-hidden="true">
+<img class="logo-tile tile-3" style="--tile-delay:0.36s" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAMEBgUGBgYFBgYGBwkIBgcJBwYGCAsICQoKCgoKBggLDAsKDAkKCgr/2wBDAQICAgICAgUDAwUKBwYHCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgr/wAARCABgAGADASIAAhEBAxEB/8QAHQAAAgIDAQEBAAAAAAAAAAAAAAgDBgIEBQEHCf/EAEgQAAECAwIHCggMBwEAAAAAAAEAAgMEEQUGBwkTITFhcRIVFjM1QVGBkcEZIjQ3U1VysQgUMkJEUlRWdISSlCMmRmSTocLR/8QAHAEAAQUBAQEAAAAAAAAAAAAAAAECAwYHBQQI/8QAMREAAgEBBQUGBQUAAAAAAAAAAAECAwQFBhExBxITITIUFhciQVEVIyZTcTM1NkJS/9oADAMBAAIRAxEAPwD89cWVdqw70xYcratlS8UNgVq+EHVzEp042D25DJapurIncjnlhnSe4qRhM8xwH0b/AJTux2h0s4HQuVbGlDmfH+1vEFuuy/mqU2itswb3EnaPddSzxT+1C2OAlxhmbdCzgAKeSNXXlWtY0tY7mWLwRpNVw+0bsuRkzx9fbeXEZyuAtx/ulZ37Nq8NxLjHTdCzj+UaF1UIdrYnfy+/uM5RuFcY/wBH2cPygXnAG433Rs79oF1kJO1th38vr7jOTwCuLz3Qs/qlQp4ODe4xlXv4KyBzfZQugwAuoVuZmyj9yfmqalX4mpFPHV8uovmMqkLA/cN8X49wckQXGtBKhcLDNcS6MK6ceYg3bkm7hnNAA5l9ElnAwGiqqmGhtblTQpzdxXVpSSRo+FsR26326CqTeqFYxVEsIc+0U+jdxTqzzQ2UeR0/+pLMVfGpabWgaJXuKdOfdWTeCM9Uy11FPkcza/VnWxNKL9DSlKvz15l6dNKokfk11IOclchUW5NsyWoqXoCEITuDH2IvKCEIRwYoMosKkHMpoMRxlYg1KHUs2tMGERX5QzqSEFFchjUXJEspxDanUVWsM7QLkTZcPm9GoqxwwZWTbFB0uVZwyTP8hTkdw+bT/RXrpVC3YZtVppXtBR0zQqmKu5WFfs3cU60/5K/akqxV3Kw/DdxTqz/kr9qZX6i4bV19VVDUkuKOxCJLijsQmtZIx6XWwQhCYAIQhAApI3FdSiOjrUsbiupOjzTCPWjKZ5OZ7aqeGbzdTmwe4q2TPJzPbVTwzebqc2D3FNp9WRcsNJfFI/lCt4q/lZv4buKdWf8AJX7UlWKw5Xb+F7inVn/JX7VLX6i4bVv5VUNSS4o7EIkuKOxCbLQx2X6jBCEJgAhCEAeHR1qWNxXUojo61LG4rqSx0YR60ZTPJzPbVTwzebqc2D3FWyZ5OZ7aqeGbzdTmwe4pKfWXLDX7pH8oVvFYZ7Va4aPi3cU6s/5K8pJcWNNbzTrJyYY4tfA3IpsKdSbnGfF9yYbhuxUVUleS3i7bVrPVWJKlVrykUiQYRI6EUqpJKXcYNaih0IdLOaaAjtUaqRkuRispx32R0OrtRQ6u1Z5B3SO1GQd0jtQJvx9zCh1dqKHV2rPIO6R2oyDukdqA34+5gQdA6VJG4vqXmQccwdzqWLAd4sMvALtCVPIWMlvoxmATZzKfXVTwy58HU4Bq9ytVrPZJSkOBGPjGIBUFV/DXZkaXwbzkZzhQtBAB1FNg8nmy9YVoVat5QlHTNCpYuG1JCLCloUQgeJ0ak8NrWdJxJRkVjhxYIX5XfBr+FPYWCqHCG8jv4baZudfeZnGj2O6AyBvFEAawCm7XutVHM+msaYLrXxaHuR1HEhRobDkw8Uqp8jAOd0XSk0lsZdd1zC6JYUTMPrrV8KFYO6IFiPzH0i8VGztZmSVtjt4zm5QiOrkZX0hRkZX0hSVeFBsL1K/9aPChWF6lf+tT8FkPg5e3+B1cjK+kKMjK+kKSrwoNhepX/rR4UGwvUr/8iOCw8G73f9B1snLNFREK0ZichGdYwRDQO5yk4GNAsJ3i7yvz9D1NK4yK70aII28r663pHRHLZBelJ5uA314XMj5MtdWkQHSuLhnnmzNw5mTETOWAU6cxSzvxjl3JhtN43mnQ9V++2MYu/acg+RNhPIcKAFyOFFepdcMYEtV32lOcND//2Q==" alt="" aria-hidden="true">
+<img class="logo-tile tile-4" style="--tile-delay:0.48s" src="data:image/jpeg;base64,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" alt="" aria-hidden="true">
+<img class="logo-tile tile-5" style="--tile-delay:0.60s" src="data:image/jpeg;base64,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" alt="" aria-hidden="true">
+<img class="logo-tile tile-6" style="--tile-delay:0.72s" src="data:image/jpeg;base64,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" alt="" aria-hidden="true">
+<img class="logo-tile tile-7" style="--tile-delay:0.84s" src="data:image/jpeg;base64,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" alt="" aria-hidden="true">
+<img class="logo-tile tile-8" style="--tile-delay:0.96s" src="data:image/jpeg;base64,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" alt="" aria-hidden="true">
+<img class="logo-tile tile-9" style="--tile-delay:1.08s" src="data:image/jpeg;base64,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" alt="" aria-hidden="true">
+<img class="logo-tile tile-10" style="--tile-delay:1.20s" src="data:image/jpeg;base64,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" alt="" aria-hidden="true"></div>
+      <div class="animated-wordmark-text" aria-label="O.T Awareness Project">
+        <span>O.T</span>
+        <span>AWARENESS</span>
+        <span>PROJECT</span>
+      </div>
     </div>
-    <h1 id="heroTitle">
-      <span data-i18n="hero1">10 Individu.</span>
-      <span data-i18n="hero2">Pelbagai Perspektif.</span>
-      <span class="accent" data-i18n="hero3">Satu Gambaran yang Lebih Besar.</span>
-    </h1>
-    <p class="hero-translation" data-i18n="heroDesc">Bersama-sama, kita melihat lebih jauh melalui pengalaman, kepakaran dan perspektif yang berbeza.</p>
-    <div class="hero-actions">
-      <a class="cta primary" href="#team">
-        <span class="cta-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2z"/><circle cx="17" cy="9" r="2.5"/><path d="M16 15a5 5 0 0 1 5 5h-4"/></svg></span>
-        <span class="cta-copy"><span data-i18n="meet">Kenali 10 Ahli OTAP</span><small data-i18n="meetSub">Kenali pasukan kami</small></span>
-        <span class="cta-arrow" aria-hidden="true">→</span>
+    <div class="splash-slogan-below">EIGHT SENSES.<br>TEN PERSPECTIVES.<br>ONE BIGGER PICTURE.</div>
+      <div class="loading-track"><div class="loading-bar"></div></div>
+      <div class="splash-hint">A BIGGER PICTURE IS COMING…</div>
+    </div>
+  </div>
+
+  <div class="mockup-menu-backdrop" id="mockupMenuBackdrop"></div>
+  <aside class="mockup-nav-panel" id="mockupNavPanel" aria-label="OTAP menu" aria-hidden="true">
+    <div class="mockup-nav-head">
+      <div class="mockup-nav-brand">
+        <img src="assets/images/logo-otap.jpg" alt="OTAP logo">
+        <span class="mockup-brand-copy"><strong>O.T AWARENESS PROJECT</strong><small>EXPLORE THE UNKNOWN</small></span>
+      </div>
+      <button class="mockup-nav-close" id="mockupMenuClose" type="button" aria-label="Close menu">×</button>
+    </div>
+    <nav class="mockup-nav-links" aria-label="OTAP sections">
+      <a href="#home"><span class="mockup-nav-icon">⌂</span><span class="mockup-nav-copy"><span data-ms="Laman Utama" data-en="Home">Laman Utama</span></span><span class="mockup-nav-arrow">›</span></a>
+      <a href="#people"><span class="mockup-nav-icon">♟</span><span class="mockup-nav-copy"><span data-ms="Kenali 10 Ahli OTAP" data-en="Meet the 10 OTAP Members">Kenali 10 Ahli OTAP</span></span><span class="mockup-nav-arrow">›</span></a>
+      <a href="#missions"><span class="mockup-nav-icon">◇</span><span class="mockup-nav-copy"><span data-ms="8 Misi Sensori" data-en="The 8 Sensory Missions">8 Misi Sensori</span><small data-ms="Lapan Misi Deria" data-en="Eight Sensory Missions">Lapan Misi Deria</small></span><span class="mockup-nav-arrow">›</span></a>
+      <a href="#profile"><span class="mockup-nav-icon">▥</span><span class="mockup-nav-copy"><span data-ms="Profil Deria Anda" data-en="Your OT Profile">Profil Deria Anda</span><small data-ms="Refleksi sensori" data-en="Sensory reflection">Refleksi sensori</small></span><span class="mockup-nav-arrow">›</span></a>
+      <a href="#podcast"><span class="mockup-nav-icon">♩</span><span class="mockup-nav-copy"><span>OTAPcast</span></span><span class="mockup-nav-arrow">›</span></a>
+      <a href="#discovery"><span class="mockup-nav-icon">▤</span><span class="mockup-nav-copy"><span data-ms="Terokai Ilmu OT" data-en="Explore OT Knowledge">Terokai Ilmu OT</span></span><span class="mockup-nav-arrow">›</span></a>
+      <a href="#about"><span class="mockup-nav-icon">ⓘ</span><span class="mockup-nav-copy"><span data-ms="Tentang" data-en="About">Tentang</span></span><span class="mockup-nav-arrow">›</span></a>
+      <a href="#accessibility"><span class="mockup-nav-icon">♿</span><span class="mockup-nav-copy"><span data-ms="Kebolehcapaian" data-en="Accessibility">Kebolehcapaian</span></span><span class="mockup-nav-arrow">›</span></a>
+    </nav>
+    <div class="mockup-nav-language"><button type="button" class="active" data-language="ms">BM</button><button type="button" data-language="en">EN</button></div>
+  </aside>
+
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="OTAP Home">
+        <img class="brand-logo" src="assets/images/logo-otap.jpg" alt="Logo rasmi O.T Awareness Project">
+        <span>O.T AWARENESS PROJECT<small>EXPLORE THE UNKNOWN</small></span>
       </a>
-      <a class="cta" href="#explore">
-        <span class="cta-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6.5v11l9-5.5z" fill="currentColor" stroke="none"/></svg></span>
-        <span class="cta-copy"><span data-i18n="journey">Mulakan Perjalanan</span><small data-i18n="journeySub">Terokai dunia OT</small></span>
-        <span class="cta-arrow" aria-hidden="true">↗</span>
-      </a>
+      <div class="nav-actions">
+        <button class="lang" id="languageButton" type="button" aria-label="Toggle language">BM / EN</button>
+        <button class="menu-btn" id="menuButton" type="button" aria-expanded="false" aria-controls="mainNav">☰</button>
+      </div>
+      <nav id="mainNav" aria-label="Main navigation">
+        <a href="#about" data-ms="Tentang" data-en="About">Tentang</a>
+        <a href="#people" data-ms="Kenali 10 Ahli OTAP" data-en="Meet the 10 OTAP Members">Kenali 10 Ahli OTAP</a>
+        <a href="#discovery" data-ms="Terokai Ilmu OT" data-en="Explore OT Knowledge">Terokai Ilmu OT</a>
+        <a href="#podcast">OTAPcast</a>
+        <a href="#accessibility" data-ms="Kebolehaksesan" data-en="Accessibility">Kebolehaksesan</a>
+      </nav>
     </div>
-  </div>
-</section>
+  </header>
+  <main>
+    <section id="home" class="otap-hero-rebuilt" aria-labelledby="otapHeroTitle">
+      <div class="otap-hero-top container">
+        <a class="otap-hero-brand" href="#home" aria-label="OTAP — Laman utama">
+          <img class="otap-hero-logo" src="assets/images/logo-otap.jpg" alt="Logo rasmi O.T Awareness Project">
+          <span class="otap-brand-wordmark"><strong>O.T</strong><strong>AWARENESS</strong><strong>PROJECT</strong></span>
+        </a>
+        <div class="otap-hero-tools">
+          <div class="otap-hero-language" role="group" aria-label="Pilihan bahasa">
+            <button type="button" class="active" data-language="ms" aria-pressed="true">BM</button>
+            <button type="button" data-language="en" aria-pressed="false">EN</button>
+          </div>
+          <button type="button" class="otap-hero-menu-button" id="otapHeroMenuButton" aria-label="Buka menu" aria-expanded="false" aria-controls="otapHeroMenu">☰</button>
+        </div>
+      </div>
+      <div class="otap-hero-image-wrap" aria-hidden="true">
+        <img class="otap-hero-silhouette" src="assets/images/otap-hero-silhouette-10-ot.png" alt="" fetchpriority="high">
+      </div>
+      <div class="otap-hero-content container">
+        <h1 id="otapHeroTitle"><span data-ms="SEPULUH INDIVIDU." data-en="TEN INDIVIDUALS.">SEPULUH INDIVIDU.</span><span data-ms="PELBAGAI PERSPEKTIF." data-en="MANY PERSPECTIVES.">PELBAGAI PERSPEKTIF.</span><span class="otap-green" data-ms="SATU GAMBARAN YANG LEBIH BESAR." data-en="ONE BIGGER PICTURE.">SATU GAMBARAN YANG LEBIH BESAR.</span></h1>
+        <div class="otap-hero-actions">
+          <a class="otap-hero-cta otap-hero-cta-primary" href="#people"><span class="otap-cta-icon" aria-hidden="true">♟</span><span data-ms="Kenali 10 Ahli OTAP" data-en="Meet the 10 OTAP Members">Kenali 10 Ahli OTAP</span><span aria-hidden="true">→</span></a>
+          <a class="otap-hero-cta otap-hero-cta-secondary" href="#missions"><span class="otap-cta-play" aria-hidden="true">▶</span><span data-ms="Mulakan Perjalanan" data-en="Start Your Journey">Mulakan Perjalanan</span><span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <nav class="otap-hero-bottom-nav container" aria-label="Menu utama">
+        <a href="#about"><span class="otap-bottom-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="18"/><path d="M24 21v12M24 15h.1"/></svg></span><span data-ms="Tentang" data-en="About">Tentang</span></a>
+        <a href="#podcast"><span class="otap-bottom-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="17" y="5" width="14" height="25" rx="7"/><path d="M10 23v2a14 14 0 0 0 28 0v-2M24 39v5M17 44h14"/></svg></span><span>OTAPcast</span></a>
+        <a href="#discovery"><span class="otap-bottom-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 5l4 7 8-2 1 8 7 4-5 7 2 8-9 1-8 5-5-7-8-1 1-9-5-6 8-4 2-8z"/><rect x="17" y="17" width="14" height="14" rx="3"/><path d="M21 22h6M21 26h6"/></svg></span><span data-ms="Terokai Ilmu OT" data-en="OT Discovery Hub">Terokai Ilmu OT</span></a>
+        <a href="#accessibility"><span class="otap-bottom-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="8" r="4"/><path d="M21 16h8l4 10h7M24 16l-4 12 7 5 3 8M20 28l-7 9M16 22l8 2"/></svg></span><span data-ms="Kebolehaksesan" data-en="Accessibility">Kebolehaksesan</span></a>
+      </nav>
+      <nav class="otap-hero-mobile-menu" id="otapHeroMenu" hidden aria-label="Menu mudah alih">
+        <a href="#about" data-ms="Tentang" data-en="About">Tentang</a>
+        <a href="#people" data-ms="Kenali 10 Ahli OTAP" data-en="Meet the 10 OTAP Members">Kenali 10 Ahli OTAP</a>
+        <a href="#missions" data-ms="Misi Sensori" data-en="Sensory Missions">Misi Sensori</a>
+        <a href="#profile" data-ms="Profil Deria Anda" data-en="Your Sensory Profile">Profil Deria Anda</a>
+        <a href="#podcast">OTAPcast</a>
+        <a href="#discovery" data-ms="Terokai Ilmu OT" data-en="Explore OT Knowledge">Terokai Ilmu OT</a>
+        <a href="#accessibility" data-ms="Kebolehaksesan" data-en="Accessibility">Kebolehaksesan</a>
+      </nav>
+    </section>
+    <section id="about"><div class="container"><div class="feature"><div class="eyebrow" data-ms="TENTANG OTAP" data-en="ABOUT OTAP">TENTANG OTAP</div><h2 data-ms="Pelbagai perspektif. Satu gambaran yang lebih besar." data-en="Many perspectives. One bigger picture.">Pelbagai perspektif. Satu gambaran yang lebih besar.</h2><p data-ms="OT Awareness Project (OTAP) menghimpunkan ahli terapi cara kerja (Occupational Therapists, OT) dari pelbagai lokasi di seluruh Malaysia, dengan latar belakang, kepakaran dan pengalaman berbeza dalam sektor kerajaan merentas kementerian serta sektor swasta. Melalui perbincangan dan perkongsian ilmu secara berterusan, kami bertukar pandangan tentang pelbagai perspektif dalam bidang Occupational Therapy, berkongsi perkembangan pengetahuan masing-masing dan mengikuti perkembangan amalan OT di peringkat antarabangsa. Kami percaya bahawa perkongsian perspektif dapat meluaskan pemahaman, memperkayakan pengetahuan dan meningkatkan kesedaran tentang peranan serta potensi Occupational Therapy." data-en="OT Awareness Project (OTAP) brings together occupational therapists from across Malaysia, with diverse backgrounds, areas of expertise and experience in government services across ministries and in the private sector. Through ongoing discussions and knowledge sharing, we exchange perspectives on occupational therapy, share professional learning and follow developments in OT practice internationally. We believe that sharing perspectives broadens understanding, enriches knowledge and raises awareness of the role and potential of occupational therapy.">OT Awareness Project (OTAP) menghimpunkan ahli terapi cara kerja (Occupational Therapists, OT) dari pelbagai lokasi di seluruh Malaysia, dengan latar belakang, kepakaran dan pengalaman berbeza dalam sektor kerajaan merentas kementerian serta sektor swasta. Melalui perbincangan dan perkongsian ilmu secara berterusan, kami bertukar pandangan tentang pelbagai perspektif dalam bidang Occupational Therapy, berkongsi perkembangan pengetahuan masing-masing dan mengikuti perkembangan amalan OT di peringkat antarabangsa. Kami percaya bahawa perkongsian perspektif dapat meluaskan pemahaman, memperkayakan pengetahuan dan meningkatkan kesedaran tentang peranan serta potensi Occupational Therapy.</p></div></div></section>
+    <section id="people"><div class="container">
+      <div class="section-top"><div class="eyebrow">THE PEOPLE BEHIND THE PERSPECTIVES</div><h2 data-ms="Sepuluh wajah. Siapakah mereka?" data-en="Ten silhouettes. Who are they?">Sepuluh wajah. Siapakah mereka?</h2><p data-ms="Setiap OT membawa pengalaman dan perspektif tersendiri. Identiti tidak didedahkan di sini — terokai projek ini dahulu." data-en="Every OT brings a different experience and perspective. Identities remain hidden here — explore the project first.">Setiap OT membawa pengalaman dan perspektif tersendiri. Identiti tidak didedahkan di sini — terokai projek ini dahulu.</p></div>
+      <div class="people" aria-label="Ten anonymous OT silhouettes">
+      <div class="person mystery-man"><div class="silhouette"><i class="head"></i><i class="body-shape"></i></div><strong>OT 01</strong><small>Identity hidden</small></div>
+      <div class="person mystery-hijab"><div class="silhouette"><i class="head"></i><i class="body-shape"></i><i class="hijab"></i></div><strong>OT 02</strong><small>Identity hidden</small></div>
+      <div class="person mystery-woman"><div class="silhouette"><i class="head"></i><i class="body-shape"></i><i class="hair"></i></div><strong>OT 03</strong><small>Identity hidden</small></div>
+      <div class="person mystery-man"><div class="silhouette"><i class="head"></i><i class="body-shape"></i></div><strong>OT 04</strong><small>Identity hidden</small></div>
+      <div class="person mystery-hijab"><div class="silhouette"><i class="head"></i><i class="body-shape"></i><i class="hijab"></i></div><strong>OT 05</strong><small>Identity hidden</small></div>
+      <div class="person mystery-man"><div class="silhouette"><i class="head"></i><i class="body-shape"></i></div><strong>OT 06</strong><small>Identity hidden</small></div>
+      <div class="person mystery-hijab"><div class="silhouette"><i class="head"></i><i class="body-shape"></i><i class="hijab"></i></div><strong>OT 07</strong><small>Identity hidden</small></div>
+      <div class="person mystery-hijab"><div class="silhouette"><i class="head"></i><i class="body-shape"></i><i class="hijab"></i></div><strong>OT 08</strong><small>Identity hidden</small></div>
+      <div class="person mystery-man"><div class="silhouette"><i class="head"></i><i class="body-shape"></i></div><strong>OT 09</strong><small>Identity hidden</small></div>
+      <div class="person mystery-man"><div class="silhouette"><i class="head"></i><i class="body-shape"></i></div><strong>OT 10</strong><small>Identity hidden</small></div>
+    </div>
+    </div></section>
+    <section id="missions"><div class="container">
+      <div class="section-top"><div class="eyebrow">EXPLORE · DISCOVER · REFLECT</div><h2 data-ms="8 Misi Sensori" data-en="8 Sensory Missions">8 Misi Sensori</h2><p data-ms="Kenali lapan sistem sensori melalui penerangan pendidikan dan aktiviti refleksi. Kandungan misi akan dibangunkan secara berperingkat." data-en="Explore eight sensory systems through educational explanations and reflection activities. Mission content will be developed in stages.">Kenali lapan sistem sensori melalui penerangan pendidikan dan aktiviti refleksi. Kandungan misi akan dibangunkan secara berperingkat.</p></div>
+      <div class="cards">
+        <article class="card"><div class="number">MISSION 01</div><h3>Visual</h3><p data-ms="Penglihatan dan maklumat yang diterima melalui mata." data-en="Vision and information received through the eyes.">Penglihatan dan maklumat yang diterima melalui mata.</p></article>
+        <article class="card"><div class="number">MISSION 02</div><h3>Auditory</h3><p data-ms="Bunyi, pendengaran dan respons terhadap persekitaran." data-en="Sound, hearing and responses to the environment.">Bunyi, pendengaran dan respons terhadap persekitaran.</p></article>
+        <article class="card"><div class="number">MISSION 03</div><h3>Tactile</h3><p data-ms="Sentuhan, tekstur dan maklumat daripada kulit." data-en="Touch, textures and information from the skin.">Sentuhan, tekstur dan maklumat daripada kulit.</p></article>
+        <article class="card"><div class="number">MISSION 04</div><h3>Olfactory</h3><p data-ms="Bau dan cara kita mengalami persekitaran." data-en="Smell and how we experience our surroundings.">Bau dan cara kita mengalami persekitaran.</p></article>
+        <article class="card"><div class="number">MISSION 05</div><h3>Gustatory</h3><p data-ms="Rasa dan pengalaman berkaitan makanan." data-en="Taste and experiences related to food.">Rasa dan pengalaman berkaitan makanan.</p></article>
+        <article class="card"><div class="number">MISSION 06</div><h3>Vestibular</h3><p data-ms="Pergerakan, keseimbangan dan orientasi kepala." data-en="Movement, balance and head orientation.">Pergerakan, keseimbangan dan orientasi kepala.</p></article>
+        <article class="card"><div class="number">MISSION 07</div><h3>Proprioception</h3><p data-ms="Kesedaran kedudukan badan dan pergerakan sendi." data-en="Awareness of body position and joint movement.">Kesedaran kedudukan badan dan pergerakan sendi.</p></article>
+        <article class="card"><div class="number">MISSION 08</div><h3>Interoception</h3><p data-ms="Kesedaran isyarat dalaman badan seperti lapar dan dahaga." data-en="Awareness of internal body signals such as hunger and thirst.">Kesedaran isyarat dalaman badan seperti lapar dan dahaga.</p></article>
+        <article class="card"><div class="number">YOUR JOURNEY</div><h3 data-ms="Sedia untuk meneroka?" data-en="Ready to explore?">Sedia untuk meneroka?</h3><p data-ms="Misi interaktif akan ditambah selepas kandungan dan pengalaman pengguna disemak." data-en="Interactive missions will be added after the content and user experience are reviewed.">Misi interaktif akan ditambah selepas kandungan dan pengalaman pengguna disemak.</p></article>
+      </div>
+    </div></section>
+    <section id="profile"><div class="container"><div class="feature"><div class="eyebrow">SELF-REFLECTION · REFLEKSI DIRI</div><h2>Your Sensory Profile</h2><p data-ms="Ruang refleksi pendidikan untuk meneroka pengalaman sensori diri. Ini bukan alat diagnosis atau pengganti penilaian profesional." data-en="An educational reflection space to explore your sensory experiences. This is not a diagnostic tool or a substitute for professional assessment.">Ruang refleksi pendidikan untuk meneroka pengalaman sensori diri. Ini bukan alat diagnosis atau pengganti penilaian profesional.</p><div class="notice" data-ms="Nota: Kandungan ini bukan Adult Sensory Profile rasmi. Item soal selidik berlesen dan pemarkahan piawai tidak akan diterbitkan tanpa kebenaran yang sesuai." data-en="Note: This is not the official Adult Sensory Profile. Licensed questionnaire items and standardized scoring will not be published without appropriate authorization.">Nota: Kandungan ini bukan Adult Sensory Profile rasmi. Item soal selidik berlesen dan pemarkahan piawai tidak akan diterbitkan tanpa kebenaran yang sesuai.</div></div></div></section>
+    <section id="podcast"><div class="container"><div class="section-top"><div class="eyebrow">LISTEN · REFLECT · CONNECT</div><h2>OTAP Podcast</h2><p data-ms="Cerita, perbualan dan perspektif tentang dunia terapi cara kerja. Episod audio akan ditambah di sini." data-en="Stories, conversations and perspectives from the world of occupational therapy. Audio episodes will be added here.">Cerita, perbualan dan perspektif tentang dunia terapi cara kerja. Episod audio akan ditambah di sini.</p></div></div></section>
+    <section id="discovery"><div class="container"><div class="feature"><div class="eyebrow">DISCOVER OCCUPATIONAL THERAPY</div><h2 data-ms="Kenali dunia OT" data-en="Discover Occupational Therapy">Kenali dunia OT</h2><p data-ms="Terokai bagaimana OT menyokong penyertaan dalam aktiviti harian, penjagaan diri, pembelajaran, pekerjaan, permainan dan kehidupan bermasyarakat." data-en="Explore how OT supports participation in daily activities, self-care, learning, work, play and community life.">Terokai bagaimana OT menyokong penyertaan dalam aktiviti harian, penjagaan diri, pembelajaran, pekerjaan, permainan dan kehidupan bermasyarakat.</p></div></div></section>
+  </main>
+  <section id="accessibility" class="accessibility-section"><div class="container"><div class="feature"><div class="eyebrow">ACCESSIBILITY · KEBOLEHCAPAIAN</div><h2>Designed for more people</h2><p>OTAP aims to support clear navigation, readable text and reduced-motion preferences.</p></div></div></section><footer><div class="container footer-inner"><div><strong style="color:var(--green)">O.T AWARENESS PROJECT</strong><div>Ten OTs. Many Perspectives. One Bigger Picture.</div><div style="margin-top:8px">Educational project · BM / EN</div></div><div class="footer-links"><a href="#about">About</a><a href="#missions">Missions</a><a href="#profile">Sensory Profile</a><a href="#podcast">Podcast</a><a href="#home">Back to top ↑</a></div></div></footer>
+  <script>
+    const otapLogo = document.querySelector("header .brand-logo");
+    otapLogo.addEventListener("error", () => {
+      otapLogo.style.display = "none";
+      const fallback = document.createElement("span");
+      fallback.className = "brand-mark";
+      fallback.textContent = "OTAP";
+      fallback.style.cssText = "width:40px;height:40px;border:1px solid var(--green);border-radius:10px;display:grid;place-items:center;color:var(--green);font-size:11px;flex-shrink:0";
+      otapLogo.insertAdjacentElement("afterend", fallback);
+    }, { once: true });
 
-<section class="section" id="about">
- <div class="section-inner about-grid">
-  <div>
-   <div class="eyebrow" data-i18n="aboutEyebrow">Mengenai OTAP</div>
-   <h2 data-i18n="aboutTitle">Pelbagai pengalaman. Satu komuniti yang berkongsi.</h2>
-   <p data-i18n="aboutText">O.T Awareness Project (OTAP) ialah projek perkongsian ilmu oleh ahli terapi cara kerja dari pelbagai latar belakang dan bidang kepakaran di Malaysia. Kami datang daripada sektor kerajaan, termasuk pelbagai kementerian, serta sektor swasta. Melalui perbincangan, perkongsian ilmu dan perkembangan terapi cara kerja di peringkat antarabangsa, kami mahu membantu orang ramai memahami peranan OT dalam kehidupan seharian.</p>
-  </div>
-  <div class="info-card">
-   <div class="eyebrow" data-i18n="purposeEyebrow">Tujuan kami</div>
-   <h2 data-i18n="purposeTitle">Satu gambaran yang lebih besar.</h2>
-   <p data-i18n="purposeText">Menghubungkan perspektif, menjadikan ilmu OT lebih mudah diterokai dan membuka ruang untuk pembelajaran bersama.</p>
-  </div>
- </div>
-</section>
+    // Current splash screen uses a CSS-built staircase and wordmark.
+    // Do not reference the old image-based splash elements here.
 
-<section class="section" id="team">
- <div class="section-inner">
-  <div class="eyebrow" data-i18n="teamEyebrow">Kenali pasukan</div>
-  <h2 data-i18n="teamTitle">Kenali 10 Ahli OTAP</h2>
-  <p data-i18n="teamText">Sepuluh individu dengan pengalaman, persekitaran kerja dan perspektif yang berbeza. Bahagian profil ahli boleh dilengkapkan dengan maklumat dan pautan profil sebenar apabila tersedia.</p>
-  <div class="feature-grid">
-   <article class="feature-card"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3"/><path d="M5 21v-2a7 7 0 0 1 14 0v2z"/></svg><h3 data-i18n="teamCard1">Pengalaman pelbagai</h3><p data-i18n="teamCard1Text">Perspektif daripada pengalaman kerja dan komuniti yang berbeza.</p></article>
-   <article class="feature-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><h3 data-i18n="teamCard2">Perkongsian ilmu</h3><p data-i18n="teamCard2Text">Belajar bersama melalui perbincangan dan penerokaan ilmu OT.</p></article>
-  </div>
- </div>
-</section>
+    // Allow the staircase pieces and wordmark to appear before revealing the homepage.
+    window.setTimeout(() => {
+      document.getElementById("splash").classList.add("done");
+      document.body.classList.remove("loading");
+      document.body.classList.add("otap-ready");
+    }, 4700);
 
-<section class="section" id="missions">
- <div class="section-inner">
-  <div class="eyebrow" data-i18n="missionsEyebrow">Teroka dan belajar</div>
-  <h2 data-i18n="missionsTitle">Lapan Misi Deria</h2>
-  <p data-i18n="missionsText">Terokai bagaimana deria dan pemprosesan deria boleh mempengaruhi aktiviti harian. Kandungan misi boleh ditambah pada bahagian ini.</p>
-  <div class="feature-grid">
-   <article class="feature-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="2.5"/></svg><h3 data-i18n="sight">Penglihatan</h3><p data-i18n="sightText">Memahami maklumat visual di persekitaran.</p></article>
-   <article class="feature-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3a6 6 0 0 0 12 0V9a6 6 0 0 0-6-6z"/><path d="M4 11v1a8 8 0 0 0 16 0v-1M12 20v2"/></svg><h3 data-i18n="hearing">Pendengaran</h3><p data-i18n="hearingText">Mengenal bunyi dan respons terhadap persekitaran.</p></article>
-  </div>
- </div>
-</section>
 
-<section class="section" id="profile">
- <div class="section-inner">
-  <div class="eyebrow" data-i18n="profileEyebrow">Kenali diri</div>
-  <h2 data-i18n="profileTitle">Profil Deria Anda</h2>
-  <p data-i18n="profileText">Ruang untuk penerokaan kendiri dan bahan pendidikan. Kandungan ini bukan alat diagnosis; dapatkan nasihat profesional jika anda memerlukan penilaian khusus.</p>
-  <a class="inline-link" href="#contact" data-contact-open><span data-i18n="profileLink">Tanya OTAP tentang topik ini</span><span aria-hidden="true">↗</span></a>
- </div>
-</section>
+    // Compact contact icon becomes available only after the splash/loading screen ends.
+    const contactLauncher = document.getElementById('otapContactLauncher');
+    const contactDialog = document.getElementById('otapContactDialog');
+    const contactClose = document.getElementById('otapContactClose');
+    contactLauncher.addEventListener('click', () => { contactDialog.hidden = false; document.getElementById('otapContactCategory').focus(); });
+    contactClose.addEventListener('click', () => { contactDialog.hidden = true; contactLauncher.focus(); });
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !contactDialog.hidden) { contactDialog.hidden = true; contactLauncher.focus(); } });
+    document.getElementById('otapContactForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const category = document.getElementById('otapContactCategory').value;
+      const message = document.getElementById('otapContactMessage').value.trim();
+      const subject = encodeURIComponent('[OTAP] ' + category);
+      const body = encodeURIComponent(category + '\n\n' + message + '\n\n— Dihantar melalui website OTAP');
+      window.location.href = 'mailto:otawarenessproject@gmail.com?subject=' + subject + '&body=' + body;
+    });
 
-<section class="section" id="podcast">
- <div class="section-inner info-card podcast-card">
-  <span class="round-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="14" rx="4"/><path d="M4 11v1a8 8 0 0 0 16 0v-1M12 20v2M8 22h8"/></svg></span>
-  <div style="flex:1;min-width:220px">
-   <div class="eyebrow">OTAPcast</div>
-   <h2 data-i18n="podcastTitle">Dengar perbualan tentang OT</h2>
-   <p data-i18n="podcastText">Ruang untuk audio, perbualan dan perkongsian pengalaman berkaitan terapi cara kerja.</p>
-   <a class="inline-link" href="mailto:otawarenessproject@gmail.com?subject=OTAPcast" data-i18n="podcastLink">Cadangkan topik OTAPcast ↗</a>
-  </div>
- </div>
-</section>
+    const mockupPanel = document.getElementById("mockupNavPanel");
+    const mockupBackdrop = document.getElementById("mockupMenuBackdrop");
+    function setMockupMenu(open) {
+      mockupPanel.classList.toggle("open", open);
+      mockupBackdrop.classList.toggle("open", open);
+      mockupPanel.setAttribute("aria-hidden", String(!open));
+      document.body.style.overflow = open ? "hidden" : "";
+    }
+    const mockupMenuHotspot = document.getElementById("mockMenuHotspot");
+    if (mockupMenuHotspot) mockupMenuHotspot.addEventListener("click", () => setMockupMenu(true));
+    document.getElementById("mockupMenuClose").addEventListener("click", () => setMockupMenu(false));
+    mockupBackdrop.addEventListener("click", () => setMockupMenu(false));
+    mockupPanel.querySelectorAll("a").forEach(a => a.addEventListener("click", () => setMockupMenu(false)));
 
-<section class="section" id="explore">
- <div class="section-inner">
-  <div class="eyebrow" data-i18n="exploreEyebrow">Pusat penerokaan OT</div>
-  <h2 data-i18n="exploreTitle">Terokai Ilmu OT</h2>
-  <p data-i18n="exploreText">Penerangan ringkas, infografik dan bahan psikoedukasi untuk membantu orang ramai mengenali terapi cara kerja dan penyertaan dalam aktiviti bermakna.</p>
-  <div class="feature-grid">
-   <article class="feature-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M4 5v14.5A2.5 2.5 0 0 1 6.5 17H20M8 6h8M8 10h8"/></svg><h3 data-i18n="learnCard1">Asas terapi cara kerja</h3><p data-i18n="learnCard1Text">Kenali bagaimana OT menyokong aktiviti dan penyertaan harian.</p></article>
-   <article class="feature-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg><h3 data-i18n="learnCard2">Aktiviti dan penyertaan</h3><p data-i18n="learnCard2Text">Terokai hubungan antara individu, aktiviti dan persekitaran.</p></article>
-  </div>
- </div>
-</section>
+    const menuButton = document.getElementById("menuButton");
+    const mainNav = document.getElementById("mainNav");
+    menuButton.addEventListener("click", () => {
+      const isOpen = mainNav.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.textContent = isOpen ? "✕" : "☰";
+    });
+    mainNav.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        mainNav.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.textContent = "☰";
+      });
+    });
+    let currentLanguage = "ms";
+    const languageButton = document.getElementById("languageButton");
+    function setLanguage(language) {
+      currentLanguage = language === "en" ? "en" : "ms";
+      document.documentElement.lang = currentLanguage === "ms" ? "ms" : "en";
+      document.querySelectorAll("[data-ms][data-en]").forEach(element => {
+        const translated = element.dataset[currentLanguage];
+        if (typeof translated === "string") element.textContent = translated;
+      });
+      document.querySelectorAll("#otapContactCategory option[data-ms][data-en]").forEach(option => {
+        option.textContent = option.dataset[currentLanguage];
+        option.value = option.dataset[currentLanguage];
+      });
+      const messageBox = document.getElementById("otapContactMessage");
+      if (messageBox) messageBox.placeholder = currentLanguage === "ms" ? messageBox.dataset.placeholderMs : messageBox.dataset.placeholderEn;
+      languageButton.textContent = currentLanguage === "ms" ? "BM / EN" : "EN / BM";
+      languageButton.setAttribute("aria-label", currentLanguage === "ms" ? "Tukar bahasa ke English" : "Switch language to Bahasa Melayu");
+      document.querySelectorAll(".mockup-nav-language [data-language]").forEach(button => {
+        const active = button.dataset.language === currentLanguage;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-pressed", String(active));
+      });
+      document.querySelectorAll(".otap-hero-language [data-language]").forEach(button => {
+        const active = button.dataset.language === currentLanguage;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-pressed", String(active));
+      });
+      const contactLauncher = document.getElementById("otapContactLauncher");
+      if (contactLauncher) {
+        contactLauncher.setAttribute("aria-label", currentLanguage === "ms" ? "Hubungi OTAP" : "Contact OTAP");
+        contactLauncher.title = currentLanguage === "ms" ? "Hubungi OTAP" : "Contact OTAP";
+      }
+      const close = document.getElementById("otapContactClose");
+      if (close) close.setAttribute("aria-label", currentLanguage === "ms" ? "Tutup" : "Close");
+    }
+    languageButton.addEventListener("click", () => setLanguage(currentLanguage === "ms" ? "en" : "ms"));
+    document.querySelectorAll(".otap-hero-language [data-language]").forEach(button => {
+      button.addEventListener("click", () => setLanguage(button.dataset.language));
+    });
+    document.querySelectorAll(".mockup-nav-language [data-language]").forEach(button => {
+      button.addEventListener("click", () => setLanguage(button.dataset.language));
+    });
+    // Keep the hero language hotspot in sync with the visible language toggle.
+    const mockupLanguageHotspot = document.getElementById("mockLanguageHotspot");
+    if (mockupLanguageHotspot) mockupLanguageHotspot.addEventListener("click", () => setLanguage(currentLanguage === "ms" ? "en" : "ms"));
+    setLanguage("ms"); // Bahasa Melayu ialah bahasa lalai; EN hanya aktif selepas dipilih.
+    const heroMenuButton = document.getElementById("otapHeroMenuButton");
+    const heroMenu = document.getElementById("otapHeroMenu");
+    if (heroMenuButton && heroMenu) {
+      heroMenuButton.addEventListener("click", () => {
+        const open = heroMenu.hidden;
+        heroMenu.hidden = !open;
+        heroMenuButton.setAttribute("aria-expanded", String(open));
+        heroMenuButton.setAttribute("aria-label", open ? (currentLanguage === "ms" ? "Tutup menu" : "Close menu") : (currentLanguage === "ms" ? "Buka menu" : "Open menu"));
+      });
+      heroMenu.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+        heroMenu.hidden = true;
+        heroMenuButton.setAttribute("aria-expanded", "false");
+      }));
+    }
+    document.querySelectorAll(".otap-hero-language [data-language]").forEach(button => {
+      button.addEventListener("click", () => setLanguage(button.dataset.language));
+    });
+    const originalSetLanguage = setLanguage;
+    setLanguage = function(language) {
+      originalSetLanguage(language);
+      document.querySelectorAll(".otap-hero-language [data-language]").forEach(button => {
+        const active = button.dataset.language === currentLanguage;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-pressed", String(active));
+      });
+      if (heroMenuButton) heroMenuButton.setAttribute("aria-label", currentLanguage === "ms" ? "Buka menu" : "Open menu");
+      const hero = document.getElementById("home");
+      if (hero) hero.setAttribute("aria-label", currentLanguage === "ms" ? "Laman utama OTAP" : "OTAP homepage");
+    };
+    setLanguage("ms");
+  </script>
 
-<section class="section" id="accessibility">
- <div class="section-inner">
-  <div class="eyebrow" data-i18n="accessEyebrow">Reka bentuk inklusif</div>
-  <h2 data-i18n="accessTitle">Kebolehaksesan</h2>
-  <p data-i18n="accessText">OTAP berusaha menyediakan navigasi yang jelas, fokus papan kekunci, label yang boleh dibaca pembaca skrin dan paparan yang responsif. Pengalaman TalkBack dan VoiceOver perlu diuji pada peranti sebenar sebelum dianggap disahkan.</p>
-  <p class="accessibility-note" data-i18n="accessNote">Jika anda menemui halangan kebolehaksesan, maklumkan kepada kami supaya kami boleh menambah baik pengalaman ini.</p>
-  <a class="inline-link" href="mailto:otawarenessproject@gmail.com?subject=Maklum%20balas%20kebolehaksesan" data-i18n="accessLink">Hantar maklum balas ↗</a>
- </div>
-</section>
-</main>
 
-<footer class="site-footer" id="footer">
- <p data-i18n="footerText">O.T Awareness Project (OTAP) · Perkongsian ilmu terapi cara kerja</p>
- <a class="inline-link" href="mailto:otawarenessproject@gmail.com">otawarenessproject@gmail.com</a>
-</footer>
+  <button id="otapContactLauncher" class="otap-contact-launcher" type="button" aria-label="Hubungi OTAP" aria-haspopup="dialog" aria-controls="otapContactDialog" title="Hubungi OTAP"><span aria-hidden="true">✉</span><i aria-hidden="true">OT</i></button>
+  <section id="otapContactDialog" class="otap-contact-dialog" role="dialog" aria-modal="false" aria-labelledby="otapContactTitle" hidden>
+    <div class="otap-contact-head"><div class="otap-contact-symbol" aria-hidden="true">✉</div><div><h2 id="otapContactTitle" data-ms="Hubungi OTAP" data-en="Contact OTAP">Hubungi OTAP</h2><p data-ms="Kami sedia mendengar pandangan anda." data-en="We welcome your questions and feedback.">Kami sedia mendengar pandangan anda.</p></div><button id="otapContactClose" type="button" aria-label="Tutup">×</button></div>
+    <form id="otapContactForm">
+      <label for="otapContactCategory" data-ms="Kategori mesej" data-en="Message category">Kategori mesej</label>
+      <select id="otapContactCategory" required><option value="Soalan tentang OT" data-ms="Soalan tentang OT" data-en="Question about OT">Soalan tentang OT</option><option value="Cadangan topik / perkongsian ilmu" data-ms="Cadangan topik / perkongsian ilmu" data-en="Topic suggestion / knowledge sharing">Cadangan topik / perkongsian ilmu</option><option value="Maklum balas website" data-ms="Maklum balas website" data-en="Website feedback">Maklum balas website</option></select>
+      <label for="otapContactMessage" data-ms="Mesej anda" data-en="Your message">Mesej anda</label>
+      <textarea id="otapContactMessage" rows="4" required maxlength="3000" placeholder="Tulis mesej di sini…" data-placeholder-ms="Tulis mesej di sini…" data-placeholder-en="Write your message here…"></textarea>
+      <p class="otap-contact-privacy" data-ms="Jangan sertakan nama pesakit atau maklumat kesihatan peribadi." data-en="Please do not include patient names or personal health information.">Jangan sertakan nama pesakit atau maklumat kesihatan peribadi.</p>
+      <button class="otap-contact-send" type="submit"><span data-ms="Teruskan ke e-mel" data-en="Continue to email">Teruskan ke e-mel</span> <span aria-hidden="true">↗</span></button>
+      <p class="otap-contact-note" data-ms="Aplikasi e-mel anda akan dibuka untuk menghantar mesej kepada OTAP." data-en="Your email app will open so you can send your message to OTAP.">Aplikasi e-mel anda akan dibuka untuk menghantar mesej kepada OTAP.</p>
+    </form>
+  </section>
 
-<nav class="bottom-nav" aria-label="Navigasi utama bawah">
- <a href="#about"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7h.01"/></svg><span data-i18n="navAbout">Tentang</span></a>
- <a href="#podcast"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="2" width="8" height="14" rx="4"/><path d="M4 11v1a8 8 0 0 0 16 0v-1M12 20v2M8 22h8"/></svg><span>OTAPcast</span></a>
- <a href="#explore"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.3 3.1 3.8-.3.7 3.7 3.2 2-2 3.2.8 3.7-3.7.8L15 21l-3-2.2L8.3 20l-.8-3.7-3.2-2 2-3.2-.8-3.7 3.7-.8z"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M10 11h4M10 13h4"/></svg><span data-i18n="navExplore">Terokai Ilmu OT</span></a>
- <a href="#accessibility"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="6" r="1"/><path d="M5 9h14M12 9v5m0 0-4 6m4-6 4 6m-4-6-5-3m5 3 5-3"/></svg><span data-i18n="navAccess">Kebolehaksesan</span></a>
-</nav>
-
-<button class="contact-float" id="contactOpen" type="button" aria-label="Hubungi OTAP" title="Hubungi OTAP">
- <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6 9 7 9-7"/></svg>
-</button>
-<section class="contact-panel" id="contact" hidden aria-labelledby="contactTitle">
- <button type="button" class="panel-close" id="contactClose" aria-label="Tutup panel">×</button>
- <h2 id="contactTitle" data-i18n="contactTitle">Hubungi OTAP</h2>
- <p data-i18n="contactIntro">Pilih kategori dan tulis mesej. Aplikasi e-mel anda akan dibuka untuk menghantar pertanyaan kepada OTAP.</p>
- <form id="contactForm">
-  <label for="contactCategory" data-i18n="contactCategoryLabel">Kategori</label>
-  <select id="contactCategory" required>
-   <option value="Pertanyaan tentang OT" data-i18n="catQuestion">Pertanyaan tentang OT</option>
-   <option value="Cadangan topik / perkongsian ilmu" data-i18n="catSuggestion">Cadangan topik / perkongsian ilmu</option>
-   <option value="Maklum balas website" data-i18n="catFeedback">Maklum balas website</option>
-  </select>
-  <label for="contactMessage" data-i18n="contactMessageLabel">Mesej</label>
-  <textarea id="contactMessage" required placeholder="Tulis mesej anda di sini…" data-i18n-placeholder="contactPlaceholder"></textarea>
-  <div class="contact-panel-actions">
-   <button type="submit" class="small-button primary" data-i18n="contactSend">Teruskan ke e-mel</button>
-   <button type="button" class="small-button" id="contactCancel" data-i18n="cancel">Batal</button>
-  </div>
- </form>
-</section>
-
-<div class="menu-overlay" id="menuOverlay" hidden role="dialog" aria-modal="true" aria-label="Menu OTAP">
- <div class="menu-top">
-  <a class="brand" href="#home" aria-label="OTAP — Laman utama">
-   <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
-   <span class="brand-name">O.T<br>Awareness<br>Project</span>
-  </a>
-  <button type="button" class="menu-close" id="menuClose" aria-label="Tutup menu">×</button>
- </div>
- <nav class="menu-links" aria-label="Menu penuh">
-  <a href="#home"><span class="menu-icon"><svg viewBox="0 0 24 24"><path d="m3 11 9-8 9 8M5 10v11h5v-6h4v6h5V10"/></svg></span><span class="menu-label"><span data-i18n="menuHome">Laman Utama</span><small>Home</small></span><span class="menu-chevron">›</span></a>
-  <a href="#team"><span class="menu-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2z"/><circle cx="17" cy="9" r="2.5"/><path d="M16 15a5 5 0 0 1 5 5"/></svg></span><span class="menu-label"><span data-i18n="meet">Kenali 10 Ahli OTAP</span><small>Meet the 10 OTs</small></span><span class="menu-chevron">›</span></a>
-  <a href="#missions"><span class="menu-icon"><svg viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7zM2 12l10 5 10-5M2 17l10 5 10-5"/></svg></span><span class="menu-label"><span data-i18n="menuMissions">Lapan Misi Deria</span><small>The 8 Sensory Missions</small></span><span class="menu-chevron">›</span></a>
-  <a href="#profile"><span class="menu-icon"><svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 15l4-4 3 2 5-7M17 6h2v2"/></svg></span><span class="menu-label"><span data-i18n="profileTitle">Profil Deria Anda</span><small>Your OT Profile</small></span><span class="menu-chevron">›</span></a>
-  <a href="#podcast"><span class="menu-icon"><svg viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="14" rx="4"/><path d="M4 11v1a8 8 0 0 0 16 0v-1M12 20v2M8 22h8"/></svg></span><span class="menu-label">OTAPcast<small>Podcast</small></span><span class="menu-chevron">›</span></a>
-  <a href="#explore"><span class="menu-icon"><svg viewBox="0 0 24 24"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M4 5v14.5A2.5 2.5 0 0 1 6.5 17H20"/></svg></span><span class="menu-label"><span data-i18n="navExplore">Terokai Ilmu OT</span><small>OT Discovery Hub</small></span><span class="menu-chevron">›</span></a>
-  <a href="#about"><span class="menu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7h.01"/></svg></span><span class="menu-label"><span data-i18n="menuAbout">Tentang Projek</span><small>About the Project</small></span><span class="menu-chevron">›</span></a>
-  <a href="#accessibility"><span class="menu-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="6" r="1"/><path d="M5 9h14M12 9v5m0 0-4 6m4-6 4 6"/></svg></span><span class="menu-label"><span data-i18n="accessTitle">Kebolehaksesan</span><small>Accessibility</small></span><span class="menu-chevron">›</span></a>
- </nav>
- <div class="menu-language">
-  <div class="language-toggle" role="group" aria-label="Pilih bahasa">
-   <button type="button" data-language="ms" aria-pressed="true">BM</button>
-   <button type="button" data-language="en" aria-pressed="false">EN</button>
-  </div>
- </div>
-</div>
-
-<script>
-const translations = {
- ms: {
-  skip:"Langkau ke kandungan utama", loading:"Membuka ruang penerokaan OT…", imageFallback:"Imej hero tidak dapat dimuatkan. Sila semak laluan fail imej.",
-  hero1:"10 Individu.",hero2:"Pelbagai Perspektif.",hero3:"Satu Gambaran yang Lebih Besar.",heroDesc:"Bersama-sama, kita melihat lebih jauh melalui pengalaman, kepakaran dan perspektif yang berbeza.",
-  meet:"Kenali 10 Ahli OTAP",meetSub:"Kenali pasukan kami",journey:"Mulakan Perjalanan",journeySub:"Terokai dunia OT",
-  aboutEyebrow:"Mengenai OTAP",aboutTitle:"Pelbagai pengalaman. Satu komuniti yang berkongsi.",aboutText:"O.T Awareness Project (OTAP) ialah projek perkongsian ilmu oleh ahli terapi cara kerja dari pelbagai latar belakang dan bidang kepakaran di Malaysia. Kami datang daripada sektor kerajaan, termasuk pelbagai kementerian, serta sektor swasta. Melalui perbincangan, perkongsian ilmu dan perkembangan terapi cara kerja di peringkat antarabangsa, kami mahu membantu orang ramai memahami peranan OT dalam kehidupan seharian.",
-  purposeEyebrow:"Tujuan kami",purposeTitle:"Satu gambaran yang lebih besar.",purposeText:"Menghubungkan perspektif, menjadikan ilmu OT lebih mudah diterokai dan membuka ruang untuk pembelajaran bersama.",
-  teamEyebrow:"Kenali pasukan",teamTitle:"Kenali 10 Ahli OTAP",teamText:"Sepuluh individu dengan pengalaman, persekitaran kerja dan perspektif yang berbeza. Bahagian profil ahli boleh dilengkapkan dengan maklumat dan pautan profil sebenar apabila tersedia.",teamCard1:"Pengalaman pelbagai",teamCard1Text:"Perspektif daripada pengalaman kerja dan komuniti yang berbeza.",teamCard2:"Perkongsian ilmu",teamCard2Text:"Belajar bersama melalui perbincangan dan penerokaan ilmu OT.",
-  missionsEyebrow:"Teroka dan belajar",missionsTitle:"Lapan Misi Deria",missionsText:"Terokai bagaimana deria dan pemprosesan deria boleh mempengaruhi aktiviti harian. Kandungan misi boleh ditambah pada bahagian ini.",sight:"Penglihatan",sightText:"Memahami maklumat visual di persekitaran.",hearing:"Pendengaran",hearingText:"Mengenal bunyi dan respons terhadap persekitaran.",
-  profileEyebrow:"Kenali diri",profileTitle:"Profil Deria Anda",profileText:"Ruang untuk penerokaan kendiri dan bahan pendidikan. Kandungan ini bukan alat diagnosis; dapatkan nasihat profesional jika anda memerlukan penilaian khusus.",profileLink:"Tanya OTAP tentang topik ini",
-  podcastTitle:"Dengar perbualan tentang OT",podcastText:"Ruang untuk audio, perbualan dan perkongsian pengalaman berkaitan terapi cara kerja.",podcastLink:"Cadangkan topik OTAPcast ↗",
-  exploreEyebrow:"Pusat penerokaan OT",exploreTitle:"Terokai Ilmu OT",exploreText:"Penerangan ringkas, infografik dan bahan psikoedukasi untuk membantu orang ramai mengenali terapi cara kerja dan penyertaan dalam aktiviti bermakna.",learnCard1:"Asas terapi cara kerja",learnCard1Text:"Kenali bagaimana OT menyokong aktiviti dan penyertaan harian.",learnCard2:"Aktiviti dan penyertaan",learnCard2Text:"Terokai hubungan antara individu, aktiviti dan persekitaran.",
-  accessEyebrow:"Reka bentuk inklusif",accessTitle:"Kebolehaksesan",accessText:"OTAP berusaha menyediakan navigasi yang jelas, fokus papan kekunci, label yang boleh dibaca pembaca skrin dan paparan yang responsif. Pengalaman TalkBack dan VoiceOver perlu diuji pada peranti sebenar sebelum dianggap disahkan.",accessNote:"Jika anda menemui halangan kebolehaksesan, maklumkan kepada kami supaya kami boleh menambah baik pengalaman ini.",accessLink:"Hantar maklum balas ↗",
-  navAbout:"Tentang",navExplore:"Terokai Ilmu OT",navAccess:"Kebolehaksesan",footerText:"O.T Awareness Project (OTAP) · Perkongsian ilmu terapi cara kerja",
-  contactTitle:"Hubungi OTAP",contactIntro:"Pilih kategori dan tulis mesej. Aplikasi e-mel anda akan dibuka untuk menghantar pertanyaan kepada OTAP.",contactCategoryLabel:"Kategori",catQuestion:"Pertanyaan tentang OT",catSuggestion:"Cadangan topik / perkongsian ilmu",catFeedback:"Maklum balas website",contactMessageLabel:"Mesej",contactPlaceholder:"Tulis mesej anda di sini…",contactSend:"Teruskan ke e-mel",cancel:"Batal",
-  menuHome:"Laman Utama",menuMissions:"Lapan Misi Deria",menuAbout:"Tentang Projek",openMenu:"Buka menu",closeMenu:"Tutup menu"
- },
- en: {
-  skip:"Skip to main content",loading:"Opening the OT discovery space…",imageFallback:"The hero image could not be loaded. Please check the image file path.",
-  hero1:"Ten Individuals.",hero2:"Many Perspectives.",hero3:"One Bigger Picture.",heroDesc:"Together, we see further through different experiences, areas of expertise and perspectives.",
-  meet:"Meet the 10 OTs",meetSub:"Meet our team",journey:"Start Your Journey",journeySub:"Explore the world of OT",
-  aboutEyebrow:"About OTAP",aboutTitle:"Different experiences. One sharing community.",aboutText:"O.T Awareness Project (OTAP) is a knowledge-sharing project by occupational therapists from different backgrounds and areas of expertise across Malaysia. Our members work in the government sector, including different ministries, as well as the private sector. Through discussion, knowledge sharing and following international occupational therapy developments, we aim to help people understand the role of OT in everyday life.",
-  purposeEyebrow:"Our purpose",purposeTitle:"One bigger picture.",purposeText:"Connecting perspectives, making OT knowledge easier to explore and creating space for shared learning.",
-  teamEyebrow:"Meet the team",teamTitle:"Meet the 10 OTs",teamText:"Ten individuals with different experiences, work settings and perspectives. Member profiles can be completed with verified information and profile links when available.",teamCard1:"Diverse experience",teamCard1Text:"Perspectives from different work experiences and communities.",teamCard2:"Shared knowledge",teamCard2Text:"Learning together through discussion and exploration of OT knowledge.",
-  missionsEyebrow:"Explore and learn",missionsTitle:"The 8 Sensory Missions",missionsText:"Explore how the senses and sensory processing may influence everyday activities. Mission content can be added to this section.",sight:"Sight",sightText:"Understanding visual information in the environment.",hearing:"Hearing",hearingText:"Noticing sounds and responding to the environment.",
-  profileEyebrow:"Know yourself",profileTitle:"Your OT Profile",profileText:"A space for self-exploration and educational resources. This content is not a diagnostic tool; seek professional advice if you need an individual assessment.",profileLink:"Ask OTAP about this topic",
-  podcastTitle:"Listen to conversations about OT",podcastText:"A space for audio, conversations and shared experiences related to occupational therapy.",podcastLink:"Suggest an OTAPcast topic ↗",
-  exploreEyebrow:"OT discovery hub",exploreTitle:"Explore OT Knowledge",exploreText:"Short explanations, infographics and psychoeducational resources to help people learn about occupational therapy and participation in meaningful activities.",learnCard1:"Occupational therapy basics",learnCard1Text:"Learn how OT supports everyday activities and participation.",learnCard2:"Occupation and participation",learnCard2Text:"Explore the relationship between people, activities and environments.",
-  accessEyebrow:"Inclusive design",accessTitle:"Accessibility",accessText:"OTAP aims to provide clear navigation, keyboard focus, screen-reader labels and a responsive layout. TalkBack and VoiceOver experiences must be tested on real devices before being considered verified.",accessNote:"If you encounter an accessibility barrier, please tell us so we can improve the experience.",accessLink:"Send feedback ↗",
-  navAbout:"About",navExplore:"OT Discovery Hub",navAccess:"Accessibility",footerText:"O.T Awareness Project (OTAP) · Occupational therapy knowledge sharing",
-  contactTitle:"Contact OTAP",contactIntro:"Choose a category and write your message. Your email app will open so you can send your enquiry to OTAP.",contactCategoryLabel:"Category",catQuestion:"OT question",catSuggestion:"Topic suggestion / knowledge sharing",catFeedback:"Website feedback",contactMessageLabel:"Message",contactPlaceholder:"Write your message here…",contactSend:"Continue to email",cancel:"Cancel",
-  menuHome:"Home",menuMissions:"The 8 Sensory Missions",menuAbout:"About the Project",openMenu:"Open menu",closeMenu:"Close menu"
- }
-};
-
-let currentLanguage = "ms";
-function setLanguage(lang) {
- currentLanguage = translations[lang] ? lang : "ms";
- document.documentElement.lang = currentLanguage === "ms" ? "ms" : "en";
- document.querySelectorAll("[data-i18n]").forEach(el => {
-  const value = translations[currentLanguage][el.dataset.i18n];
-  if (value !== undefined) el.textContent = value;
- });
- document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-  const value = translations[currentLanguage][el.dataset.i18nPlaceholder];
-  if (value !== undefined) el.setAttribute("placeholder", value);
- });
- document.querySelectorAll("[data-language]").forEach(button => {
-  button.setAttribute("aria-pressed", String(button.dataset.language === currentLanguage));
- });
- const menuOpen = document.getElementById("menuOpen");
- if (menuOpen) menuOpen.setAttribute("aria-label", translations[currentLanguage].openMenu);
- const menuClose = document.getElementById("menuClose");
- if (menuClose) menuClose.setAttribute("aria-label", translations[currentLanguage].closeMenu);
- document.querySelectorAll(".brand").forEach(a => a.setAttribute("aria-label", currentLanguage === "ms" ? "OTAP — Laman utama" : "OTAP — Home"));
-}
-document.querySelectorAll("[data-language]").forEach(button => button.addEventListener("click", () => setLanguage(button.dataset.language)));
-
-const loadingScreen = document.getElementById("loadingScreen");
-const contactButton = document.getElementById("contactOpen");
-function finishLoading() {
- loadingScreen.classList.add("is-done");
- window.setTimeout(() => { loadingScreen.hidden = true; contactButton.classList.add("is-visible"); }, 480);
-}
-window.addEventListener("load", () => window.setTimeout(finishLoading, 650));
-window.setTimeout(finishLoading, 2400);
-
-const menuOverlay = document.getElementById("menuOverlay");
-const menuOpenButton = document.getElementById("menuOpen");
-const menuCloseButton = document.getElementById("menuClose");
-function openMenu() {
- menuOverlay.hidden = false;
- menuOpenButton.setAttribute("aria-expanded", "true");
- document.body.classList.add("menu-open");
- menuCloseButton.focus();
-}
-function closeMenu(restoreFocus = true) {
- menuOverlay.hidden = true;
- menuOpenButton.setAttribute("aria-expanded", "false");
- document.body.classList.remove("menu-open");
- if (restoreFocus) menuOpenButton.focus();
-}
-menuOpenButton.addEventListener("click", openMenu);
-menuCloseButton.addEventListener("click", () => closeMenu());
-menuOverlay.querySelectorAll('a[href^="#"]').forEach(link => link.addEventListener("click", () => closeMenu(false)));
-document.addEventListener("keydown", event => {
- if (event.key === "Escape") {
-  if (!menuOverlay.hidden) closeMenu();
-  if (!document.getElementById("contact").hidden) closeContact();
- }
-});
-menuOverlay.addEventListener("click", event => { if (event.target === menuOverlay) closeMenu(); });
-
-const contactPanel = document.getElementById("contact");
-function openContact() {
- contactPanel.hidden = false;
- document.getElementById("contactMessage").focus();
-}
-function closeContact() {
- contactPanel.hidden = true;
- contactButton.focus();
-}
-contactButton.addEventListener("click", openContact);
-document.querySelectorAll("[data-contact-open]").forEach(link => link.addEventListener("click", event => {
- event.preventDefault();
- openContact();
-}));
-document.getElementById("contactClose").addEventListener("click", closeContact);
-document.getElementById("contactCancel").addEventListener("click", closeContact);
-document.getElementById("contactForm").addEventListener("submit", event => {
- event.preventDefault();
- const category = document.getElementById("contactCategory").value;
- const message = document.getElementById("contactMessage").value.trim();
- if (!message) return;
- const subject = encodeURIComponent("[OTAP] " + category);
- const body = encodeURIComponent(message + "\n\n— Dihantar melalui laman web OTAP");
- window.location.href = "mailto:otawarenessproject@gmail.com?subject=" + subject + "&body=" + body;
-});
-
-const heroImage = document.getElementById("heroImage");
-heroImage.addEventListener("error", () => {
- heroImage.style.display = "none";
- document.getElementById("heroImageFallback").style.display = "block";
-});
-setLanguage("ms");
-</script>
 </body>
 </html>
