@@ -1243,6 +1243,26 @@
       }
     }
 
+  
+    /* Corrected per clarification: stretch the wordmark vertically, not horizontally. */
+    .splash-logo-animation .animated-wordmark-text {
+      text-align:left !important;
+      align-items:flex-start !important;
+      transform:none !important;
+    }
+    .splash-logo-animation .animated-wordmark-text span {
+      transform:scaleX(1) scaleY(1.20) !important;
+      transform-origin:left center !important;
+      line-height:1.02 !important;
+    }
+    @media(max-width:420px) {
+      .splash-logo-animation .animated-wordmark-text span {
+        transform:scaleX(1) scaleY(1.18) !important;
+        transform-origin:left center !important;
+        line-height:1.02 !important;
+      }
+    }
+
   </style>
 </head>
 <body class="loading">
