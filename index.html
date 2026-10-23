@@ -1178,6 +1178,22 @@
     }
 
   </style>
+
+  <style id="otap-contact-and-nav-polish">
+    /* Contact control is a small icon, and stays hidden until the loading screen has finished. */
+    .otap-contact-launcher{position:fixed;right:18px;bottom:20px;z-index:90;width:54px;height:54px;border-radius:50%;border:1px solid rgba(0,245,160,.7);background:linear-gradient(145deg,#103c2a,#06130d);color:#00f5a0;box-shadow:0 8px 26px #0008,0 0 18px #00f5a022;display:grid;place-items:center;font-size:24px;opacity:0;visibility:hidden;transform:translateY(8px) scale(.9);transition:opacity .25s,transform .25s,visibility .25s;cursor:pointer}
+    .otap-contact-launcher i{position:absolute;right:-2px;bottom:-1px;background:#00f5a0;color:#03110b;border:2px solid #030806;border-radius:9px;padding:1px 4px;font-size:8px;font-style:normal;font-weight:900;letter-spacing:.4px}
+    body.otap-ready .otap-contact-launcher{opacity:1;visibility:visible;transform:none}
+    .otap-contact-launcher:hover{box-shadow:0 0 0 5px #00f5a01c,0 8px 26px #0008}
+    .otap-contact-launcher:focus-visible,.otap-contact-dialog button:focus-visible,.otap-contact-dialog select:focus-visible,.otap-contact-dialog textarea:focus-visible{outline:2px solid #00f5a0;outline-offset:3px}
+    .otap-contact-dialog{position:fixed;z-index:95;right:18px;bottom:86px;width:min(360px,calc(100vw - 28px));max-height:min(76vh,620px);overflow:auto;background:#07130d;border:1px solid #176b48;border-radius:20px;padding:18px;color:#f1fff8;box-shadow:0 18px 60px #000b}
+    .otap-contact-dialog[hidden]{display:none}
+    .otap-contact-head{display:flex;align-items:center;gap:11px;margin-bottom:18px}.otap-contact-symbol{width:42px;height:42px;flex:0 0 42px;border-radius:14px;display:grid;place-items:center;background:#00f5a018;color:#00f5a0;font-size:22px}.otap-contact-head h2{font-size:17px;margin:0;color:#f1fff8}.otap-contact-head p{font-size:11px;color:#a5c4b5;margin:3px 0 0}.otap-contact-head>button{margin-left:auto;align-self:flex-start;border:0;background:transparent;color:#a5c4b5;font-size:25px;line-height:1}
+    .otap-contact-dialog form{display:grid;gap:8px}.otap-contact-dialog label{font-size:12px;color:#d5e9df;font-weight:700;margin-top:3px}.otap-contact-dialog select,.otap-contact-dialog textarea{width:100%;border:1px solid #24583f;background:#030b07;color:#f1fff8;border-radius:10px;padding:11px;font:inherit;font-size:13px}.otap-contact-dialog textarea{resize:vertical;min-height:90px}.otap-contact-dialog select option{background:#07130d}.otap-contact-privacy{margin:2px 0 4px;color:#b8d4c9;font-size:11px;line-height:1.5}.otap-contact-send{display:flex;justify-content:center;align-items:center;gap:8px;background:#00f5a0;color:#03110b;border:0;border-radius:11px;padding:12px;font-weight:800;font-size:13px}.otap-contact-note{margin:0;color:#8fb5a4;font-size:10px;line-height:1.5;text-align:center}
+    @media(max-width:420px){.otap-contact-launcher{right:14px;bottom:14px;width:49px;height:49px}.otap-contact-dialog{right:12px;bottom:72px;width:calc(100vw - 24px);padding:15px;border-radius:17px}}
+    @media(prefers-reduced-motion:reduce){.otap-contact-launcher{transition:none}}
+  </style>
+
 </head>
 <body class="loading">
   <div class="splash" id="splash" aria-label="OTAP logo loading animation">
@@ -1227,12 +1243,12 @@
     </div>
     <nav class="mockup-nav-links" aria-label="OTAP sections">
       <a href="#home"><span class="mockup-nav-icon">⌂</span><span class="mockup-nav-copy"><span data-ms="Laman Utama" data-en="Home">Laman Utama</span></span><span class="mockup-nav-arrow">›</span></a>
-      <a href="#people"><span class="mockup-nav-icon">♟</span><span class="mockup-nav-copy"><span>Meet the 10 OTs</span><small>Kenali 10 Ahli OTAP</small></span><span class="mockup-nav-arrow">›</span></a>
+      <a href="#people"><span class="mockup-nav-icon">♟</span><span class="mockup-nav-copy"><span data-ms="Kenali 10 Ahli OTAP" data-en="Meet the 10 OTAP Members">Kenali 10 Ahli OTAP</span></span><span class="mockup-nav-arrow">›</span></a>
       <a href="#missions"><span class="mockup-nav-icon">◇</span><span class="mockup-nav-copy"><span data-ms="8 Misi Sensori" data-en="The 8 Sensory Missions">8 Misi Sensori</span><small data-ms="Lapan Misi Deria" data-en="Eight Sensory Missions">Lapan Misi Deria</small></span><span class="mockup-nav-arrow">›</span></a>
       <a href="#profile"><span class="mockup-nav-icon">▥</span><span class="mockup-nav-copy"><span data-ms="Profil Deria Anda" data-en="Your OT Profile">Profil Deria Anda</span><small data-ms="Refleksi sensori" data-en="Sensory reflection">Refleksi sensori</small></span><span class="mockup-nav-arrow">›</span></a>
-      <a href="#podcast"><span class="mockup-nav-icon">♩</span><span class="mockup-nav-copy"><span>Podcast</span><small>Podcast OTAP</small></span><span class="mockup-nav-arrow">›</span></a>
-      <a href="#discovery"><span class="mockup-nav-icon">▤</span><span class="mockup-nav-copy"><span>OT Discovery Hub</span><small>Pusat Penerokaan OT</small></span><span class="mockup-nav-arrow">›</span></a>
-      <a href="#about"><span class="mockup-nav-icon">ⓘ</span><span class="mockup-nav-copy"><span data-ms="Tentang Projek" data-en="About the Project">Tentang Projek</span></span><span class="mockup-nav-arrow">›</span></a>
+      <a href="#podcast"><span class="mockup-nav-icon">♩</span><span class="mockup-nav-copy"><span>OTAPcast</span></span><span class="mockup-nav-arrow">›</span></a>
+      <a href="#discovery"><span class="mockup-nav-icon">▤</span><span class="mockup-nav-copy"><span data-ms="Terokai Ilmu OT" data-en="Explore OT Knowledge">Terokai Ilmu OT</span></span><span class="mockup-nav-arrow">›</span></a>
+      <a href="#about"><span class="mockup-nav-icon">ⓘ</span><span class="mockup-nav-copy"><span data-ms="Tentang" data-en="About">Tentang</span></span><span class="mockup-nav-arrow">›</span></a>
       <a href="#accessibility"><span class="mockup-nav-icon">♿</span><span class="mockup-nav-copy"><span data-ms="Kebolehcapaian" data-en="Accessibility">Kebolehcapaian</span></span><span class="mockup-nav-arrow">›</span></a>
     </nav>
     <div class="mockup-nav-language"><button type="button" class="active" data-language="ms">BM</button><button type="button" data-language="en">EN</button></div>
@@ -1249,11 +1265,11 @@
         <button class="menu-btn" id="menuButton" type="button" aria-expanded="false" aria-controls="mainNav">☰</button>
       </div>
       <nav id="mainNav" aria-label="Main navigation">
-        <a href="#about" data-ms="Tentang OTAP" data-en="About OTAP">Tentang OTAP</a>
-        <a href="#missions" data-ms="Misi Sensori" data-en="Sensory Missions">Misi Sensori</a>
-        <a href="#profile" data-ms="Profil Sensori" data-en="Sensory Profile">Profil Sensori</a>
-        <a href="#podcast">Podcast</a>
-        <a href="#discovery" data-ms="Kenali OT" data-en="Discover OT">Kenali OT</a>
+        <a href="#about" data-ms="Tentang" data-en="About">Tentang</a>
+        <a href="#people" data-ms="Kenali 10 Ahli OTAP" data-en="Meet the 10 OTAP Members">Kenali 10 Ahli OTAP</a>
+        <a href="#discovery" data-ms="Terokai Ilmu OT" data-en="Explore OT Knowledge">Terokai Ilmu OT</a>
+        <a href="#podcast">OTAPcast</a>
+        <a href="#accessibility" data-ms="Kebolehaksesan" data-en="Accessibility">Kebolehaksesan</a>
       </nav>
     </div>
   </header>
@@ -1272,6 +1288,7 @@
   </div>
 </section>
     <section id="accessibility" class="accessibility-section"><div class="container"><div class="feature"><div class="eyebrow">ACCESSIBILITY · KEBOLEHCAPAIAN</div><h2 data-ms="Direka untuk semua" data-en="Designed for everyone">Direka untuk semua</h2><p data-ms="Kami mahu pengalaman OTAP mudah dibaca, dinavigasi dan digunakan pada telefon mahupun komputer." data-en="We aim to make OTAP easy to read, navigate and use on phones and computers.">Kami mahu pengalaman OTAP mudah dibaca, dinavigasi dan digunakan pada telefon mahupun komputer.</p></div></div></section>
+    <section id="about"><div class="container"><div class="feature"><div class="eyebrow" data-ms="TENTANG OTAP" data-en="ABOUT OTAP">TENTANG OTAP</div><h2 data-ms="Pelbagai perspektif. Satu gambaran yang lebih besar." data-en="Many perspectives. One bigger picture.">Pelbagai perspektif. Satu gambaran yang lebih besar.</h2><p data-ms="OT Awareness Project (OTAP) menghimpunkan ahli terapi cara kerja (Occupational Therapists, OT) dari pelbagai lokasi di seluruh Malaysia, dengan latar belakang, kepakaran dan pengalaman berbeza dalam sektor kerajaan merentas kementerian serta sektor swasta. Melalui perbincangan dan perkongsian ilmu secara berterusan, kami bertukar pandangan tentang pelbagai perspektif dalam bidang Occupational Therapy, berkongsi perkembangan pengetahuan masing-masing dan mengikuti perkembangan amalan OT di peringkat antarabangsa. Kami percaya bahawa perkongsian perspektif dapat meluaskan pemahaman, memperkayakan pengetahuan dan meningkatkan kesedaran tentang peranan serta potensi Occupational Therapy." data-en="OT Awareness Project (OTAP) brings together occupational therapists from across Malaysia, with diverse backgrounds, areas of expertise and experience in government services across ministries and in the private sector. Through ongoing discussions and knowledge sharing, we exchange perspectives on occupational therapy, share professional learning and follow developments in OT practice internationally. We believe that sharing perspectives broadens understanding, enriches knowledge and raises awareness of the role and potential of occupational therapy.">OT Awareness Project (OTAP) menghimpunkan ahli terapi cara kerja (Occupational Therapists, OT) dari pelbagai lokasi di seluruh Malaysia, dengan latar belakang, kepakaran dan pengalaman berbeza dalam sektor kerajaan merentas kementerian serta sektor swasta. Melalui perbincangan dan perkongsian ilmu secara berterusan, kami bertukar pandangan tentang pelbagai perspektif dalam bidang Occupational Therapy, berkongsi perkembangan pengetahuan masing-masing dan mengikuti perkembangan amalan OT di peringkat antarabangsa. Kami percaya bahawa perkongsian perspektif dapat meluaskan pemahaman, memperkayakan pengetahuan dan meningkatkan kesedaran tentang peranan serta potensi Occupational Therapy.</p></div></div></section>
     <section id="people"><div class="container">
       <div class="section-top"><div class="eyebrow">THE PEOPLE BEHIND THE PERSPECTIVES</div><h2 data-ms="Sepuluh wajah. Siapakah mereka?" data-en="Ten silhouettes. Who are they?">Sepuluh wajah. Siapakah mereka?</h2><p data-ms="Setiap OT membawa pengalaman dan perspektif tersendiri. Identiti tidak didedahkan di sini — terokai projek ini dahulu." data-en="Every OT brings a different experience and perspective. Identities remain hidden here — explore the project first.">Setiap OT membawa pengalaman dan perspektif tersendiri. Identiti tidak didedahkan di sini — terokai projek ini dahulu.</p></div>
       <div class="people" aria-label="Ten anonymous OT silhouettes">
@@ -1287,7 +1304,6 @@
       <div class="person mystery-man"><div class="silhouette"><i class="head"></i><i class="body-shape"></i></div><strong>OT 10</strong><small>Identity hidden</small></div>
     </div>
     </div></section>
-    <section id="about"><div class="container"><div class="feature"><div class="eyebrow">ABOUT OTAP · TENTANG OTAP</div><h2 data-ms="Melihat kehidupan dari perspektif yang lebih luas." data-en="See everyday life through a wider lens.">Melihat kehidupan dari perspektif yang lebih luas.</h2><p data-ms="OTAP ialah ruang penerokaan pendidikan tentang terapi cara kerja, pengalaman sensori dan bagaimana aktiviti harian membentuk penyertaan seseorang dalam kehidupan." data-en="OTAP is an educational space exploring occupational therapy, sensory experiences and how everyday activities shape participation in life.">OTAP ialah ruang penerokaan pendidikan tentang terapi cara kerja, pengalaman sensori dan bagaimana aktiviti harian membentuk penyertaan seseorang dalam kehidupan.</p></div></div></section>
     <section id="missions"><div class="container">
       <div class="section-top"><div class="eyebrow">EXPLORE · DISCOVER · REFLECT</div><h2 data-ms="8 Misi Sensori" data-en="8 Sensory Missions">8 Misi Sensori</h2><p data-ms="Kenali lapan sistem sensori melalui penerangan pendidikan dan aktiviti refleksi. Kandungan misi akan dibangunkan secara berperingkat." data-en="Explore eight sensory systems through educational explanations and reflection activities. Mission content will be developed in stages.">Kenali lapan sistem sensori melalui penerangan pendidikan dan aktiviti refleksi. Kandungan misi akan dibangunkan secara berperingkat.</p></div>
       <div class="cards">
@@ -1325,7 +1341,25 @@
     window.setTimeout(() => {
       document.getElementById("splash").classList.add("done");
       document.body.classList.remove("loading");
+      document.body.classList.add("otap-ready");
     }, 4700);
+
+
+    // Compact contact icon becomes available only after the splash/loading screen ends.
+    const contactLauncher = document.getElementById('otapContactLauncher');
+    const contactDialog = document.getElementById('otapContactDialog');
+    const contactClose = document.getElementById('otapContactClose');
+    contactLauncher.addEventListener('click', () => { contactDialog.hidden = false; document.getElementById('otapContactCategory').focus(); });
+    contactClose.addEventListener('click', () => { contactDialog.hidden = true; contactLauncher.focus(); });
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !contactDialog.hidden) { contactDialog.hidden = true; contactLauncher.focus(); } });
+    document.getElementById('otapContactForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const category = document.getElementById('otapContactCategory').value;
+      const message = document.getElementById('otapContactMessage').value.trim();
+      const subject = encodeURIComponent('[OTAP] ' + category);
+      const body = encodeURIComponent(category + '\n\n' + message + '\n\n— Dihantar melalui website OTAP');
+      window.location.href = 'mailto:otawarenessproject@gmail.com?subject=' + subject + '&body=' + body;
+    });
 
     const mockupPanel = document.getElementById("mockupNavPanel");
     const mockupBackdrop = document.getElementById("mockupMenuBackdrop");
@@ -1373,94 +1407,24 @@
         element.textContent = element.dataset[currentLanguage];
       });
       languageButton.textContent = currentLanguage === "ms" ? "BM / EN" : "EN / BM";
+      document.querySelectorAll(".mockup-nav-language [data-language]").forEach(b => b.classList.toggle("active", b.dataset.language === currentLanguage));
     });
   </script>
 
 
-  <!-- OTAP contact panel: additive feature; existing page content and artwork are preserved. -->
-  <style id="otap-contact-styles">
-    .otap-contact-launcher{position:fixed;right:20px;bottom:20px;z-index:9998;display:flex;align-items:center;gap:10px;border:1px solid #8dffb2;border-radius:999px;background:#092016;color:#eaffef;padding:13px 18px;font:700 14px/1.2 inherit;box-shadow:0 8px 28px #0008;cursor:pointer}
-    .otap-contact-launcher .otap-contact-icon{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#9cffb9;color:#062012;font-size:17px}
-    .otap-contact-panel{position:fixed;right:20px;bottom:82px;z-index:9999;width:min(420px,calc(100vw - 28px));max-height:min(78vh,720px);overflow:auto;background:#07130d;color:#effff3;border:1px solid #286b43;border-radius:20px;box-shadow:0 18px 60px #000b;padding:22px;display:none}
-    .otap-contact-panel.open{display:block}.otap-contact-panel h2{font-size:1.3rem;margin:0 36px 7px 0;color:#a6ffbf}.otap-contact-panel p{font-size:.92rem;line-height:1.5;color:#d3e8d9;margin:0 0 15px}
-    .otap-contact-close{position:absolute;right:13px;top:12px;border:1px solid #456b53;background:#10281a;color:white;border-radius:50%;width:34px;height:34px;font-size:21px;cursor:pointer}
-    .otap-contact-panel form{display:grid;gap:12px}.otap-contact-panel label{display:block;font-weight:650;font-size:.88rem;margin-bottom:5px}.otap-contact-panel input,.otap-contact-panel select,.otap-contact-panel textarea{box-sizing:border-box;width:100%;padding:11px 12px;border:1px solid #456b53;border-radius:10px;background:#0e2116;color:#f3fff6;font:inherit;font-size:16px}.otap-contact-panel textarea{min-height:105px;resize:vertical}.otap-contact-panel input:focus,.otap-contact-panel select:focus,.otap-contact-panel textarea:focus,.otap-contact-panel button:focus-visible,.otap-contact-launcher:focus-visible{outline:3px solid #a6ffbf;outline-offset:3px}
-    .otap-contact-send{border:0;border-radius:11px;padding:13px 15px;background:#a6ffbf;color:#052111;font-weight:800;font-size:1rem;cursor:pointer}.otap-contact-note{font-size:.78rem!important;color:#b8cdbf!important;margin:0!important}.otap-contact-email{color:#a6ffbf;overflow-wrap:anywhere}
-    @media(max-width:480px){.otap-contact-launcher{right:12px;bottom:12px;padding:10px 13px}.otap-contact-panel{right:8px;bottom:70px;width:calc(100vw - 16px);padding:18px;max-height:78vh}}
-    @media(prefers-reduced-motion:reduce){.otap-contact-panel,.otap-contact-launcher{scroll-behavior:auto}}
-  </style>
-  <button id="otapContactLauncher" class="otap-contact-launcher" type="button" aria-expanded="false" aria-controls="otapContactPanel">
-    <span class="otap-contact-icon" aria-hidden="true">✉</span><span data-ms="Hubungi OTAP" data-en="Contact OTAP">Hubungi OTAP</span>
-  </button>
-  <section id="otapContactPanel" class="otap-contact-panel" aria-labelledby="otapContactTitle" aria-hidden="true">
-    <button id="otapContactClose" class="otap-contact-close" type="button" aria-label="Tutup / Close">×</button>
-    <h2 id="otapContactTitle" data-ms="Hubungi OTAP" data-en="Contact OTAP">Hubungi OTAP</h2>
-    <p data-ms="Ada soalan, cadangan atau maklum balas? Hantarkan mesej kepada pasukan OTAP." data-en="Have a question, suggestion, or feedback? Send a message to the OTAP team.">Ada soalan, cadangan atau maklum balas? Hantarkan mesej kepada pasukan OTAP.</p>
+  <button id="otapContactLauncher" class="otap-contact-launcher" type="button" aria-label="Hubungi OTAP" aria-haspopup="dialog" aria-controls="otapContactDialog" title="Hubungi OTAP"><span aria-hidden="true">✉</span><i aria-hidden="true">OT</i></button>
+  <section id="otapContactDialog" class="otap-contact-dialog" role="dialog" aria-modal="false" aria-labelledby="otapContactTitle" hidden>
+    <div class="otap-contact-head"><div class="otap-contact-symbol" aria-hidden="true">✉</div><div><h2 id="otapContactTitle" data-ms="Hubungi OTAP" data-en="Contact OTAP">Hubungi OTAP</h2><p data-ms="Kami sedia mendengar pandangan anda." data-en="We welcome your questions and feedback.">Kami sedia mendengar pandangan anda.</p></div><button id="otapContactClose" type="button" aria-label="Tutup">×</button></div>
     <form id="otapContactForm">
-      <div><label for="otapContactCategory" data-ms="Kategori mesej" data-en="Message category">Kategori mesej</label>
-        <select id="otapContactCategory" name="category" required>
-          <option value="Soalan tentang OT" data-ms="Soalan tentang OT" data-en="Question about OT">Soalan tentang OT</option>
-          <option value="Cadangan topik / perkongsian ilmu" data-ms="Cadangan topik / perkongsian ilmu" data-en="Topic / knowledge-sharing suggestion">Cadangan topik / perkongsian ilmu</option>
-          <option value="Maklum balas website" data-ms="Maklum balas website" data-en="Website feedback">Maklum balas website</option>
-        </select>
-      </div>
-      <div><label for="otapContactName" data-ms="Nama (pilihan)" data-en="Name (optional)">Nama (pilihan)</label><input id="otapContactName" name="name" autocomplete="name" data-ms-placeholder="Nama anda" data-en-placeholder="Your name" placeholder="Nama anda" /></div>
-      <div><label for="otapContactReply" data-ms="E-mel untuk dihubungi (pilihan)" data-en="Reply email (optional)">E-mel untuk dihubungi (pilihan)</label><input id="otapContactReply" name="replyEmail" type="email" autocomplete="email" data-ms-placeholder="nama@contoh.com" data-en-placeholder="name@example.com" placeholder="nama@contoh.com" /></div>
-      <div><label for="otapContactMessage" data-ms="Mesej" data-en="Message">Mesej</label><textarea id="otapContactMessage" name="message" required data-ms-placeholder="Taip mesej anda di sini…" data-en-placeholder="Type your message here…" placeholder="Taip mesej anda di sini…"></textarea></div>
-      <p class="otap-contact-note" data-ms="Jangan sertakan nama pesakit, nombor pengenalan atau maklumat kesihatan peribadi. Apabila anda menekan Hantar, aplikasi e-mel anda akan dibuka untuk menghantar mesej." data-en="Do not include patient names, identification numbers, or personal health information. When you select Send, your email app will open so you can send the message.">Jangan sertakan nama pesakit, nombor pengenalan atau maklumat kesihatan peribadi. Apabila anda menekan Hantar, aplikasi e-mel anda akan dibuka untuk menghantar mesej.</p>
-      <button class="otap-contact-send" type="submit" data-ms="Hantar melalui e-mel ↗" data-en="Send by email ↗">Hantar melalui e-mel ↗</button>
+      <label for="otapContactCategory" data-ms="Kategori mesej" data-en="Message category">Kategori mesej</label>
+      <select id="otapContactCategory" required><option value="Soalan tentang OT">Soalan tentang OT</option><option value="Cadangan topik / perkongsian ilmu">Cadangan topik / perkongsian ilmu</option><option value="Maklum balas website">Maklum balas website</option></select>
+      <label for="otapContactMessage" data-ms="Mesej anda" data-en="Your message">Mesej anda</label>
+      <textarea id="otapContactMessage" rows="4" required maxlength="3000" placeholder="Tulis mesej di sini…"></textarea>
+      <p class="otap-contact-privacy" data-ms="Jangan sertakan nama pesakit atau maklumat kesihatan peribadi." data-en="Please do not include patient names or personal health information.">Jangan sertakan nama pesakit atau maklumat kesihatan peribadi.</p>
+      <button class="otap-contact-send" type="submit"><span data-ms="Teruskan ke e-mel" data-en="Continue to email">Teruskan ke e-mel</span> <span aria-hidden="true">↗</span></button>
+      <p class="otap-contact-note" data-ms="Aplikasi e-mel anda akan dibuka untuk menghantar mesej kepada OTAP." data-en="Your email app will open so you can send your message to OTAP.">Aplikasi e-mel anda akan dibuka untuk menghantar mesej kepada OTAP.</p>
     </form>
-    <p style="margin-top:13px"><span data-ms="E-mel rasmi:" data-en="Official email:">E-mel rasmi:</span> <a class="otap-contact-email" href="mailto:otawarenessproject@gmail.com">otawarenessproject@gmail.com</a></p>
   </section>
-  <script id="otap-contact-script">
-    (() => {
-      const launcher = document.getElementById('otapContactLauncher');
-      const panel = document.getElementById('otapContactPanel');
-      const close = document.getElementById('otapContactClose');
-      const form = document.getElementById('otapContactForm');
-      const category = document.getElementById('otapContactCategory');
-      const name = document.getElementById('otapContactName');
-      const reply = document.getElementById('otapContactReply');
-      const message = document.getElementById('otapContactMessage');
-      const setOpen = (open) => {
-        panel.classList.toggle('open', open);
-        panel.setAttribute('aria-hidden', String(!open));
-        launcher.setAttribute('aria-expanded', String(open));
-        if (open) setTimeout(() => category.focus(), 0); else launcher.focus();
-      };
-      launcher.addEventListener('click', () => setOpen(!panel.classList.contains('open')));
-      close.addEventListener('click', () => setOpen(false));
-      document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && panel.classList.contains('open')) setOpen(false); });
-      form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const lang = document.documentElement.lang === 'en' ? 'en' : 'ms';
-        const subjectPrefix = lang === 'en' ? 'OTAP website enquiry' : 'Pertanyaan website OTAP';
-        const subject = `${subjectPrefix} — ${category.value}`;
-        const body = [
-          `${lang === 'en' ? 'Category' : 'Kategori'}: ${category.value}`,
-          `${lang === 'en' ? 'Name' : 'Nama'}: ${name.value.trim() || (lang === 'en' ? 'Not provided' : 'Tidak dinyatakan')}`,
-          `${lang === 'en' ? 'Reply email' : 'E-mel balasan'}: ${reply.value.trim() || (lang === 'en' ? 'Not provided' : 'Tidak dinyatakan')}`,
-          '', message.value.trim()
-        ].join('\n');
-        window.location.href = `mailto:otawarenessproject@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      });
-      // Keep select options and placeholders synchronized with the existing BM/EN toggle.
-      const languageButton = document.getElementById('languageButton');
-      if (languageButton) languageButton.addEventListener('click', () => {
-        setTimeout(() => {
-          document.querySelectorAll('#otapContactCategory option[data-ms][data-en]').forEach(option => {
-            option.textContent = option.dataset[document.documentElement.lang === 'en' ? 'en' : 'ms'];
-          });
-          [name, reply, message].forEach(field => {
-            const key = document.documentElement.lang === 'en' ? 'en' : 'ms';
-            const placeholder = field.dataset[key + 'Placeholder'];
-            if (placeholder) field.placeholder = placeholder;
-          });
-          close.setAttribute('aria-label', document.documentElement.lang === 'en' ? 'Close' : 'Tutup');
-        }, 0);
-      });
-    })();
-  </script>
 
 </body>
 </html>
