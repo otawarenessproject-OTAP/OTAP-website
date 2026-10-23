@@ -1286,6 +1286,19 @@
     .otap-hero-language button.active{background:#00d98b!important;color:#03110b!important;box-shadow:0 0 15px #00f5a055;}
     @media(max-width:760px){.otap-brand-staircase{width:43px!important;height:43px!important;min-width:43px;}.otap-hero-content{margin-top:clamp(-18px,-2vw,-6px)!important;padding-inline:14px;}.otap-hero-content h1{font-size:clamp(19px,5.2vw,31px)!important;line-height:1.12!important;letter-spacing:-.035em!important;gap:5px!important;}.otap-hero-image-wrap{margin-top:6px!important;}.otap-hero-actions{margin:22px auto 26px!important;}.otap-hero-bottom-nav{margin-top:8px;}.otap-hero-bottom-nav a{font-size:clamp(10px,2.8vw,13px);}}
     @media(max-width:420px){.otap-hero-top{gap:8px!important;padding-inline:16px!important;}.otap-brand-wordmark{font-size:clamp(10px,3vw,13px)!important;}.otap-hero-language button{min-width:42px;padding:8px 9px!important;}.otap-hero-menu-button{min-width:34px!important;font-size:27px!important;}.otap-hero-content h1{font-size:clamp(18px,5.1vw,24px)!important;}.otap-hero-cta{max-width:100%!important;min-height:58px!important;font-size:13px!important;}.otap-hero-bottom-nav{grid-template-columns:repeat(4,minmax(0,1fr))!important;}.otap-hero-bottom-nav a{padding:8px 2px!important;font-size:10px!important;min-height:78px!important;}.otap-bottom-icon{width:30px;height:30px;}.otap-bottom-icon svg{width:28px;height:28px;}}
+    /* Requested-only refinements: remove the JPEG's black logo tile visually, enlarge official mark, and match mockup icon style. */
+    .otap-hero-logo{width:clamp(118px,18vw,190px)!important;height:clamp(78px,10vw,116px)!important;object-fit:contain;mix-blend-mode:screen;filter:brightness(1.12);}
+    .otap-hero-brand{flex:0 0 auto;min-width:0;}
+    .otap-hero-cta-primary .otap-cta-icon{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;flex:0 0 36px;font-size:0;}
+    .otap-hero-cta-primary .otap-cta-icon svg{width:34px;height:34px;fill:currentColor;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+    .otap-cta-play{width:42px;height:42px;font-size:16px;}
+    .otap-bottom-icon svg{width:38px;height:38px;stroke-width:2.1;}
+    .otap-hero-bottom-nav a{cursor:pointer;}
+    .otap-hero-rebuilt a,.otap-hero-rebuilt button{position:relative;z-index:4;pointer-events:auto;}
+    .otap-hero-image-wrap{pointer-events:none;}
+    @media(max-width:760px){.otap-hero-logo{width:clamp(108px,29vw,150px)!important;height:72px!important;}}
+    @media(max-width:420px){.otap-hero-logo{width:clamp(100px,28vw,132px)!important;height:66px!important;}}
+
 
 </style>
 
@@ -1388,15 +1401,15 @@
       <div class="otap-hero-content container">
         <h1 id="otapHeroTitle"><span data-ms="SEPULUH INDIVIDU." data-en="TEN INDIVIDUALS.">SEPULUH INDIVIDU.</span><span data-ms="PELBAGAI PERSPEKTIF." data-en="MANY PERSPECTIVES.">PELBAGAI PERSPEKTIF.</span><span class="otap-green" data-ms="SATU GAMBARAN YANG LEBIH BESAR." data-en="ONE BIGGER PICTURE.">SATU GAMBARAN YANG LEBIH BESAR.</span></h1>
         <div class="otap-hero-actions">
-          <a class="otap-hero-cta otap-hero-cta-primary" href="#people"><span class="otap-cta-icon" aria-hidden="true">♟</span><span data-ms="Kenali 10 Ahli OTAP" data-en="Meet the 10 OTAP Members">Kenali 10 Ahli OTAP</span><span aria-hidden="true">→</span></a>
+          <a class="otap-hero-cta otap-hero-cta-primary" href="#people"><span class="otap-cta-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="17" cy="13" r="6"/><circle cx="31" cy="16" r="5"/><path d="M5 35c0-7 5-12 12-12s12 5 12 12v3H5z"/><path d="M27 25c7-2 15 3 15 10v3H31"/></svg></span><span data-ms="Kenali 10 Ahli OTAP" data-en="Meet the 10 OTAP Members">Kenali 10 Ahli OTAP</span><span aria-hidden="true">→</span></a>
           <a class="otap-hero-cta otap-hero-cta-secondary" href="#missions"><span class="otap-cta-play" aria-hidden="true">▶</span><span data-ms="Mulakan Perjalanan" data-en="Start Your Journey">Mulakan Perjalanan</span><span aria-hidden="true">↗</span></a>
         </div>
       </div>
       <nav class="otap-hero-bottom-nav container" aria-label="Menu utama">
-        <a href="#about"><span class="otap-bottom-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="18"/><path d="M24 21v12M24 15h.1"/></svg></span><span>Tentang</span></a>
-        <a href="#podcast"><span class="otap-bottom-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="17" y="5" width="14" height="25" rx="7"/><path d="M10 23v2a14 14 0 0 0 28 0v-2M24 39v5M17 44h14"/></svg></span><span>OTAPcast</span></a>
-        <a href="#discovery"><span class="otap-bottom-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 5l4 7 8-2 1 8 7 4-5 7 2 8-9 1-8 5-5-7-8-1 1-9-5-6 8-4 2-8z"/><rect x="17" y="17" width="14" height="14" rx="3"/><path d="M21 22h6M21 26h6"/></svg></span><span>Terokai Ilmu OT</span></a>
-        <a href="#accessibility"><span class="otap-bottom-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="8" r="4"/><path d="M21 16h8l4 10h7M24 16l-4 12 7 5 3 8M20 28l-7 9M16 22l8 2"/></svg></span><span>Kebolehaksesan</span></a>
+        <a href="#about"><span class="otap-bottom-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="17.5"/><path d="M24 22v11"/><circle cx="24" cy="15.5" r="1.2" fill="currentColor" stroke="none"/></svg></span><span>Tentang</span></a>
+        <a href="#podcast"><span class="otap-bottom-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="18" y="5" width="12" height="24" rx="6"/><path d="M11 22v2a13 13 0 0 0 26 0v-2M24 37v6M17 43h14"/><path d="M14 17v6M34 17v6"/></svg></span><span>OTAPcast</span></a>
+        <a href="#discovery"><span class="otap-bottom-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 4.5l5 5.2 7.2-.6 2.4 6.8 6.4 3.4-2.2 7 2.2 7-6.4 3.4-2.4 6.8-7.2-.6-5 5.2-5-5.2-7.2.6-2.4-6.8L3 33.3l2.2-7L3 19.3l6.4-3.4 2.4-6.8 7.2.6z"/><rect x="16" y="16" width="16" height="16" rx="3.5"/><path d="M20 21h8M20 25h8M20 29h5"/><circle cx="28.5" cy="12" r="2"/></svg></span><span>Terokai Ilmu OT</span></a>
+        <a href="#accessibility"><span class="otap-bottom-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="7.5" r="3.5"/><path d="M14 15.5l10 3 10-3M24 18.5v11M24 22l-8 7M24 22l8 7M24 29.5l-7 12M24 29.5l8 12"/><path d="M10 16.5l4 1M34 17.5l4-1"/></svg></span><span>Kebolehaksesan</span></a>
       </nav>
       <nav class="otap-hero-mobile-menu" id="otapHeroMenu" hidden aria-label="Menu mudah alih">
         <a href="#about" data-ms="Tentang" data-en="About">Tentang</a>
@@ -1444,15 +1457,15 @@
   </main>
   <section id="accessibility" class="accessibility-section"><div class="container"><div class="feature"><div class="eyebrow">ACCESSIBILITY · KEBOLEHCAPAIAN</div><h2>Designed for more people</h2><p>OTAP aims to support clear navigation, readable text and reduced-motion preferences.</p></div></div></section><footer><div class="container footer-inner"><div><strong style="color:var(--green)">O.T AWARENESS PROJECT</strong><div>Ten OTs. Many Perspectives. One Bigger Picture.</div><div style="margin-top:8px">Educational project · BM / EN</div></div><div class="footer-links"><a href="#about">About</a><a href="#missions">Missions</a><a href="#profile">Sensory Profile</a><a href="#podcast">Podcast</a><a href="#home">Back to top ↑</a></div></div></footer>
   <script>
-    const otapLogo = document.querySelector("header .brand-logo");
-    otapLogo.addEventListener("error", () => {
-      otapLogo.style.display = "none";
-      const fallback = document.createElement("span");
-      fallback.className = "brand-mark";
-      fallback.textContent = "OTAP";
-      fallback.style.cssText = "width:40px;height:40px;border:1px solid var(--green);border-radius:10px;display:grid;place-items:center;color:var(--green);font-size:11px;flex-shrink:0";
-      otapLogo.insertAdjacentElement("afterend", fallback);
-    }, { once: true });
+    // The visible homepage logo is the official image in .otap-hero-logo.
+    // If it fails to load, keep a clear accessible fallback without stopping other controls.
+    document.querySelectorAll(".brand-logo, .otap-hero-logo").forEach((logo) => {
+      logo.addEventListener("error", () => {
+        logo.alt = "Logo rasmi OTAP tidak dapat dimuatkan";
+        logo.style.background = "transparent";
+        logo.style.mixBlendMode = "normal";
+      }, { once: true });
+    });
 
     // Current splash screen uses a CSS-built staircase and wordmark.
     // Do not reference the old image-based splash elements here.
@@ -1585,6 +1598,33 @@
       if (hero) hero.setAttribute("aria-label", currentLanguage === "ms" ? "Laman utama OTAP" : "OTAP homepage");
     };
     setLanguage("ms");
+
+    // Reliable delegated navigation: every in-page link scrolls to its real target.
+    document.addEventListener("click", (event) => {
+      const link = event.target.closest('a[href^="#"]');
+      if (!link) return;
+      const targetId = decodeURIComponent(link.getAttribute("href").slice(1));
+      const target = document.getElementById(targetId);
+      if (!target) return;
+      event.preventDefault();
+      target.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+      if (history && history.replaceState) history.replaceState(null, "", "#" + targetId);
+      if (heroMenu && !heroMenu.hidden) heroMenu.hidden = true;
+      if (mainNav && mainNav.classList.contains("open")) {
+        mainNav.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.textContent = "☰";
+      }
+    });
+    // Ensure all visible BM/EN controls always call the same language switcher.
+    document.addEventListener("click", (event) => {
+      const languageControl = event.target.closest('[data-language="ms"], [data-language="en"]');
+      if (!languageControl) return;
+      if (languageControl.closest(".otap-hero-language, .mockup-nav-language")) {
+        event.preventDefault();
+        setLanguage(languageControl.dataset.language);
+      }
+    });
   </script>
 
 
