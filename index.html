@@ -1199,6 +1199,10 @@
     .otap-hero-rebuilt:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 35%,#00f5a018,transparent 54%)}
     .otap-hero-top{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-top:18px;position:relative;z-index:5}
     .otap-hero-brand{display:flex;align-items:center;gap:10px;min-width:0;color:#fff}
+    .otap-hero-logo{display:block;width:clamp(118px,19vw,190px);height:auto;max-height:76px;object-fit:contain;background:transparent;flex:0 0 auto}
+    .otap-bottom-icon svg,.otap-cta-icon svg{display:block;width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+    .otap-cta-icon{display:grid;place-items:center;width:34px;height:34px;flex:0 0 34px}
+
     .otap-brand-staircase{width:58px;height:58px;flex:0 0 auto;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);gap:3px;align-items:end}.otap-brand-staircase i{display:block;background:#00f5a0;box-shadow:0 0 8px #00f5a055}.otap-brand-staircase i:nth-child(1){grid-column:1;grid-row:4}.otap-brand-staircase i:nth-child(2){grid-column:2;grid-row:3}.otap-brand-staircase i:nth-child(3){grid-column:2;grid-row:4}.otap-brand-staircase i:nth-child(4){grid-column:3;grid-row:2}.otap-brand-staircase i:nth-child(5){grid-column:3;grid-row:3}.otap-brand-staircase i:nth-child(6){grid-column:3;grid-row:4}.otap-brand-staircase i:nth-child(7){grid-column:4;grid-row:1}.otap-brand-staircase i:nth-child(8){grid-column:4;grid-row:2}.otap-brand-staircase i:nth-child(9){grid-column:4;grid-row:3}.otap-brand-staircase i:nth-child(10){grid-column:4;grid-row:4}
     .otap-brand-wordmark{display:flex;flex-direction:column;font-family:'Arial Narrow','Roboto Condensed',Arial,sans-serif;font-weight:900;line-height:.9;letter-spacing:-.04em;font-size:clamp(13px,2vw,21px)}
     .otap-hero-tools{display:flex;align-items:center;gap:12px}
@@ -1225,7 +1229,7 @@
     .otap-hero-mobile-menu{position:absolute;top:78px;right:5%;z-index:20;width:min(300px,90vw);padding:10px;border:1px solid #176b48;border-radius:16px;background:#041009f5;box-shadow:0 15px 45px #000b}
     .otap-hero-mobile-menu[hidden]{display:none}.otap-hero-mobile-menu a{display:block;padding:12px;border-radius:9px;color:#eafff6;font-size:14px}.otap-hero-mobile-menu a:hover{background:#00f5a018;color:#00f5a0}
     @media(min-width:761px){.otap-hero-image-wrap{margin-top:-3px}.otap-hero-silhouette{max-height:clamp(310px,39vw,530px)}.otap-hero-content{margin-top:-80px}}
-    @media(max-width:760px){.otap-hero-top{padding-top:12px}.otap-brand-staircase{width:43px;height:43px;gap:2px}.otap-hero-brand{gap:7px}.otap-brand-wordmark{font-size:13px}.otap-hero-tools{gap:7px}.otap-hero-language button{padding:8px 10px;min-width:40px}.otap-hero-image-wrap{margin-top:4px}.otap-hero-silhouette{max-height:none;width:100%}.otap-hero-content{margin-top:-5vw}.otap-hero-project-name{letter-spacing:.13em}.otap-hero-content h1{font-size:clamp(22px,5.6vw,38px)}.otap-hero-slogan{margin-top:10px}.otap-hero-actions{gap:9px;margin:19px auto 22px}.otap-hero-cta{width:calc(50% - 5px);min-height:55px;padding:10px 12px;gap:7px;font-size:clamp(10px,2.5vw,14px)}.otap-cta-icon{font-size:19px}.otap-cta-play{width:28px;height:28px}.otap-hero-bottom-nav a{padding:7px 4px;min-height:74px;font-size:10px}.otap-bottom-icon{font-size:22px}}
+    @media(max-width:760px){.otap-hero-logo{width:clamp(105px,34vw,150px);max-height:58px}.otap-hero-top{padding-top:12px}.otap-brand-staircase{width:43px;height:43px;gap:2px}.otap-hero-brand{gap:7px}.otap-brand-wordmark{font-size:13px}.otap-hero-tools{gap:7px}.otap-hero-language button{padding:8px 10px;min-width:40px}.otap-hero-image-wrap{margin-top:4px}.otap-hero-silhouette{max-height:none;width:100%}.otap-hero-content{margin-top:-5vw}.otap-hero-project-name{letter-spacing:.13em}.otap-hero-content h1{font-size:clamp(22px,5.6vw,38px)}.otap-hero-slogan{margin-top:10px}.otap-hero-actions{gap:9px;margin:19px auto 22px}.otap-hero-cta{width:calc(50% - 5px);min-height:55px;padding:10px 12px;gap:7px;font-size:clamp(10px,2.5vw,14px)}.otap-cta-icon{font-size:19px}.otap-cta-play{width:28px;height:28px}.otap-hero-bottom-nav a{padding:7px 4px;min-height:74px;font-size:10px}.otap-bottom-icon{font-size:22px}}
     @media(max-width:420px){.otap-hero-content{margin-top:-2px}.otap-hero-content h1{font-size:clamp(21px,6.2vw,28px);letter-spacing:-.035em}.otap-hero-project-name{font-size:9px;letter-spacing:.1em}.otap-hero-cta{width:100%;max-width:330px;min-height:52px}.otap-hero-actions{flex-direction:column;align-items:center}.otap-hero-bottom-nav{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:7px}.otap-hero-bottom-nav a:nth-child(2){border-right:0}.otap-hero-bottom-nav a:nth-child(-n+2){border-bottom:1px solid #103323}.otap-hero-mobile-menu{top:67px}.otap-brand-staircase{width:37px;height:37px;gap:2px}.otap-brand-wordmark{font-size:11px}}
     @media(prefers-reduced-motion:reduce){.otap-hero-cta{transition:none}}
 
@@ -1325,7 +1329,7 @@
   <aside class="mockup-nav-panel" id="mockupNavPanel" aria-label="OTAP menu" aria-hidden="true">
     <div class="mockup-nav-head">
       <div class="mockup-nav-brand">
-        <img src="assets/images/logo-otap.jpg" alt="OTAP logo">
+        <img src="assets/images/logo-otap.png" alt="OTAP logo">
         <span class="mockup-brand-copy"><strong>O.T AWARENESS PROJECT</strong><small>EXPLORE THE UNKNOWN</small></span>
       </div>
       <button class="mockup-nav-close" id="mockupMenuClose" type="button" aria-label="Close menu">×</button>
@@ -1365,8 +1369,7 @@
     <section id="home" class="otap-hero-rebuilt" aria-labelledby="otapHeroTitle">
       <div class="otap-hero-top container">
         <a class="otap-hero-brand" href="#home" aria-label="OTAP — Laman utama">
-          <span class="otap-brand-staircase" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
-          <span class="otap-brand-wordmark"><strong>O.T</strong><strong>AWARENESS</strong><strong>PROJECT</strong></span>
+          <img class="otap-hero-logo" src="assets/images/logo-otap.png" alt="Logo rasmi O.T Awareness Project">
         </a>
         <div class="otap-hero-tools">
           <div class="otap-hero-language" role="group" aria-label="Pilihan bahasa">
@@ -1382,15 +1385,15 @@
       <div class="otap-hero-content container">
         <h1 id="otapHeroTitle"><span data-ms="SEPULUH INDIVIDU." data-en="TEN INDIVIDUALS.">SEPULUH INDIVIDU.</span><span data-ms="PELBAGAI PERSPEKTIF." data-en="MANY PERSPECTIVES.">PELBAGAI PERSPEKTIF.</span><span class="otap-green" data-ms="SATU GAMBARAN YANG LEBIH BESAR." data-en="ONE BIGGER PICTURE.">SATU GAMBARAN YANG LEBIH BESAR.</span></h1>
         <div class="otap-hero-actions">
-          <a class="otap-hero-cta otap-hero-cta-primary" href="#people"><span class="otap-cta-icon" aria-hidden="true">♟</span><span data-ms="Kenali 10 Ahli OTAP" data-en="Meet the 10 OTAP Members">Kenali 10 Ahli OTAP</span><span aria-hidden="true">→</span></a>
+          <a class="otap-hero-cta otap-hero-cta-primary" href="#people"><span class="otap-cta-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="14" r="7"/><path d="M10 40v-4a14 14 0 0 1 28 0v4z"/></svg></span><span data-ms="Kenali 10 Ahli OTAP" data-en="Meet the 10 OTAP Members">Kenali 10 Ahli OTAP</span><span aria-hidden="true">→</span></a>
           <a class="otap-hero-cta otap-hero-cta-secondary" href="#missions"><span class="otap-cta-play" aria-hidden="true">▶</span><span data-ms="Mulakan Perjalanan" data-en="Start Your Journey">Mulakan Perjalanan</span><span aria-hidden="true">↗</span></a>
         </div>
       </div>
       <nav class="otap-hero-bottom-nav container" aria-label="Menu utama">
         <a href="#about"><span class="otap-bottom-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="18"/><path d="M24 21v12M24 15h.1"/></svg></span><span data-ms="Tentang" data-en="About">Tentang</span></a>
         <a href="#podcast"><span class="otap-bottom-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="17" y="5" width="14" height="25" rx="7"/><path d="M10 23v2a14 14 0 0 0 28 0v-2M24 39v5M17 44h14"/></svg></span><span>OTAPcast</span></a>
-        <a href="#discovery"><span class="otap-bottom-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 5l4 7 8-2 1 8 7 4-5 7 2 8-9 1-8 5-5-7-8-1 1-9-5-6 8-4 2-8z"/><rect x="17" y="17" width="14" height="14" rx="3"/><path d="M21 22h6M21 26h6"/></svg></span><span data-ms="Terokai Ilmu OT" data-en="OT Discovery Hub">Terokai Ilmu OT</span></a>
-        <a href="#accessibility"><span class="otap-bottom-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="8" r="4"/><path d="M21 16h8l4 10h7M24 16l-4 12 7 5 3 8M20 28l-7 9M16 22l8 2"/></svg></span><span data-ms="Kebolehaksesan" data-en="Accessibility">Kebolehaksesan</span></a>
+        <a href="#discovery"><span class="otap-bottom-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M7 11.5A2.5 2.5 0 0 1 9.5 9H21a6 6 0 0 1 6 6v25a6 6 0 0 0-6-6H9.5A2.5 2.5 0 0 0 7 36.5z"/><path d="M41 11.5A2.5 2.5 0 0 0 38.5 9H27M27 15v25a6 6 0 0 1 6-6h5.5a2.5 2.5 0 0 0 2.5-2.5z"/></svg></span><span data-ms="Terokai Ilmu OT" data-en="OT Discovery Hub">Terokai Ilmu OT</span></a>
+        <a href="#accessibility"><span class="otap-bottom-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="8" r="4"/><path d="M13 17l11 4 11-4M24 21v11l-8 10M24 32l9 8M16 23l-3 10h11"/></svg></span><span data-ms="Kebolehaksesan" data-en="Accessibility">Kebolehaksesan</span></a>
       </nav>
       <nav class="otap-hero-mobile-menu" id="otapHeroMenu" hidden aria-label="Menu mudah alih">
         <a href="#about" data-ms="Tentang" data-en="About">Tentang</a>
