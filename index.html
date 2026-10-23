@@ -1153,7 +1153,7 @@
       align-items:flex-start !important;
       justify-content:center !important;
       flex:0 0 auto !important;
-      width:clamp(180px,46vw,320px) !important;
+      width:clamp(165px,42vw,300px) !important;
       max-width:none !important;
       color:#f7f7f7 !important;
       font-family:"Roboto Condensed","Arial Narrow","Liberation Sans Narrow",Impact,sans-serif !important;
@@ -1161,8 +1161,7 @@
       font-weight:900 !important;
       font-size:clamp(30px,7.1vw,59px) !important;
       line-height:.91 !important;
-      letter-spacing:-.025em !important;
-      transform-origin:left center !important;
+      letter-spacing:-.045em !important;
       text-transform:uppercase !important;
       white-space:nowrap !important;
       text-shadow:0 0 4px rgba(255,255,255,.12) !important;
@@ -1172,10 +1171,46 @@
     .splash-logo-animation .animated-wordmark-text span { display:block !important; }
     @media(max-width:420px) {
       .splash-logo-animation .animated-wordmark-text {
-        width:clamp(168px,46vw,205px) !important;
+        width:clamp(155px,43vw,190px) !important;
         font-size:clamp(27px,7.15vw,32px) !important;
-        letter-spacing:-.03em !important;
+        letter-spacing:-.05em !important;
       }
+    }
+
+  
+    /* Wordmark spans the horizontal width of the stair logo; editable text, no pasted image. */
+    .splash-logo-animation {
+      width:min(92vw,650px) !important;
+      gap:clamp(8px,1.5vw,16px) !important;
+    }
+    .splash-logo-animation .animated-wordmark-text {
+      width:clamp(205px,55vw,370px) !important;
+      flex:1 1 auto !important;
+      min-width:0 !important;
+      font-family:"Roboto Condensed","Arial Narrow","Liberation Sans Narrow",Impact,sans-serif !important;
+      font-size:clamp(32px,8.4vw,66px) !important;
+      font-weight:900 !important;
+      line-height:.91 !important;
+      letter-spacing:-.035em !important;
+      transform-origin:left center;
+      white-space:nowrap !important;
+    }
+    .splash-logo-animation .animated-wordmark-text span {
+      display:block !important;
+      width:100% !important;
+      transform:scaleX(1.08);
+      transform-origin:left center;
+    }
+    @media(max-width:420px) {
+      .splash-logo-animation { width:94vw !important; gap:7px !important; }
+      .splash-logo-animation .animated-staircase { width:clamp(112px,34vw,138px) !important; }
+      .splash-logo-animation .animated-wordmark-text {
+        width:calc(94vw - clamp(112px,34vw,138px) - 12px) !important;
+        flex:1 1 auto !important;
+        font-size:clamp(27px,7.5vw,34px) !important;
+        letter-spacing:-.045em !important;
+      }
+      .splash-logo-animation .animated-wordmark-text span { transform:scaleX(1.04); }
     }
 
   </style>
